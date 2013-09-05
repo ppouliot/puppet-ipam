@@ -1,0 +1,31 @@
+dhcp::dnsdomain:
+      - contoso.ltd
+      - 7.21.10.in-addr.arpa
+  
+dhcp::nameservers:
+      - 192.168.0.1
+      - 192.168.0.2
+  
+dhcp::ntpservers:
+  - bonehed.lsc.mit.edu
+dhcp::interfaces:
+  - eth0
+
+dhcpdata:
+  contoso.ltd:
+    failover: dhcp-failover
+    network: 192.168.0.0
+    mask: 255.255.255.0
+    gateway: 192.168.0.254
+    range: 192.168.0.100 192.168.0.220
+    options:
+      - domain-name-servers 192.168.0.1
+      - domain-name "contoso.ltd"
+      - ntp-servers bonehed.lcs.mit.edu
+    parameters:
+      - ddns-domainname "contoso.ltd, 0.168.192.in-addr.arpa"
+
+static_leases:
+  myhost: 
+    mac: 00:1a:2b:3c:4d:5e
+    ip: 192.168.0.3
