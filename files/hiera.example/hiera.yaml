@@ -4,4 +4,4 @@
   :datadir: /etc/puppet/hiera
 :hierarchy:
   - %{hostname}
-  - common
+  - %{calling_module}
