@@ -1,6 +1,6 @@
 dhcp::dnsdomain:
       - contoso.ltd
-      - 7.21.10.in-addr.arpa
+      - 0.168.192.in-addr.arpa
   
 dhcp::nameservers:
       - 192.168.0.1
