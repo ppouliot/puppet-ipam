@@ -20,7 +20,7 @@ class ipam {
 
   import 'params'
 
-#  Currently Slave and Primary Work
+#  Slave and Primary Zones
   create_resources(primary_zone,$primary)
   create_resources(slave_zone,$slave)
 
