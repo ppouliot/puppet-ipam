@@ -1,5 +1,5 @@
 name    'puppet-ipam'
-version '0.1.0'
+version '0.0.1'
 project_page 'https://github.com/ppouliot/puppet-ipam'
 source 'https://github.com/ppouliot/puppet-ipam'
 author 'Peter J. Pouliot'
