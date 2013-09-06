@@ -1,0 +1,32 @@
+# This generates hiera data to be used for creation of DNS Records
+# This is provided by the module to be used for general automation
+# of DNS Records for other nodes on the network
+
+<if @macaddress_eth0 then
+  <%= @hostname %>:
+      zone: <%= @domain %>
+      data: <%= @ipaddress_eth0 %>
+      ptr: true 
+< end >
+  
+<if @macaddress_eth1 then
+  <%= @hostname %>:
+      zone: <%= @domain %>
+      data: <%= @ipaddress_eth1 %>
+      ptr: true 
+< end >
+  
+<if @macaddress_eth2 then
+  <%= @hostname %>:
+      zone: <%= @domain %>
+      data: <%= @ipaddress_eth2 %>
+      ptr: true 
+< end >
+  
+<if @macaddress_eth3 then
+  <%= @hostname %>:
+      zone: <%= @domain %>
+      data: <%= @ipaddress_eth3 %>
+      ptr: true 
+< end >
+  
