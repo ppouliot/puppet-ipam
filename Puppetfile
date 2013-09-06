@@ -11,6 +11,6 @@ mod 'puppetlabs/stdlib', :git => "#{base_url}/puppetlabs/puppetlabs-stdlib", :re
 
 mod 'ppouliot/dhcp', :git => "#{base_url}/ppouliot/puppetlabs-dhcp"
 #mod 'puppetlabs/dhcp', :git => "#{base_url}/puppetlabs/puppetlabs-dhcp"
-mod 'ppouliot/dns', :git => "#{base_url}/ppouliot/puppet-dns"
-#mod 'ajjahn/dns', :git => "#{base_url}/ajjahn/puppet-dns"
+#mod 'ppouliot/dns', :git => "#{base_url}/ppouliot/puppet-dns"
+mod 'ajjahn/dns', :git => "#{base_url}/ajjahn/puppet-dns"
 mod 'ppouliot/ipam', :git => "#{base_url}/ppouliot/puppet-ipam"

@@ -14,7 +14,13 @@ class ipam {
   include dns::server
 
   # generate key for use with dhcp 
-  dns::key{'dhcp-updater':}
+  if $primary {
+    dns::key{'dhcp-updater':}
+  }
+  else {
+   notify {"You do not need a ddnskey": }
+  }
+
 
 # Import Zone Types  
 
