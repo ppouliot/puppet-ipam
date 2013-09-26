@@ -4,6 +4,7 @@ class ipam {
   # Bind Configuration
 
   $primary        = hiera('primary',{})
+  $ddnskey        = hiera('ddnskey',{})
   $slave          = hiera('slave',{})
   $dhcpdata       = hiera('dhcpdata',{})
   $static_leases  = hiera('static_leases',{})
@@ -15,7 +16,7 @@ class ipam {
 
   # generate key for use with dhcp 
   if $primary {
-    dns::key{'dhcp-updater':}
+    dns::key{ $ddnskey: }
   }
   else {
    notify {"You do not need a ddnskey": }
