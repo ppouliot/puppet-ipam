@@ -1,27 +1,26 @@
-<% if @macaddress_eth0 %>
+<% if @macaddress_eth0 then  
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth0 %>
       ptr: true 
-< end >
-  
-<% if @macaddress_eth1 %>
+%>
+<% if @macaddress_eth1 then
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth1 %>
       ptr: true 
-< end >
+%>
   
 <% if @macaddress_eth2 %>
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth2 %>
       ptr: true 
-< end >
-  
+%>
 <% if @macaddress_eth3 %>
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth3 %>
       ptr: true 
+%>
 < end >
