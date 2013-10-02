@@ -1,22 +1,25 @@
-<% if @macaddress_eth0 then -%>
-  <%= @hostname %>-eth0:
-      mac: <%= @macaddress_eth0 %> 
-      ip: <%= @ipaddress_eth0 %>
+<% if @macaddress_em0 -%>
+  <%= @hostname %>-em0:
+      mac: <%= @macaddress_em0 %> 
+      ip: <%= @ipaddress_em0 %>
 <% end -%>
-<% if @macaddress_eth1 then -%>
-  <%= @hostname %>-eth1:
-      mac: <%= @macaddress_eth1 %>
-      ip: <%= @ipaddress_eth1 %>
+
+<% if @macaddress_em1 -%>
+  <%= @hostname %>-em1:
+      mac: <%= @macaddress_em1 %>
+      ip: <%= @ipaddress_em1 %>
 <% end -%>
-<% if @macaddress_eth2 then -%>
-  <%= @hostname %>-eth2:
-      mac: <%= @macaddress_eth2 %>
-      ip: <%= @ipaddress_eth2 %>
+
+<% if @macaddress_em2 -%>
+  <%= @hostname %>-em2:
+      mac: <%= @macaddress_em2 %>
+      ip: <%= @ipaddress_em2 %>
 <% end -%>
-<% if @macaddress_eth3 then -%>
-  <%= @hostname %>-eth3:
-      mac: <%= @macaddress_eth3 %>
-      ip: <%= @ipaddress_eth1 %>
+
+<% if @macaddress_em3 -%>
+  <%= @hostname %>-em3:
+      mac: <%= @macaddress_em3 %>
+      ip: <%= @ipaddress_em1 %>
 <% end -%>
   
   

@@ -1,25 +1,25 @@
-<% if @macaddress_eth0 == !undef then -%> 
+<% if @macaddress_em0 -%> 
   <%= @hostname %>:
       zone: <%= @domain %>
-      data: <%= @ipaddress_eth0 %>
+      data: <%= @ipaddress_em0 %>
       ptr: true 
 <% end -%>
-<% if @macaddress_eth1 == !undef then -%>
+<% if @macaddress_em1 -%>
   <%= @hostname %>:
       zone: <%= @domain %>
-      data: <%= @ipaddress_eth1 %>
+      data: <%= @ipaddress_em1 %>
       ptr: true 
 <% end -%>
   
-<% if @macaddress_eth2 == !undef then -%>
+<% if @macaddress_em2 -%>
   <%= @hostname %>:
       zone: <%= @domain %>
-      data: <%= @ipaddress_eth2 %>
+      data: <%= @ipaddress_em2 %>
       ptr: true 
 <% end -%>
-<% if @macaddress_eth3 ==!undef then -%>
+<% if @macaddress_em3 -%>
   <%= @hostname %>:
       zone: <%= @domain %>
-      data: <%= @ipaddress_eth3 %>
+      data: <%= @ipaddress_em3 %>
       ptr: true 
 <% end -%>
