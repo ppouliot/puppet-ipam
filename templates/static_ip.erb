@@ -1,19 +1,19 @@
-<if @macaddress_eth0 then
+<% if @macaddress_eth0 %>
   <%= @hostname %>-eth0:
       mac: <%= @macaddress_eth0 %> 
       ip: <%= @ipaddress_eth0 %>
 <end>
-<if @macaddress_eth1 then
+<% if @macaddress_eth1 %>
   <%= @hostname %>-eth1:
       mac: <%= @macaddress_eth1 %>
       ip: <%= @ipaddress_eth1 %>
 <end>
-<if @macaddress_eth2 then
+<% if @macaddress_eth2 %>
   <%= @hostname %>-eth2:
       mac: <%= @macaddress_eth2 %>
       ip: <%= @ipaddress_eth2 %>
 <end>
-<if @macaddress_eth3 then
+<% if @macaddress_eth3 %>
   <%= @hostname %>-eth3:
       mac: <%= @macaddress_eth3 %>
       ip: <%= @ipaddress_eth1 %>

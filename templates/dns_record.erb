@@ -2,28 +2,28 @@
 # This is provided by the module to be used for general automation
 # of DNS Records for other nodes on the network
 
-<if @macaddress_eth0 then
+<% if @macaddress_eth0 %>
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth0 %>
       ptr: true 
 < end >
   
-<if @macaddress_eth1 then
+<% if @macaddress_eth1 %>
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth1 %>
       ptr: true 
 < end >
   
-<if @macaddress_eth2 then
+<% if @macaddress_eth2 %>
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth2 %>
       ptr: true 
 < end >
   
-<if @macaddress_eth3 then
+<% if @macaddress_eth3 %>
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth3 %>
