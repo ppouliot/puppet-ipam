@@ -11,13 +11,13 @@
       ptr: true 
 %>
   
-<% if @macaddress_eth2 %>
+<% if @macaddress_eth2 then
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth2 %>
       ptr: true 
 %>
-<% if @macaddress_eth3 %>
+<% if @macaddress_eth3 then 
   <%= @hostname %>:
       zone: <%= @domain %>
       data: <%= @ipaddress_eth3 %>
