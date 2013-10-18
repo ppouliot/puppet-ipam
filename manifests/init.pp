@@ -1,5 +1,6 @@
 class ipam {
 
+
   # Responsible for Primary Name Services, DHCP, and LDAP
   # Bind Configuration
 
@@ -13,6 +14,7 @@ class ipam {
   
   # Installs DNS Server
   include dns::server
+  include dns::key
 
   # generate key for use with dhcp 
   if $primary {
