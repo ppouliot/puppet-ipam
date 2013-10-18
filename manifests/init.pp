@@ -14,7 +14,10 @@ class ipam {
   
   # Installs DNS Server
   include dns::server
-  include dns
+
+  package {'apparmor':
+    ensure => absent,
+  }
 
   # generate key for use with dhcp 
   group {'bind':
