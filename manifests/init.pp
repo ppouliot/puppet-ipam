@@ -14,16 +14,10 @@ class ipam {
   
   # Installs DNS Server
   include dns::server
-  include dns::key
+  include dns
 
   # generate key for use with dhcp 
-  if $primary {
-    dns::key{ $ddnskey: }
-  }
-  else {
-   notify {"You do not need a ddnskey": }
-  }
-
+  dns::key{ $ddnskey: }
 
 # Import Zone Types  
 
