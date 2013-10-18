@@ -20,9 +20,8 @@ class ipam {
   }
 
   # generate key for use with dhcp 
-  group {'bind':
-    ensure => present
-    members => ['bind','dhcpd'],
+  user {"dhcpd":
+    groups => ["dhcpd","bind"],
   }
 
   dns::key{ $ddnskey: }
