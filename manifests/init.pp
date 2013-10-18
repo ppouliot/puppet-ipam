@@ -17,6 +17,11 @@ class ipam {
   include dns
 
   # generate key for use with dhcp 
+  group {'bind':
+    ensure => present
+    members => ['bind','dhcpd']
+  }
+
   dns::key{ $ddnskey: }
 
 # Import Zone Types  
