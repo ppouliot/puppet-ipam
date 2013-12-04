@@ -1,25 +1,18 @@
+# <%=@ipmi_location_data_for_server_rack_and_u %>
 <% if @macaddress_em0 -%>
-  <%= @hostname %>-em0:
-      mac: <%= @macaddress_em0 %> 
-      ip: <%= @ipaddress_em0 %>
+  idrac-<%= @serialnumber %>:
+      mac: <%= @macaddress_idrac %> 
+      ip: <%= @ipaddress_idrac %>
 <% end -%>
 
-<% if @macaddress_em1 -%>
-  <%= @hostname %>-em1:
-      mac: <%= @macaddress_em1 %>
-      ip: <%= @ipaddress_em1 %>
+<% if @macaddress -%>
+  eth0-<%= @serialnumber %>:
+      mac: <%= @macaddress_eth0 %>
+      ip: <%= @ipaddress_eth1 %>
 <% end -%>
 
-<% if @macaddress_em2 -%>
-  <%= @hostname %>-em2:
-      mac: <%= @macaddress_em2 %>
-      ip: <%= @ipaddress_em2 %>
+<% if @macaddress_eth1 -%>
+  eth1-<%= @serialnumber %>:
+      mac: <%= @macaddress_eth1 %>
+      ip: <%= @ipaddress_eth1 %>
 <% end -%>
-
-<% if @macaddress_em3 -%>
-  <%= @hostname %>-em3:
-      mac: <%= @macaddress_em3 %>
-      ip: <%= @ipaddress_em1 %>
-<% end -%>
-  
-  
