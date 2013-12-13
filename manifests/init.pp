@@ -57,9 +57,9 @@ class ipam {
     nameservers  => hiera("dhcp::nameservers"),
     ntpservers   => hiera("dhcp::ntpservers"),
     interfaces   => hiera("dhcp::interfaces"),
-    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
+#    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
 #    require      => Dns::Key[$ddnskey],
-#  }
+  }
   
   class {'dhcp::failover':
     role         => hiera("dhcp::failover::role"),
