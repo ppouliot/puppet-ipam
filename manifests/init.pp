@@ -4,6 +4,7 @@ class ipam {
   # Responsible for Primary Name Services, DHCP, and LDAP
   # Bind Configuration
 
+  $master         = hiera('master',{})
   $primary        = hiera('primary',{})
   $ddnskey        = hiera('ddnskey',{})
   $slave          = hiera('slave',{})
@@ -24,7 +25,14 @@ class ipam {
     groups => ["dhcpd","bind"],
   }
 
-  dns::key{ $ddnskey: }
+  case $master {
+    'true':{
+       dns::key{ $ddnskey: }
+    }
+    default:{
+      notify {"${hostname} is not a master":}
+    }
+  }
 
 # Import Zone Types  
 
