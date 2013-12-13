@@ -4,12 +4,12 @@ class ipam {
   # Responsible for Primary Name Services, DHCP, and LDAP
   # Bind Configuration
 
-  $master         = hiera('master',{})
-  $primary        = hiera('primary',{})
-  $ddnskey        = hiera('ddnskey',{})
-  $slave          = hiera('slave',{})
-  $dhcpdata       = hiera('dhcpdata',{})
-  $static_leases  = hiera('static_leases',{})
+  $master             =  hiera('master',{})
+  $primary            = hiera('primary',{})
+  $ddnskey            = hiera('ddnskey',{})
+  $slave              = hiera('slave',{})
+  $dhcpdata           = hiera('dhcpdata',{})
+  $static_leases      = hiera('static_leases',{})
   $dns_records_a      = hiera('dns_records_a',{})
   $dns_records_cname  = hiera('dns_records_cname',{})
   
@@ -57,9 +57,9 @@ class ipam {
     nameservers  => hiera("dhcp::nameservers"),
     ntpservers   => hiera("dhcp::ntpservers"),
     interfaces   => hiera("dhcp::interfaces"),
-#    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
+    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
 #    require      => Dns::Key[$ddnskey],
-  }
+#  }
   
   class {'dhcp::failover':
     role         => hiera("dhcp::failover::role"),
