@@ -1,18 +1,19 @@
-class ipam {
-
+class ipam (
 
   # Responsible for Primary Name Services, DHCP, and LDAP
   # Bind Configuration
 
-  $master             =  hiera('master',{})
-  $primary            = hiera('primary',{})
-  $ddnskey            = hiera('ddnskey',{})
-  $slave              = hiera('slave',{})
-  $dhcpdata           = hiera('dhcpdata',{})
-  $static_leases      = hiera('static_leases',{})
-  $dns_records_a      = hiera('dns_records_a',{})
-  $dns_records_cname  = hiera('dns_records_cname',{})
+  $master             = hiera('master',true),
+  $primary            = hiera('primary',{}),
+  $ddnskey            = hiera('ddnskey',"default"),
+  $slave              = hiera('slave',{}),
+  $dhcpdata           = hiera('dhcpdata',{}),
+  $static_leases      = hiera('static_leases',{}),
+  $dns_records_a      = hiera('dns_records_a',{}),
+  $dns_records_cname  = hiera('dns_records_cname',{}),
+  $dhcp_use_failover  = true,
   
+) {
   # Installs DNS Server
   include dns::server
 
@@ -53,20 +54,20 @@ class ipam {
   create_resources(dhcp_reservation,$static_leases)
 
   class { 'dhcp':
-    dnsdomain    => hiera("dhcp::dnsdomain"),
-    nameservers  => hiera("dhcp::nameservers"),
-    ntpservers   => hiera("dhcp::ntpservers"),
-    interfaces   => hiera("dhcp::interfaces"),
+#    dnsdomain    => hiera("dhcp::dnsdomain"),
+#    nameservers  => hiera("dhcp::nameservers"),
+#    ntpservers   => hiera("dhcp::ntpservers"),
+#    interfaces   => hiera("dhcp::interfaces"),
 #    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
 #    require      => Dns::Key[$ddnskey],
   }
   
-  class {'dhcp::failover':
-    role         => hiera("dhcp::failover::role"),
-    peer_address => hiera("dhcp::failover::peer_address"),
+  if ($dhcp_use_failover) {
+    class {'dhcp::failover':
+      role         => hiera("dhcp::failover::role"),
+      peer_address => hiera("dhcp::failover::peer_address"),
+    }
+    Dhcp::Pool{ failover => "dhcp-failover" }
   }
-
-  
-  Dhcp::Pool{ failover => "dhcp-failover" }
   
 }
