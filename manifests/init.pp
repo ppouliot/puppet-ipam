@@ -21,9 +21,9 @@ class ipam {
   }
 
   # generate key for use with dhcp 
-  user {"dhcpd":
-    groups => ["dhcpd",$dns::server::params::group],
-  }
+  #user {"dhcpd":
+  #  groups => ["dhcpd",$dns::server::params::group],
+  #}
 
   case $master {
     'true':{
