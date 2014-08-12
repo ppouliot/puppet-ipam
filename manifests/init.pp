@@ -12,7 +12,8 @@ class ipam (
   $dns_records_a      = hiera('dns_records_a',{}),
   $dns_records_cname  = hiera('dns_records_cname',{}),
   $dhcp_use_failover  = true,
-  
+  $primary_defaults   = {},
+  $slave_defaults     = {},
 ) {
   # Installs DNS Server
   include dns::server
@@ -40,8 +41,8 @@ class ipam (
   import 'params'
 
 #  Slave and Primary Zones
-  create_resources(primary_zone,$primary)
-  create_resources(slave_zone,$slave)
+  create_resources(primary_zone,$primary,$primary_defaults)
+  create_resources(slave_zone,$slave,$slave_defaults)
 
 # Import Name Records
   create_resources(record_a,$dns_records_a)
@@ -54,10 +55,10 @@ class ipam (
   create_resources(dhcp_reservation,$static_leases)
 
   class { 'dhcp':
-#    dnsdomain    => hiera("dhcp::dnsdomain"),
-#    nameservers  => hiera("dhcp::nameservers"),
-#    ntpservers   => hiera("dhcp::ntpservers"),
-#    interfaces   => hiera("dhcp::interfaces"),
+    dnsdomain    => hiera("dhcp::dnsdomain"),
+    nameservers  => hiera("dhcp::nameservers"),
+    ntpservers   => hiera("dhcp::ntpservers"),
+    interfaces   => hiera("dhcp::interfaces"),
 #    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
 #    require      => Dns::Key[$ddnskey],
   }
