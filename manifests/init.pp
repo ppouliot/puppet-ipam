@@ -28,7 +28,7 @@ class ipam (
   }
 
   case $master {
-    'true':{
+    true:{
        dns::key{ $ddnskey: }
     }
     default:{
