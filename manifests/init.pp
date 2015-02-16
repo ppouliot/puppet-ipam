@@ -14,12 +14,7 @@ class ipam {
   $dns_records_cname  = hiera('dns_records_cname',{})
   
   # Installs DNS Server
-  #include dns::server
-  class{'dns::server':
-    listen_on => $interfaces,
-  }
-
-
+  include dns::server
 
   package {'apparmor':
     ensure => absent,
