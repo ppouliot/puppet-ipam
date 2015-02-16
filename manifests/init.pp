@@ -1,18 +1,20 @@
-class ipam {
-
+class ipam (
 
   # Responsible for Primary Name Services, DHCP, and LDAP
   # Bind Configuration
 
-  $master             =  hiera('master',{})
-  $primary            = hiera('primary',{})
-  $ddnskey            = hiera('ddnskey',{})
-  $slave              = hiera('slave',{})
-  $dhcpdata           = hiera('dhcpdata',{})
-  $static_leases      = hiera('static_leases',{})
-  $dns_records_a      = hiera('dns_records_a',{})
-  $dns_records_cname  = hiera('dns_records_cname',{})
-  
+  $master             = hiera('master',true),
+  $primary            = hiera('primary',{}),
+  $ddnskey            = hiera('ddnskey',"default"),
+  $slave              = hiera('slave',{}),
+  $dhcpdata           = hiera('dhcpdata',{}),
+  $static_leases      = hiera('static_leases',{}),
+  $dns_records_a      = hiera('dns_records_a',{}),
+  $dns_records_cname  = hiera('dns_records_cname',{}),
+  $dhcp_use_failover  = true,
+  $primary_defaults   = {},
+  $slave_defaults     = {},
+) {
   # Installs DNS Server
   include dns::server
 
@@ -26,7 +28,7 @@ class ipam {
   #}
 
   case $master {
-    'true':{
+    true:{
        dns::key{ $ddnskey: }
     }
     default:{
@@ -39,8 +41,8 @@ class ipam {
   import 'params'
 
 #  Slave and Primary Zones
-  create_resources(primary_zone,$primary)
-  create_resources(slave_zone,$slave)
+  create_resources(primary_zone,$primary,$primary_defaults)
+  create_resources(slave_zone,$slave,$slave_defaults)
 
 # Import Name Records
   create_resources(record_a,$dns_records_a)
@@ -61,12 +63,12 @@ class ipam {
 #    require      => Dns::Key[$ddnskey],
   }
   
-  class {'dhcp::failover':
-    role         => hiera("dhcp::failover::role"),
-    peer_address => hiera("dhcp::failover::peer_address"),
+  if ($dhcp_use_failover) {
+    class {'dhcp::failover':
+      role         => hiera("dhcp::failover::role"),
+      peer_address => hiera("dhcp::failover::peer_address"),
+    }
+    Dhcp::Pool{ failover => "dhcp-failover" }
   }
-
-  
-  Dhcp::Pool{ failover => "dhcp-failover" }
   
 }
