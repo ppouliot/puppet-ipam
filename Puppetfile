@@ -5,12 +5,13 @@ base_url = "#{git_protocol}://github.com"
 
 
 branch_name = 'master'
-mod 'ripienaar/concat', :git => "#{base_url}/ripienaar/puppet-concat", :ref => branch_name
-mod 'puppetlabs/stdlib', :git => "#{base_url}/puppetlabs/puppetlabs-stdlib", :ref => branch_name
-#mod 'cprice404/inifile', :git => "#{base_url}/cprice-puppet/puppetlabs-inifile"
 
-mod 'ppouliot/dhcp', :git => "#{base_url}/ppouliot/puppetlabs-dhcp"
-#mod 'puppetlabs/dhcp', :git => "#{base_url}/puppetlabs/puppetlabs-dhcp"
-#mod 'ppouliot/dns', :git => "#{base_url}/ppouliot/puppet-dns"
-mod 'ajjahn/dns', :git => "#{base_url}/ajjahn/puppet-dns"
-mod 'ppouliot/ipam', :git => "#{base_url}/ppouliot/puppet-ipam"
+
+mod 'stdlib',     :git => "#{base_url}/puppetlabs/puppetlabs-stdlib",    :tag => '4.5.1'
+mod 'concat',     :git => "#{base_url}/puppetlabs/puppetlabs-concat",    :tag => '1.2.0'
+mod 'firewall',   :git => "#{base_url}/puppetlabs/puppetlabs-firewall",  :tag => '1.4.0'
+mod 'ntp',        :git => "#{base_url}/puppetlabs/puppetlabs-ntp",       :tag => '3.3.0'
+mod 'inifile',    :git => "#{base_url}/puppetlabs/puppetlabs-inifile",   :tag => '1.2.0'
+mod 'dhcp',       :git => "#{base_url}/puppetlabs/puppetlabs-dhcp",      :tag => '0.3.0'
+mod 'ajjahn/dns', :git => "#{base_url}/ajjahn/puppet-dns",               :tag => '1.1.0'
+mod 'ipam',       :git => "#{base_url}/openstack-hyper-v/puppet-ipam"    :ref => "#{branch_name}"
