@@ -1,7 +1,7 @@
 # Ipam
 # VERSION 1.0
 FROM ubuntu
-RUN apt-get update -y && apt-get install -y git
+RUN apt-get update -y && apt-get install -y git wget
 RUN release=`lsb_release -c | awk '{print $2}'`
 RUN cd /tmp &&  wget http://apt.puppetlabs.com/puppetlabs-release-$release.deb; dpkg -i puppetlabs-release-$release.deb
 RUN if [ $? $test -eq 1 ]; then \
