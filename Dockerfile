@@ -1,6 +1,6 @@
 FROM msopenstack/sentinel-ubuntu:latest
  
-RUN apt-get update
+RUN apt-get update -y
 RUN apt-get install software-properties-common -y
 RUN puppet module install puppetlabs-apt
 RUN puppet module install puppetlabs-stdlib
