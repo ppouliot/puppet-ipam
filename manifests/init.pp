@@ -16,7 +16,7 @@ class ipam (
   $dhcp_use_failover  = true,
   $primary_defaults   = {},
   $slave_defaults     = {},
-) {
+) inherits ipam::params {
   # Installs DNS Server
   include dns::server
 
@@ -40,7 +40,7 @@ class ipam (
 
 # Import Zone Types
 
-  import 'params'
+#  import 'params'
 
 #  Slave and Primary Zones
   create_resources(primary_zone,$primary,$primary_defaults)
