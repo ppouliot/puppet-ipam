@@ -1,3 +1,5 @@
+# == Class: ipam
+
 class ipam (
 
   # Responsible for Primary Name Services, DHCP, and LDAP
@@ -5,7 +7,7 @@ class ipam (
 
   $master             = hiera('master',true),
   $primary            = hiera('primary',{}),
-  $ddnskey            = hiera('ddnskey',"default"),
+  $ddnskey            = hiera('ddnskey','default'),
   $slave              = hiera('slave',{}),
   $dhcpdata           = hiera('dhcpdata',{}),
   $static_leases      = hiera('static_leases',{}),
@@ -22,21 +24,21 @@ class ipam (
     ensure => absent,
   }
 
-  # generate key for use with dhcp 
-  #user {"dhcpd":
-  #  groups => ["dhcpd",$dns::server::params::group],
+  # generate key for use with dhcp
+  #user {'dhcpd':
+  #  groups => ['dhcpd',$dns::server::params::group],
   #}
 
   case $master {
     true:{
-       dns::key{ $ddnskey: }
+      dns::key{ $ddnskey: }
     }
     default:{
       notify {"${hostname} is not a master":}
     }
   }
 
-# Import Zone Types  
+# Import Zone Types
 
   import 'params'
 
@@ -48,27 +50,23 @@ class ipam (
   create_resources(record_a,$dns_records_a)
   create_resources(record_cname,$dns_records_cname)
 
-  
   # isc-dhcp-server
 
   create_resources(dhcp_ip_pools,$dhcpdata)
   create_resources(dhcp_reservation,$static_leases)
 
   class { 'dhcp':
-    dnsdomain    => hiera("dhcp::dnsdomain"),
-    nameservers  => hiera("dhcp::nameservers"),
-    ntpservers   => hiera("dhcp::ntpservers"),
-    interfaces   => hiera("dhcp::interfaces"),
-#    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key", 
+    dnsdomain    => hiera('dhcp::dnsdomain'),
+    nameservers  => hiera('dhcp::nameservers'),
+    ntpservers   => hiera('dhcp::ntpservers'),
+    interfaces   => hiera('dhcp::interfaces'),
+#    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key",
 #    require      => Dns::Key[$ddnskey],
   }
-  
   if ($dhcp_use_failover) {
     class {'dhcp::failover':
-      role         => hiera("dhcp::failover::role"),
-      peer_address => hiera("dhcp::failover::peer_address"),
+      role         => hiera('dhcp::failover::role'),
+      peer_address => hiera('dhcp::failover::peer_address'),
     }
-    Dhcp::Pool{ failover => "dhcp-failover" }
+    Dhcp::Pool{ failover => 'dhcp-failover' }
   }
-  
-}
