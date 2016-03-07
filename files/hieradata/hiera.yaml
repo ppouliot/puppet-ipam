@@ -4,4 +4,6 @@
   :datadir: /etc/puppet/hiera
 :hierarchy:
   - %{hostname}
+  - hosts/%{hostname}
   - %{calling_module}
+  - hiera_common
