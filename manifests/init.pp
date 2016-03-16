@@ -70,3 +70,5 @@ class ipam (
     }
     Dhcp::Pool{ failover => 'dhcp-failover' }
   }
+
+}
