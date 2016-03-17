@@ -1,4 +1,5 @@
 # == Class: ipam::params
+class ipam::params
 # == Class: ipam::params::primary_zone
   define primary_zone ($soa,$soa_email,$nameservers,$allow_transfer){
     include dns::server
@@ -56,3 +57,4 @@
       ip  => $ip;
     }
   }
+}
