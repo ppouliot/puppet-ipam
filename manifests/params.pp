@@ -1,3 +1,3 @@
 # == Class: ipam::params
-class ipam::params
+class ipam::params{
 }
