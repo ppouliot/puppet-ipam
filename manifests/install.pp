@@ -14,12 +14,12 @@ class ipam::install
   }
 
   class { 'dhcp':
-    dnsdomain    => hiera('dhcp::dnsdomain'),
-    nameservers  => hiera('dhcp::nameservers'),
-    ntpservers   => hiera('dhcp::ntpservers'),
-    interfaces   => hiera('dhcp::interfaces'),
-#    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key",
-#    require      => Dns::Key[$ddnskey],
+    dnsdomain   => hiera('dhcp::dnsdomain'),
+    nameservers => hiera('dhcp::nameservers'),
+    ntpservers  => hiera('dhcp::ntpservers'),
+    interfaces  => hiera('dhcp::interfaces'),
+#   dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key",
+#   require      => Dns::Key[$ddnskey],
   }
   if ($ipam::dhcp_use_failover) {
     class {'dhcp::failover':

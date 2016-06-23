@@ -19,7 +19,7 @@ class ipam (
 ) inherits ipam::params {
 # Installs DNS Server and DHCP Server
 
-  class{'ipam::install':} -> 
+  class{'ipam::install':} ->
   class{'ipam::config':}
 
 #  Slave and Primary Zones
