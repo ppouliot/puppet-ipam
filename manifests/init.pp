@@ -17,58 +17,21 @@ class ipam (
   $primary_defaults   = {},
   $slave_defaults     = {},
 ) inherits ipam::params {
-  # Installs DNS Server
-  include dns::server
+# Installs DNS Server and DHCP Server
 
-  package {'apparmor':
-    ensure => absent,
-  }
-
-  # generate key for use with dhcp
-  #user {'dhcpd':
-  #  groups => ['dhcpd',$dns::server::params::group],
-  #}
-
-  case $master {
-    true:{
-      dns::key{ $ddnskey: }
-    }
-    default:{
-      notify {"${hostname} is not a master":}
-    }
-  }
-
-# Import Zone Types
-
-#  import 'params'
+  class{'ipam::install':} -> 
+  class{'ipam::config':}
 
 #  Slave and Primary Zones
   create_resources(primary_zone,$primary,$primary_defaults)
   create_resources(slave_zone,$slave,$slave_defaults)
 
-# Import Name Records
+  # A and CNAME Records
   create_resources(record_a,$dns_records_a)
   create_resources(record_cname,$dns_records_cname)
 
-  # isc-dhcp-server
-
+  # isc-dhcp-server dhcp datapools and leaces
   create_resources(dhcp_ip_pools,$dhcpdata)
   create_resources(dhcp_reservation,$static_leases)
-
-  class { 'dhcp':
-    dnsdomain    => hiera('dhcp::dnsdomain'),
-    nameservers  => hiera('dhcp::nameservers'),
-    ntpservers   => hiera('dhcp::ntpservers'),
-    interfaces   => hiera('dhcp::interfaces'),
-#    dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key",
-#    require      => Dns::Key[$ddnskey],
-  }
-  if ($dhcp_use_failover) {
-    class {'dhcp::failover':
-      role         => hiera('dhcp::failover::role'),
-      peer_address => hiera('dhcp::failover::peer_address'),
-    }
-    Dhcp::Pool{ failover => 'dhcp-failover' }
-  }
 
 }
