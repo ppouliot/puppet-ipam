@@ -1,3 +1,3 @@
 # == Class: ipam::config
-class ipam::config
+class ipam::config {
 }
