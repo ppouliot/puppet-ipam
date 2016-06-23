@@ -23,15 +23,15 @@ class ipam (
   class{'ipam::config':}
 
 #  Slave and Primary Zones
-  create_resources(primary_zone,$primary,$primary_defaults)
-  create_resources(slave_zone,$slave,$slave_defaults)
+  create_resources(ipam::primary_zone,$primary,$primary_defaults)
+  create_resources(ipam::slave_zone,$slave,$slave_defaults)
 
   # A and CNAME Records
-  create_resources(record_a,$dns_records_a)
-  create_resources(record_cname,$dns_records_cname)
+  create_resources(ipam::record_a,$dns_records_a)
+  create_resources(ipam::record_cname,$dns_records_cname)
 
   # isc-dhcp-server dhcp datapools and leaces
-  create_resources(dhcp_ip_pools,$dhcpdata)
-  create_resources(dhcp_reservation,$static_leases)
+  create_resources(ipam::dhcp_ip_pools,$dhcpdata)
+  create_resources(ipam::dhcp_reservation,$static_leases)
 
 }
