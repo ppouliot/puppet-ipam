@@ -1,5 +1,5 @@
 # == Class: ipam::install
-class ipam::install
+class ipam::install {
 
   # Install DNS Server
   include dns::server
