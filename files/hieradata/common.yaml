@@ -1,31 +1,44 @@
-dhcp::dnsdomain:
-      - contoso.ltd
-      - 0.168.192.in-addr.arpa
-  
-dhcp::nameservers:
-      - 192.168.0.1
-      - 192.168.0.2
-  
-dhcp::ntpservers:
-  - bonehed.lsc.mit.edu
-dhcp::interfaces:
-  - eth0
+dhcp::failover::role: primary
+dhcp::failover::peer_address: 192.168.0.2
 
-dhcpdata:
+primary:
   contoso.ltd:
-    failover: dhcp-failover
-    network: 192.168.0.0
-    mask: 255.255.255.0
-    gateway: 192.168.0.254
-    range: 192.168.0.100 192.168.0.220
-    options:
-      - domain-name-servers 192.168.0.1
-      - domain-name "contoso.ltd"
-      - ntp-servers bonehed.lcs.mit.edu
-    parameters:
-      - ddns-domainname "contoso.ltd, 0.168.192.in-addr.arpa"
+    soa: ns1.contoso.ltd
+    soa_email: admin.contoso.ltd
+    allow_transfer:
+      - ns2
+    nameservers:
+      - ns1
+      - ns2
 
-static_leases:
-  myhost: 
-    mac: 00:1a:2b:3c:4d:5e
-    ip: 192.168.0.3
+  0.168.192.IN-ADDR.ARPA:
+    soa: ns1.contoso.ltd
+    soa_email: admin.contoso.ltd
+    allow_transfer: 
+      - ns2
+    nameservers:
+      - ns1
+      - ns2
+
+dns_records_a:
+  ns1:
+    zone: contoso.ltd
+    data: 192.168.0.1
+    ptr: true
+  ns2:
+    zone: contoso.ltd
+    data: 192.168.0.2
+    ptr: true
+  myhost:
+    zone: contoso.ltd
+    data: 192.168.0.3
+    ptr: true 
+
+
+dns_records_cname:
+  test:
+    zone: contoso.ltd
+    data: myhost.contoso.ltd
+
+
+
