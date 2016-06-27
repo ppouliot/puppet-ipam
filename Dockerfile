@@ -16,4 +16,5 @@ RUN cp /etc/puppet/modules/ipam/files/hieradata/hiera.yaml /etc/puppet/hiera.yam
 RUN cp /etc/puppet/modules/ipam/files/hieradata/ipam.yaml /etc/puppet/hiera/ipam.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/common.yaml /etc/puppet/hiera/common.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/ns1.yaml /etc/puppet/hiera/`hostname`.yaml
+RUN mkdir -p /var/lock/named /var/run/named
 RUN puppet apply --debug --trace --verbose --modulepath=/etc/puppet/modules /etc/puppet/modules/ipam/tests/init.pp

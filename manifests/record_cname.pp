@@ -3,12 +3,11 @@
 # $zone
 # $data
 #
-  #  Define record_cname
-  define record_cname($zone,$data){
-    dns::record::cname { $name:
-      zone    => $zone,
-      data    => $data,
-      require => Class['ipam::config'],
-    }
+# Define record_cname
+define ipam::record_cname($zone,$data){
+  dns::record::cname { $name:
+    zone    => $zone,
+    data    => $data,
+    require => Class['ipam::config'],
   }
 }
