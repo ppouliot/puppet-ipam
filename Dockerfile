@@ -14,5 +14,6 @@ RUN git clone https://github.com/openstack-hyper-v/puppet-ipam /etc/puppet/modul
 RUN mkdir /etc/puppet/hiera
 RUN cp /etc/puppet/modules/ipam/files/hieradata/hiera.yaml /etc/puppet/hiera.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/ipam.yaml /etc/puppet/hiera/ipam.yaml
+RUN cp /etc/puppet/modules/ipam/files/hieradata/common.yaml /etc/puppet/hiera/common.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/ns1.yaml /etc/puppet/hiera/`hostname`.yaml
 RUN puppet apply --debug --trace --verbose --modulepath=/etc/puppet/modules /etc/puppet/modules/ipam/tests/init.pp
