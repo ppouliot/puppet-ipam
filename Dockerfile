@@ -12,7 +12,8 @@ RUN puppet module install puppetlabs-dhcp
 RUN puppet module install ajjahn-dns
 RUN git clone https://github.com/openstack-hyper-v/puppet-ipam /etc/puppet/modules/ipam
 RUN mkdir /etc/puppet/hiera
-RUN cp /etc/puppet/modules/ipam/files/hieradata/hiera.yaml /etc/puppet/hiera.yaml
+RUN cp /etc/puppet/modules/ipam/files/hieradata/hiera.yaml /etc/puppet/hiera/hiera.yaml
+RUN ln -s /etc/puppet/hiera/hiera.yaml /etc/puppet/hiera.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/ipam.yaml /etc/puppet/hiera/ipam.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/common.yaml /etc/puppet/hiera/common.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/ns1.yaml /etc/puppet/hiera/`hostname`.yaml
