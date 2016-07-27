@@ -17,7 +17,9 @@ dhcpdata:
     network: 192.168.0.0
     mask: 255.255.255.0
     gateway: 192.168.0.254
-    range: 192.168.0.100 192.168.0.220
+    range:
+      - 192.168.0.100
+      - 192.168.0.220
     options:
       - domain-name-servers 192.168.0.1
       - domain-name "contoso.ltd"
