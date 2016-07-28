@@ -1,0 +1,10 @@
+dhcp::failover::role: secondary
+dhcp::failover::peer_address: 192.168.0.1
+#slave:
+#  contoso.ltd:
+#    slave_masters: 192.168.0.1
+#    zone_type: slave
+#
+#  0.168.192.IN-ADDR.ARPA:
+#    slave_masters: 192.168.0.1
+#    zone_type: slave

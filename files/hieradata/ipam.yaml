@@ -1,3 +1,4 @@
+# Shared DHCP Zone Data
 dhcp::dnsdomain:
       - contoso.ltd
       - 0.168.192.in-addr.arpa
@@ -31,3 +32,54 @@ static_leases:
   myhost: 
     mac: 00:1a:2b:3c:4d:5e
     ip: 192.168.0.3
+
+# DNS Primary Zone Data
+ipam::primary:
+  contoso.ltd:
+    soa: ns1.contoso.ltd
+    soa_email: admin.contoso.ltd
+    allow_transfer:
+      - ns2
+    nameservers:
+      - ns1
+      - ns2
+
+  0.168.192.IN-ADDR.ARPA:
+    soa: ns1.contoso.ltd
+    soa_email: admin.contoso.ltd
+    allow_transfer: 
+      - ns2
+    nameservers:
+      - ns1
+      - ns2
+
+ipam::dns_records_a:
+  ns1:
+    zone: contoso.ltd
+    data: 192.168.0.1
+    ptr: true
+  ns2:
+    zone: contoso.ltd
+    data: 192.168.0.2
+    ptr: true
+  myhost:
+    zone: contoso.ltd
+    data: 192.168.0.3
+    ptr: true 
+
+
+ipam::dns_records_cname:
+  test:
+    zone: contoso.ltd
+    data: myhost.contoso.ltd
+
+# DNS Slave Zones
+ipam::slave:
+  contoso.ltd:
+    slave_masters: 192.168.0.1
+    zone_type: slave
+
+  0.168.192.IN-ADDR.ARPA:
+    slave_masters: 192.168.0.1
+    zone_type: slave
+
