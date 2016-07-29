@@ -1,5 +1,10 @@
 dhcp::failover::role: secondary
 dhcp::failover::peer_address: 192.168.0.1
+
+ipam::slave_defaults:
+  slave_masters: 192.168.0.1
+  zone_type: slave
+
 ipam::slave:
   contoso.ltd:
     slave_masters: 192.168.0.1
