@@ -34,7 +34,10 @@ ipam::dns_records_a:
     zone: contoso.ltd
     data: 192.168.0.3
     ptr: true 
-
+  allnumericmac:
+    zone: contoso.ltd
+    data: 192.168.0.4
+    ptr: true
 
 ipam::dns_records_cname:
   test:
