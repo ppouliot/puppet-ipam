@@ -7,19 +7,19 @@ ipam::primary:
     soa: ns1.contoso.ltd
     soa_email: admin.contoso.ltd
     allow_transfer:
-      - ns2
+      - 192.168.0.2
     nameservers:
-      - ns1
-      - ns2
+      - 192.168.0.1
+      - 192.168.0.2
 
   0.168.192.IN-ADDR.ARPA:
     soa: ns1.contoso.ltd
     soa_email: admin.contoso.ltd
-    allow_transfer: 
-      - ns2
+    allow_transfer:
+      - 192.168.0.2
     nameservers:
-      - ns1
-      - ns2
+      - 192.168.0.1
+      - 192.168.0.2
 
 ipam::dns_records_a:
   ns1:
