@@ -3,10 +3,11 @@ class ipam::install {
 
   # Install DNS Server
   include dns::server
-
+if $::osfamily == 'Redhat' {
   dns::server::options{'/etc/named/named.conf.options':
     listen_on_port => '53',
   }
+}
 
   # Remove Apparmor
   package {'apparmor':
