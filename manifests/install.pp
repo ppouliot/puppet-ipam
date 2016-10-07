@@ -5,7 +5,8 @@ class ipam::install {
   include dns::server
 if $::osfamily == 'Redhat' {
   dns::server::options{'/etc/named/named.conf.options':
-    listen_on_port => '53',
+    listen_on_port  => '53',
+    allow_recursion => 'any',
   }
 }
 
