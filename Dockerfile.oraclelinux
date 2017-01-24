@@ -8,10 +8,7 @@ RUN puppet module install puppetlabs-firewall
 RUN puppet module install puppetlabs-ntp
 RUN puppet module install puppetlabs-inifile
 RUN puppet module install ajjahn-dns
-# For some reason this pulls 0.3.0, which fails on Centos.  Forcing it to pull latest from voxpupuli/puppet-dhcp 
-#RUN puppet module install puppetlabs-dhcp
-RUN git clone https://github.com/voxpupuli/puppet-dhcp /etc/puppet/modules/dhcp
-RUN cd /etc/puppet/modules/dhcp && git checkout tags/v0.5.0
+RUN puppet module install puppetlabs-dhcp
 RUN git clone https://github.com/openstack-hyper-v/puppet-ipam /etc/puppet/modules/ipam
 RUN mkdir /etc/puppet/hiera
 RUN cp /etc/puppet/modules/ipam/files/hieradata/hiera.yaml /etc/puppet/hiera/hiera.yaml
