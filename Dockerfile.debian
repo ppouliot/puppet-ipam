@@ -21,6 +21,7 @@ RUN cp /etc/puppet/modules/ipam/files/hieradata/ipam.yaml /etc/puppet/hiera/ipam
 RUN touch /etc/puppet/hiera/common.yaml
 RUN cp /etc/puppet/modules/ipam/files/hieradata/primary.yaml /etc/puppet/hiera/`facter |grep fqdn | awk '{print $3}'`.yaml
 RUN mkdir -p /var/lock/named /var/run/named
+RUN puppet module list
 RUN puppet apply --debug --trace --verbose --modulepath=/etc/puppet/modules /etc/puppet/modules/ipam/tests/init.pp
 RUN /usr/sbin/dhcpd -t
 RUN /usr/sbin/named-checkconf
