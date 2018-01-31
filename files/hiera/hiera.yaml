@@ -1,4 +1,4 @@
-# hiera.5.yaml
+# hiera.yaml
 ---
 version: 5
 defaults:
