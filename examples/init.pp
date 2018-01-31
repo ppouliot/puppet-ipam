@@ -1,0 +1,2 @@
+# include ipam
+class { 'ipam': }
