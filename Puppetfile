@@ -5,6 +5,7 @@ mod "puppetlabs/firewall", :latest
 mod "puppetlabs/ntp", :latest
 mod "puppetlabs/inifile", :latest
 mod "puppetlabs/firewall", :latest
+mod "puppetlabs/stdlib", :latest
 mod "puppet/dhcp", :latest
 mod "ajjahn/dns", :latest
 mod "puppet/ipam", 
