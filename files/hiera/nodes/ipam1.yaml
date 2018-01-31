@@ -1,0 +1,126 @@
+---
+# Site Wide Puppet Classes being applied
+
+master: true
+ipam::master: true
+dhcp::failover::role: primary
+dhcp::failover::peer_address: 192.168.0.2
+ipam::primary_defaults:
+  soa: ipam1.contoso.ltd
+  soa_email: admin.contoso.ltd
+  nameservers:
+    - ipam1
+    - ipam2
+  allow_transfer:
+    - 192.168.0.2
+    - 192.168.0.1
+  allow_update:
+    - 192.168.0.2
+    - 192.168.0.1
+  also_notify:
+    - 192.168.0.2
+    - 192.168.0.1
+  
+  
+  
+  
+primary:
+  contoso.ltd: {}
+  0.168.192.IN-ADDR.ARPA: {}
+#    soa: ns3.opensack.tld
+
+#  ad.contoso.ltd:
+#    soa: ad0.contoso.ltd
+#    nameservers:
+#      - ad0
+#      - ad1
+
+dns_records_a:
+# Begin SOA
+# Begin contoso.ltd
+  ipam1:
+    zone: contoso.ltd
+    data: 192.168.0.1
+    ptr: true
+  ipam2:
+    zone: contoso.ltd
+    data: 192.168.0.2
+    ptr: true
+  puppetmaster:
+    zone: contoso.ltd
+    data: 192.168.0.3
+    ptr: true
+  round-robin0:
+    zone: contoso.ltd
+    data: 192.168.0.4
+    ptr: true
+  round-robin1:
+    zone: contoso.ltd
+    data: 192.168.0.5
+    ptr: true
+  round-robin2:
+    zone: contoso.ltd
+    data: 192.168.0.6
+    ptr: true
+  # Round Robin in A Record Test
+  round-robin:
+    zone: contoso.ltd
+    data: 192.168.0.6
+    ptr: true
+  round-robin:
+    zone: contoso.ltd
+    data: 192.168.0.6
+    ptr: true
+  round-robin:
+    zone: contoso.ltd
+    data: 192.168.0.6
+    ptr: true
+  # All Numeric Mac Address Test
+  allnumericmac:
+    zone: contoso.ltd
+    data: 192.168.0.7
+    ptr: true
+  jenkins-master:
+    zone: contoso.ltd
+    data: 192.168.0.15
+    ptr: true
+  gw:
+    zone: contoso.ltd
+    data: 192.168.0.254
+    ptr: true
+
+#  ad.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.111
+#    ptr: true
+#  ad1.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.112
+#    ptr: true
+#  ad2.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.113
+#    ptr: true
+
+dns_records_cname:
+  puppet:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetdb:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetboard:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  # Round Robin CNAME TEST
+  roundrobin:
+    zone: contoso.ltd
+    data: round-robin0.contoso.ltd
+  roundrobin:
+    zone: contoso.ltd
+    data: round-robin1.contoso.ltd
+  roundrobin:
+    zone: contoso.ltd
+    data: round-robin1.contoso.ltd
+
+# End Cname Records
