@@ -1,14 +1,16 @@
 
-# ipam
+# puppet-ipam
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://docs.puppet.com/pdk/1.0/pdk_generating_modules.html#module-contents .
+An Opinioned DHCP/DNS infrastructure.
 
-Below you'll find the default README template ready for some content.
+## Description
+Welcome to the puppet-ipam module.  This is an opinionated deployment of a DNS/DHCP Infrastructure.
+It creates an Active/Active ISC-DHCP-Server Cluster and a Bind Primary/Secondary across two nodes.
+All records are added via Hiera data.
 
-
-
-
-
+This module was used to managed the IPAM networing infrastrucure for Microsoft's OpenStack CI Operations
+from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
+on every Server in the MS OpenStack CI.
 
 
 #### Table of Contents
@@ -24,10 +26,13 @@ Below you'll find the default README template ready for some content.
 6. [Development - Guide for contributing to the module](#development)
 
 ## Description
+Welcome to the puppet-ipam module.  This is an opinionated deployment of a DNS/DHCP Infrastructure.
+It creates an Active/Active ISC-DHCP-Server Cluster and a Bind Primary/Secondary across two nodes.
+All records are added via Hiera data.
 
-Start with a one- or two-sentence summary of what the module does and/or what problem it solves. This is your 30-second elevator pitch for your module. Consider including OS/Puppet version it works with.       
-
-You can give more descriptive information in a second paragraph. This paragraph should answer the questions: "What does this module *do*?" and "Why would I use it?" If your module has a range of functionality (installation, configuration, management, etc.), this is the time to mention it.
+This module was used to managed the IPAM networing infrastrucure for Microsoft's OpenStack CI Operations
+from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
+on every Server in the MS OpenStack CI.
 
 ## Setup
 
