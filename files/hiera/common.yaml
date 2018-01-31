@@ -1,9 +1,10 @@
 ---
-classes:
-  - ipam
+#classes:
+#  - ipam
 
 #dhcp::dnsupdatekey: '/etc/named/bind.keys.d/Knorman.contoso.ltd.+157+21576.key'
 #dhcp::dnskeyname: 'norman.contoso.ltd'
+dhcp::failover::role: primary
 dhcp::default_lease_time: 86400
 dhcp::max_lease_time: 259200
 dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/ipam1.contoso.ltd.key"
