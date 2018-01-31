@@ -1,26 +1,27 @@
 FROM puppet/puppet-agent-ubuntu
 MAINTAINER peter@pouliot.net
+COPY Puppetfile /etc/puppetlabs/code/environments/production/Puppetfile
 RUN \
     apt-get update -y \
     && apt-get install git software-properties-common -y \
-    && puppet module install puppetlabs-stdlib \
-    && puppet module install puppetlabs-apt \
-    && puppet module install puppetlabs-concat \
-    && puppet module install puppetlabs-firewall \
-    && puppet module install puppetlabs-ntp \
-    && puppet module install puppetlabs-inifile \
-    && puppet module install ajjahn-dns \
-    && puppet module install puppet-dhcp \
-    && git clone https://github.com/openstack-hyper-v/puppet-ipam /etc/puppetlabs/code/environments/production/modules/ipam
+#    && puppet module install puppetlabs-stdlib \
+#    && puppet module install puppetlabs-apt \
+#    && puppet module install puppetlabs-concat \
+#    && puppet module install puppetlabs-firewall \
+#    && puppet module install puppetlabs-ntp \
+#    && puppet module install puppetlabs-inifile \
+#    && puppet module install ajjahn-dns \
+#    && puppet module install puppet-dhcp \
+#    && git clone https://github.com/openstack-hyper-v/puppet-ipam /etc/puppetlabs/code/environments/production/modules/ipam
+    && cd /etc/puppetlabs/code/environments/production/ \
+    && r10k puppetfile install --verbose DEBUG2
 
-RUN mkdir /etc/puppetlabs/code/environments/production/hiera
-RUN cp /etc/puppetlabs/code/environments/production/modules/ipam/files/hieradata/hiera.yaml /etc/puppetlabs/code/environments/production/hiera/hiera.yaml
-RUN ln -s /etc/puppetlabs/code/environments/production/hiera/hiera.yaml /etc/puppetlabs/hiera.yaml
-RUN cp /etc/puppetlabs/code/environments/production/modules/ipam/files/hieradata/ipam.yaml /etc/puppetlabs/code/environments/production/hiera/ipam.yaml
-RUN touch /etc/puppetlabs/code/environments/production/hiera/common.yaml
-RUN cp /etc/puppetlabs/code/environments/production/modules/ipam/files/hieradata/primary.yaml /etc/puppetlabs/code/environments/production/hiera/`facter |grep fqdn | awk '{print $3}'`.yaml
+COPY files/hiera /etc/puppetlabs/code/environments/production/data
+
+RUN ln -s /etc/puppetlabs/code/environments/production/data/hiera.yaml /etc/puppetlabs/hiera.yaml
 RUN mkdir -p /var/lock/named /var/run/named
 RUN puppet module list
 RUN puppet apply --debug --trace --verbose --modulepath=/etc/puppetlabs/code/environments/production/modules /etc/puppetlabs/code/environments/production/modules/ipam/examples/init.pp
 RUN /usr/sbin/dhcpd -t
 RUN /usr/sbin/named-checkconf
+COPY Dockerfile.ubuntu Dockerfile
