@@ -1,6 +1,12 @@
-# == Class: ipam::dhcp_ip_pools
-# Define IP Data Format
-define ipam::dhcp_ip_pools (
+# ipam::dhcp_ip_pools
+#
+# Defines IPAM DHCP IP Pools
+#
+# @summary Define IP Data Format
+#
+# @example
+#   ipam::dhcp_ip_pools { 'namevar': }
+define ipam::dhcp_ip_pools(
     $failover,
     $network,
     $mask,
@@ -8,7 +14,7 @@ define ipam::dhcp_ip_pools (
     $range,
     $options,
     $parameters,
-){
+) {
   dhcp::pool{ $name :
     failover   => $failover,
     network    => $network,

@@ -1,10 +1,12 @@
-# == Class: ipam
-
+# ipam
+#
+# Configures Bind/ISC-DHCP-Server IPAM Infrastructure
+#
+# @summary Responsible for Primary Name Services, DHCP and (maybe LDAP someday)
+#
+# @example
+#   include ipam
 class ipam (
-
-  # Responsible for Primary Name Services, DHCP, and LDAP
-  # Bind Configuration
-
   $master             = hiera('master',true),
   $primary            = hiera('primary',{}),
   $ddnskey            = hiera('ddnskey','default'),
@@ -33,5 +35,4 @@ class ipam (
   # isc-dhcp-server dhcp datapools and leaces
   create_resources(ipam::dhcp_ip_pools,$dhcpdata)
   create_resources(ipam::dhcp_reservation,$static_leases)
-
 }

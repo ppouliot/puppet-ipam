@@ -1,2 +1,0 @@
-# include ipam
-class { 'ipam': }

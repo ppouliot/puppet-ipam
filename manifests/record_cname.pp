@@ -1,10 +1,15 @@
-# == Class: ipam::record_cname
+# ipam::record_cname
 #
-# $zone
-# $data
+# A description of what this defined type does
 #
-# Define record_cname
-define ipam::record_cname($zone,$data){
+# @summary A short summary of the purpose of this defined type.
+#
+# @example
+#   ipam::record_cname { 'namevar': }
+define ipam::record_cname(
+  $zone,
+  $data,
+) {
   dns::record::cname { $name:
     zone    => $zone,
     data    => $data,

@@ -1,17 +1,18 @@
-FROM puppet/puppet-agent-debian
+FROM puppet/puppet-agent-ubuntu
 MAINTAINER peter@pouliot.net
-RUN apt-get update -y
 RUN \
-    apt-get install software-properties-common -y
-    && puppet module install puppetlabs-stdlib
-    && puppet module install puppetlabs-apt
-    && puppet module install puppetlabs-concat
-    && puppet module install puppetlabs-firewall
-    && puppet module install puppetlabs-ntp
-    && puppet module install puppetlabs-inifile
-    && puppet module install ajjahn-dns
+    apt-get update -y \
+    && apt-get install software-properties-common -y
+    && puppet module install puppetlabs-stdlib \
+    && puppet module install puppetlabs-apt \
+    && puppet module install puppetlabs-concat \
+    && puppet module install puppetlabs-firewall \
+    && puppet module install puppetlabs-ntp \
+    && puppet module install puppetlabs-inifile \
+    && puppet module install ajjahn-dns \
     && puppet module install puppet-dhcp
-RUN git clone https://github.com/ppouliot/puppet-ipam /etc/puppetlabs/modules/ipam
+
+RUN git clone https://github.com/openstack-hyper-v/puppet-ipam /etc/puppetlabs/modules/ipam
 RUN mkdir /etc/puppetlabs/hiera
 RUN cp /etc/puppetlabs/modules/ipam/files/hieradata/hiera.yaml /etc/puppetlabs/hiera/hiera.yaml
 RUN ln -s /etc/puppetlabs/hiera/hiera.yaml /etc/puppetlabs/hiera.yaml
