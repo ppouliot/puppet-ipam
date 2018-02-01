@@ -1,12 +1,9 @@
-FROM puppet/puppet-agent-centos
+FROM puppet/puppet-agent
 MAINTAINER peter@pouliot.net
-
-COPY VERSION /VERSION
 COPY Puppetfile /etc/puppetlabs/code/environments/production/Puppetfile
 COPY files/hiera /etc/puppetlabs/code/environments/production/data
 RUN \
-    yum makecache \
-    && yum install git -y \
+    apt-get update -y && apt-get install git software-properties-common -y \
     && gem install r10k \
     && cd /etc/puppetlabs/code/environments/production/ \
     && r10k puppetfile install --verbose DEBUG2 \
@@ -20,7 +17,7 @@ RUN \
     &&  puppet apply --debug --trace --verbose --modulepath=/etc/puppetlabs/code/environments/production/modules /etc/puppetlabs/code/environments/production/modules/ipam/examples/init.pp
 RUN /usr/sbin/dhcpd -t
 RUN /usr/sbin/named-checkconf
-COPY Dockerfile.debian Dockerfile
+COPY Dockerfile.ubuntu Dockerfile
 # Test Slave Build
 RUN \
     cd /etc/puppetlabs/code/environments/production/ \

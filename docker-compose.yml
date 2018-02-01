@@ -1,0 +1,29 @@
+version: '3'
+services:
+  ipam1:
+    image: "${USERNAME}/${IMAGE}:${VERSION}"
+    container_name: ipam1
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  ipam2:
+    image: "${USERNAME}/${IMAGE}:${VERSION}-ubuntu"
+    container_name: ipam1
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+
+  imap3:
+    image: "${USERNAME}/${IMAGE}:${VERSION}-debian"
+    container_name: ipam1
+    build:
+      context: .
+      dockerfile: Dockerfile.debian
+
+  ipam4:
+    image: "${USERNAME}/${IMAGE}:${VERSION}-centos"
+    container_name: ipam1
+    build:
+      context: .
+      dockerfile: Dockerfile.centos
