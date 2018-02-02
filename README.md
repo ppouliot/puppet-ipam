@@ -3,16 +3,6 @@
 
 An Opinioned DHCP/DNS infrastructure.
 
-## Description
-Welcome to the puppet-ipam module.  This is an opinionated deployment of a DNS/DHCP Infrastructure.
-It creates an Active/Active ISC-DHCP-Server Cluster and a Bind Primary/Secondary across two nodes.
-All records are added via Hiera data.
-
-This module was used to managed the IPAM networing infrastrucure for Microsoft's OpenStack CI Operations
-from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
-on every Server in the MS OpenStack CI.
-
-
 #### Table of Contents
 
 1. [Description](#description)
