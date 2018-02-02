@@ -23,5 +23,4 @@ define ipam::primary_zone(
     also_notify    => $also_notify,
     require        => Class['ipam::config'],
   }
-) {
 }
