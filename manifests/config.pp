@@ -6,5 +6,4 @@
 #
 # @example
 #   include ipam::config
-class ipam::config {
-}
+class ipam::config () { }

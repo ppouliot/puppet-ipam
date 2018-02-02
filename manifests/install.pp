@@ -21,8 +21,8 @@ if $::osfamily == 'Redhat' {
     ensure => absent,
   }
 
-  if $master == !false {
-    @dns::key{ $ddnskey: }
+  if $::master == !false {
+    @dns::key{ $::ddnskey: }
   }
 
   class { 'dhcp':
