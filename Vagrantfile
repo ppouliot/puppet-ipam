@@ -13,7 +13,6 @@ def vm(opt)
   fixture_modules = File.join(proj_root, 'spec', 'fixtures', 'modules')
 
   Vagrant.configure('2') do |conf|
-
     # forward all the ports
     ports.each do |p|
       conf.vm.network(:forwarded_port, guest: p, host: p, auto_correct: true)
@@ -32,8 +31,8 @@ def vm(opt)
       if os_type == :windows
         mod.vm.guest = :windows
         mod.vm.communicator = 'winrm'
-        mod.vm.synced_folder './' , "/ProgramData/PuppetLabs/puppet/etc/modules/#{module_name}"
-        mod.vm.synced_folder 'spec/fixtures/modules' , '/temp/modules'
+        mod.vm.synced_folder './', "/ProgramData/PuppetLabs/puppet/etc/modules/#{module_name}"
+        mod.vm.synced_folder 'spec/fixtures/modules', '/temp/modules'
       else
         mod.vm.synced_folder './', "/etc/puppet/modules/#{module_name}"
         mod.vm.synced_folder 'spec/fixtures/modules', '/tmp/puppet/modules'
@@ -47,7 +46,7 @@ def vm(opt)
         f.vmx['memsize'] = memory
         f.vmx['numvcpus'] = cpu
         if iso
-          f.vmx['ide1:0.devicetype'] = "cdrom-image"
+          f.vmx['ide1:0.devicetype'] = 'cdrom-image'
           f.vmx['ide1:0.filename'] = iso
         end
       end
@@ -58,7 +57,7 @@ def vm(opt)
         f.vmx['memsize'] = memory
         f.vmx['numvcpus'] = cpu
         if iso
-          f.vmx['ide1:0.devicetype'] = "cdrom-image"
+          f.vmx['ide1:0.devicetype'] = 'cdrom-image'
           f.vmx['ide1:0.filename'] = iso
         end
       end
@@ -72,15 +71,15 @@ def vm(opt)
 
       if os_type == :windows
         manifest = ENV['VAGRANT_MANIFEST'] || 'init.pp'
-        #mod.vm.provision :shell, :inline => "@powershell -NoProfile -ExecutionPolicy Bypass -Command \"iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))\" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-        #mod.vm.provision :shell, :inline => "choco install puppet"
-        mod.vm.provision :shell, :inline => "puppet apply --modulepath 'C:/ProgramData/PuppetLabs/puppet/etc/modules;C:/temp/modules' --verbose C:/ProgramData/PuppetLabs/puppet/etc/modules/#{module_name}/tests/#{manifest}"
+        # mod.vm.provision :shell, :inline => "@powershell -NoProfile -ExecutionPolicy Bypass -Command \"iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))\" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+        # mod.vm.provision :shell, :inline => "choco install puppet"
+        mod.vm.provision :shell, inline: "puppet apply --modulepath 'C:/ProgramData/PuppetLabs/puppet/etc/modules;C:/temp/modules' --verbose C:/ProgramData/PuppetLabs/puppet/etc/modules/#{module_name}/tests/#{manifest}"
       else
         mod.vm.provision :puppet do |p|
           p.manifests_path = 'tests'
-         # p.hiera_config_path = File.join(fixture_modules, 'hieradata', 'hiera.yaml')
+          # p.hiera_config_path = File.join(fixture_modules, 'hieradata', 'hiera.yaml')
           p.manifest_file = ENV['VAGRANT_MANIFEST'] || 'init.pp'
-          #p.module_path = fixture_modules
+          # p.module_path = fixture_modules
           # because of how symlinks are handled via the spec_helper we are forced to mount the modules is different locations
           # otherwise we could just use the above option
           p.options = '--modulepath="/etc/puppet/modules:/tmp/puppet/modules"'
@@ -90,6 +89,6 @@ def vm(opt)
   end
 end
 module_name = File.basename(File.expand_path(File.join(File.dirname(__FILE__))))
-vm :hostname => 'win2012r2', :module => module_name, :box => 'opentable/win-2012r2-standard-amd64-nocm', :url => 'opentable/win-2012r2-standard-amd64-nocm', :os_type => :windows, :cpu => 1, :memory => 4096, :gui => true
-vm :hostname => 'win2008r2', :module => module_name, :box => 'opentable/win-2008r2-standard-amd64-nocm', :url => 'opentable/win-2008r2-standard-amd64-nocm', :os_type => :windows, :cpu => 1, :memory => 4096, :gui => true
-vm :hostname => 'centos6', :module => module_name, :box => 'puppetlabs/centos-6.6-64-puppet', :url => 'puppetlabs/centos-6.6-64-puppet', :cpu => 1, :memory => 2048, :gui => false
+vm hostname: 'win2012r2', module: module_name, box: 'opentable/win-2012r2-standard-amd64-nocm', url: 'opentable/win-2012r2-standard-amd64-nocm', os_type: :windows, cpu: 1, memory: 4096, gui: true
+vm hostname: 'win2008r2', module: module_name, box: 'opentable/win-2008r2-standard-amd64-nocm', url: 'opentable/win-2008r2-standard-amd64-nocm', os_type: :windows, cpu: 1, memory: 4096, gui: true
+vm hostname: 'centos6', module: module_name, box: 'puppetlabs/centos-6.6-64-puppet', url: 'puppetlabs/centos-6.6-64-puppet', cpu: 1, memory: 2048, gui: false

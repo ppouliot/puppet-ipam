@@ -1,7 +1,7 @@
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 def location_for(place_or_version, fake_version = nil)
-  if place_or_version =~ %r{\A(git[:@][^#]*)#(.*)}
+  if place_or_version =~ /\A(git[:@][^#]*)#(.*)/
     [fake_version, { git: Regexp.last_match(1), branch: Regexp.last_match(2), require: false }].compact
   elsif place_or_version =~ %r{\Afile:\/\/(.*)}
     ['>= 0', { path: File.expand_path(Regexp.last_match(1)), require: false }]
@@ -11,7 +11,7 @@ def location_for(place_or_version, fake_version = nil)
 end
 
 def gem_type(place_or_version)
-  if place_or_version =~ %r{\Agit[:@]}
+  if place_or_version =~ /\Agit[:@]/
     :git
   elsif !place_or_version.nil? && place_or_version.start_with?('file:')
     :file
@@ -24,14 +24,14 @@ ruby_version_segments = Gem::Version.new(RUBY_VERSION.dup).segments
 minor_version = ruby_version_segments[0..1].join('.')
 
 group :development do
-  gem "fast_gettext", '1.1.0',                         require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.1.0')
-  gem "fast_gettext",                                  require: false if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.1.0')
-  gem "json_pure", '<= 2.0.1',                         require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.0.0')
-  gem "json", '= 1.8.1',                               require: false if Gem::Version.new(RUBY_VERSION.dup) == Gem::Version.new('2.1.9')
+  gem 'fast_gettext', '1.1.0',                         require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.1.0')
+  gem 'fast_gettext',                                  require: false if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.1.0')
+  gem 'json', '= 1.8.1',                               require: false if Gem::Version.new(RUBY_VERSION.dup) == Gem::Version.new('2.1.9')
+  gem 'json_pure', '<= 2.0.1',                         require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.0.0')
   gem "puppet-module-posix-default-r#{minor_version}", require: false, platforms: [:ruby]
   gem "puppet-module-posix-dev-r#{minor_version}",     require: false, platforms: [:ruby]
-  gem "puppet-module-win-default-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "puppet-module-win-default-r#{minor_version}",   require: false, platforms: %i[mswin mingw x64_mingw]
+  gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: %i[mswin mingw x64_mingw]
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
@@ -115,7 +115,7 @@ end
 # Evaluate Gemfile.local and ~/.gemfile if they exist
 extra_gemfiles = [
   "#{__FILE__}.local",
-  File.join(Dir.home, '.gemfile'),
+  File.join(Dir.home, '.gemfile')
 ]
 
 extra_gemfiles.each do |gemfile|

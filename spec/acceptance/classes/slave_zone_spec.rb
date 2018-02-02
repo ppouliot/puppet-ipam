@@ -9,12 +9,11 @@ describe 'ipam::slave_zone ipam::slave_zone' do
         zone_type: nil,
 
       }
-      EOS
+   EOS
 
-    # Run it twice and test for idempotency
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      # Run it twice and test for idempotency
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
-
   end
 end
