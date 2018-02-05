@@ -1,5 +1,5 @@
-# include ipam
 if $virtual == 'docker' {
   include dummy_service
 }
-class { 'ipam': }
+class{'dummy_service':}
+-> class { 'ipam': }

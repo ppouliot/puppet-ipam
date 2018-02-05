@@ -1,0 +1,18 @@
+fixtures:
+  symlinks:
+    ipam: "#{source_dir}"
+  forge_modules:
+    apt: 'puppetlabs-apt'
+    concat: 'puppetlabs-concat'
+    dhcp: 'puppet-dhcp'
+    dummy_service: 'puppetlabs-dummy_service'
+    firewall: 'puppetlabs-firewall'
+    inifile: 'puppetlabs-inifile'
+    ntp: 'puppetlabs-ntp'
+    stdlib: 'puppetlabs-stdlib'
+symlinks:
+  ipam: "#{source_dir}"
+  repositories:
+    dns:
+      repo: https://github.com/ajjahn/puppet-dns
+      branch: master

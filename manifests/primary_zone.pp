@@ -13,7 +13,7 @@ define ipam::primary_zone(
   $allow_transfer,
   $allow_update,
   $also_notify,
-){
+) {
   dns::zone{ $name:
     soa            => $soa,
     soa_email      => $soa_email,
