@@ -1,14 +1,14 @@
 pipeline {
   agent {
     dockerfile {
-      filename 'Dockerfile.ubuntu'
+      filename 'Dockerfile'
     }
     
   }
   stages {
-    stage('Build  Compose') {
+    stage('build') {
       steps {
-        sh './build.sh'
+        sh 'build.sh'
       }
     }
   }
