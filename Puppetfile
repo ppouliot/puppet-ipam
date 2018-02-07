@@ -8,9 +8,9 @@ mod 'puppetlabs/inifile', :latest
 mod 'puppetlabs/firewall', :latest
 mod 'puppetlabs/stdlib', :latest
 mod 'puppet/dhcp', :latest
-mod 'ajjahn/dns', # :latest
-    git: 'https://github.com/ajjahn/puppet-dns',
-    branch: 'master'
-mod 'ipam',
-    git: 'https://github.com/ppouliot/puppet-ipam',
-    branch: 'master'
+mod 'ajjahn/dns',
+    :git => 'https://github.com/ajjahn/puppet-dns',
+    :branch => 'master'
+mod 'ppouliot/ipam',
+    :git => 'https://github.com/ppouliot/puppet-ipam',
+    :branch => 'master'
