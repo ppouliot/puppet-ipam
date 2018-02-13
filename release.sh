@@ -3,27 +3,32 @@
 USERNAME=ppouliot
 # image name
 IMAGE=puppet-ipam
-# ensure we're up to date
+
+# Ensure the repo is up to date
 git pull
-# bump version
+
+# Bump Version
 docker run --rm -v "$PWD":/app treeder/bump patch
 VERSION=`cat VERSION`
 set -x
 echo "version: $VERSION"
+# Bump Version in metadata.json
 sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 # run build
+
 ./build.sh
 # tag it
 git add -A
-git commit -m "version $version"
-git tag -a "$version" -m "version $version"
+git commit -m "version $VERSION"
+git tag -a "$VERSION" -m "version $VERSION"
 git push
 git push --tags
-docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$version $USERNAME/IMAGE:$version-centos $USERNAME/$IMAGE:$version-debian $USERNAME/$IMAGE:$version $USERNAME/$IMAGE:$version-ubuntu
+docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION $USERNAME/IMAGE:$VERSION-centos $USERNAME/$IMAGE:$VERSION-debian $USERNAME/$IMAGE:$VERSION $USERNAME/$IMAGE:$VERSION-ubuntu
+
 # push it
 docker push $USERNAME/$IMAGE:latest
-docker push $USERNAME/$IMAGE:$version
-docker push $USERNAME/IMAGE:$version-centos
-docker push $USERNAME/$IMAGE:$version-debian
-docker push $USERNAME/$IMAGE:$version-ubuntu
+docker push $USERNAME/$IMAGE:$VERSION
+docker push $USERNAME/$IMAGE:$VERSION-centos
+docker push $USERNAME/$IMAGE:$VERSION-debian
+docker push $USERNAME/$IMAGE:$VERSION-ubuntu
