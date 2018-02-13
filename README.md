@@ -24,6 +24,8 @@ This module was used to managed the IPAM networing infrastrucure for Microsoft's
 from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
 on every Server in the MS OpenStack CI.
 
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) ppouliot/puppet-ipam
+
 ## Setup
 
 ### What ipam affects **OPTIONAL**
