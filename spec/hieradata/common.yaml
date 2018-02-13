@@ -1,0 +1,72 @@
+---
+#classes:
+#  - ipam
+
+#dhcp::dnsupdatekey: '/etc/named/bind.keys.d/Knorman.contoso.ltd.+157+21576.key'
+#dhcp::dnskeyname: 'norman.contoso.ltd'
+dhcp::failover::role: primary
+dhcp::failover::peer_address: 192.168.0.2
+
+dhcp::default_lease_time: 86400
+dhcp::max_lease_time: 259200
+# dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/ipam1.contoso.ltd.key"
+# dhcp::dnskeyname: ipam1.contoso.ltd
+dhcp::omapi_name: ipam1.contoso.ltd
+dhcp::omapi_key: "JFuV5v6ZHk1nJb6wlxrbCQ=="
+dhcp::omapi_port: 7911
+dhcp::dnsdomain:
+      - contoso.ltd
+      - 0.168.192.in-addr.arpa
+  
+dhcp::nameservers:
+      - 192.168.0.1
+      - 192.168.0.2
+  
+dhcp::ntpservers:
+  - bonehed.lsc.mit.edu
+dhcp::interfaces:
+  - eth0
+
+dhcpdata:
+  contoso.ltd:
+    failover: dhcp-failover
+    network: 192.168.0.0
+    mask: 255.255.255.0
+    gateway: 192.168.0.254
+    range: 192.168.0.25 192.168.0.220
+    options:
+      - 'domain-name-servers 192.168.0.1, 192.168.0.2'
+      - domain-name "contoso.ltd"
+      - ntp-servers bonehed.lcs.mit.edu
+    parameters:
+      - ddns-domainname "contoso.ltd, 0.168.192.in-addr.arpa"
+
+static_leases:
+# Begin Static Leases
+
+  ipam1: 
+    mac: "00:0c:29:55:26:f8"
+    ip: 192.168.0.1
+  ipam2: 
+    mac: "00:0c:29:3a:3e:fc"
+    ip: 192.168.0.2
+  puppetmaster:
+    mac: "00:0c:29:e1:de:13"
+    ip: 192.168.0.3
+  jenkins-master:
+    mac: "00:0c:29:be:87:31"
+    ip: 192.168.0.15
+  round-robin0:
+    mac: "00:0c:29:0f:08:2f"
+    ip: 192.168.0.4
+  round-robin1:
+    mac: "00:0c:29:e9:2a:7e"
+    ip: 192.168.0.5
+  round-robin2:
+    mac: "00:0c:29:60:2c:e9"
+    ip: 192.168.0.6
+
+# All Numeric Mac Test
+  allnumericmac:
+    mac: "00:07:43:14:15:30"
+    ip: 192.168.0.7
