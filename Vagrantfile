@@ -38,13 +38,13 @@ Vagrant.configure("2") do |config|
 #   v.vm.box = "centos/7"
 #   v.vm.box_version = "1801.02"
 #   v.vm.box_url = "http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7.box"
-#   v.vm.hostname = "ipam2.contoso.ltd"
-#   v.vm.network "private_network", ip: "192.168.0.3"
+   v.vm.hostname = "ipam2.contoso.ltd"
+   v.vm.network "private_network", ip: "192.168.0.3"
   end
 
   config.vm.define :pxe_client do |pxe_client|
 
-  #  pxe_client.vm.box = 'debian/jessie64'
+    pxe_client.vm.box = 'centos/atomic-host'
 
     pxe_client.vm.provider :libvirt do |libvirt|
       libvirt.cpu_mode = 'host-passthrough'
