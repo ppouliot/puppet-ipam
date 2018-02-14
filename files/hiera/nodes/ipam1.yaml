@@ -4,7 +4,7 @@
 master: true
 ipam::master: true
 dhcp::failover::role: primary
-dhcp::failover::peer_address: 192.168.0.2
+dhcp::failover::peer_address: 192.168.0.3
 ipam::primary_defaults:
   soa: ipam1.contoso.ltd
   soa_email: admin.contoso.ltd
@@ -13,13 +13,13 @@ ipam::primary_defaults:
     - ipam2
   allow_transfer:
     - 192.168.0.2
-    - 192.168.0.1
+    - 192.168.0.3
   allow_update:
     - 192.168.0.2
-    - 192.168.0.1
+    - 192.168.0.3
   also_notify:
     - 192.168.0.2
-    - 192.168.0.1
+    - 192.168.0.3
   
   
   
@@ -40,15 +40,15 @@ dns_records_a:
 # Begin contoso.ltd
   ipam1:
     zone: contoso.ltd
-    data: 192.168.0.1
+    data: 192.168.0.2
     ptr: true
   ipam2:
     zone: contoso.ltd
-    data: 192.168.0.2
+    data: 192.168.0.3
     ptr: true
   puppetmaster:
     zone: contoso.ltd
-    data: 192.168.0.3
+    data: 192.168.0.14
     ptr: true
   round-robin0:
     zone: contoso.ltd
@@ -86,7 +86,7 @@ dns_records_a:
     ptr: true
   gw:
     zone: contoso.ltd
-    data: 192.168.0.254
+    data: 192.168.0.1
     ptr: true
 
 #  ad.contoso.ltd:

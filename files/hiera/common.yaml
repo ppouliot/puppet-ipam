@@ -5,7 +5,7 @@
 #dhcp::dnsupdatekey: '/etc/named/bind.keys.d/Knorman.contoso.ltd.+157+21576.key'
 #dhcp::dnskeyname: 'norman.contoso.ltd'
 dhcp::failover::role: primary
-dhcp::failover::peer_address: 192.168.0.2
+dhcp::failover::peer_address: 192.168.0.3
 
 dhcp::default_lease_time: 86400
 dhcp::max_lease_time: 259200
@@ -19,8 +19,8 @@ dhcp::dnsdomain:
       - 0.168.192.in-addr.arpa
   
 dhcp::nameservers:
-      - 192.168.0.1
       - 192.168.0.2
+      - 192.168.0.3
   
 dhcp::ntpservers:
   - bonehed.lsc.mit.edu
@@ -35,7 +35,7 @@ dhcpdata:
     gateway: 192.168.0.254
     range: 192.168.0.25 192.168.0.220
     options:
-      - 'domain-name-servers 192.168.0.1, 192.168.0.2'
+      - 'domain-name-servers 192.168.0.2, 192.168.0.3'
       - domain-name "contoso.ltd"
       - ntp-servers bonehed.lcs.mit.edu
     parameters:
@@ -46,13 +46,13 @@ static_leases:
 
   ipam1: 
     mac: "00:0c:29:55:26:f8"
-    ip: 192.168.0.1
+    ip: 192.168.0.2
   ipam2: 
     mac: "00:0c:29:3a:3e:fc"
-    ip: 192.168.0.2
+    ip: 192.168.0.3
   puppetmaster:
     mac: "00:0c:29:e1:de:13"
-    ip: 192.168.0.3
+    ip: 192.168.0.14
   jenkins-master:
     mac: "00:0c:29:be:87:31"
     ip: 192.168.0.15

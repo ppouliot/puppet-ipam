@@ -9,7 +9,6 @@
   end
 end
 
-
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.synced_folder ".", "/etc/puppetlabs/code/modules/ipam", :mount_options => ['dmode=775','fmode=777']
@@ -27,8 +26,13 @@ Vagrant.configure("2") do |config|
 
   end
   config.vm.define "ipam1" do |v|
-    v.vm.hostname = "ipam1.contoso.tld"
+    v.vm.hostname = "ipam1.contoso.lld"
     v.vm.network "private_network", ip: "192.168.0.2"
   end
+  config.vm.define "ipam2" do |v|
+    v.vm.hostname = "ipam2.contoso.ltd"
+    v.vm.network "private_network", ip: "192.168.0.3"
+  end
+
 
 end
