@@ -10,7 +10,7 @@
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
+#  config.vm.box = "ubuntu/xenial64"
   config.vm.synced_folder ".", "/etc/puppetlabs/code/modules/ipam", :mount_options => ['dmode=775','fmode=777']
   config.vm.synced_folder "./files/hiera", "/etc/puppetlabs/code/environments/production/data", :mount_options => ['dmode=775','fmode=777']
   config.vm.provider "virtualbox" do |v|
@@ -26,10 +26,12 @@ Vagrant.configure("2") do |config|
 
   end
   config.vm.define "ipam1" do |v|
+    v.vm.box = "ubuntu/xenial64"
     v.vm.hostname = "ipam1.contoso.lld"
     v.vm.network "private_network", ip: "192.168.0.2"
   end
   config.vm.define "ipam2" do |v|
+    v.vm.box = "centos/7"
     v.vm.hostname = "ipam2.contoso.ltd"
     v.vm.network "private_network", ip: "192.168.0.3"
   end
