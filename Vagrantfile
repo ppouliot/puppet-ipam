@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--memory", "2048"]
     v.linked_clone = true
   config.puppet_install.puppet_version = :latest
-  config.vm.provision "shell", path: "files/vagrant.sh"
+#  config.vm.provision "shell", path: "files/vagrant.sh"
   end
 
   config.vm.define "ipam1" do |v|
