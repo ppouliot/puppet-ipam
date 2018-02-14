@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -x
-if [ -d /usr/bin/yum ]; then
+YUM=`which yum`
+APT=`which yum`
+if [ -d $YUM ]; then
   echo "Yum is detected installing required packages for the platform."
   yum install git wget curl
-elif [ -d /usr/bin/apt ]; then
+elif [ -d $APT ]; then
   echo "Apt is detected installing required packages for the platform."
   apt-get install git wget curl -y
 else 

@@ -3,9 +3,11 @@
 [
   { :name => "vagrant-scp", :version => ">= 0.5.7" },
   { :name => "vagrant-puppet-install", :version => ">= 5.0.0" },
-  { :name => "vagrant-vbguest", :version => ">= 0.15.1" },
+  { :name => "vagrant-vbguest", :version => ">= 0.15.1" }
 ].each do |plugin|
-    system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+  if not Vagrant.has_plugin?(plugin[:name], plugin[:version])
+#    raise "#{plugin[:name]} #[plugin[:version]} is required. Please run `vagrant plugin install #{plugin[:name]}`"
+    system "vagrant plugin install #{plugin}"
   end
 end
 
