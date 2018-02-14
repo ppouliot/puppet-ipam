@@ -5,8 +5,7 @@
   { :name => "vagrant-puppet-install", :version => ">= 5.0.0" },
   { :name => "vagrant-vbguest", :version => ">= 0.15.1" },
 ].each do |plugin|
-  if not Vagrant.has_plugin?(plugin[:name], plugin[:version])
-    raise "#{plugin[:name]} #[plugin[:version]} is required. Please run `vagrant plugin install #{plugin[:name]}`"
+    system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
   end
 end
 
@@ -25,6 +24,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "cd /etc/puppetlabs/code/environments/production && /opt/puppetlabs/puppet/bin/r10k puppetfile install --verbose DEBUG2"
   config.vm.provision "shell", inline: "/opt/puppetlabs/bin/puppet module list --tree"
   config.vm.provision "shell", inline: "/opt/puppetlabs/bin/puppet apply --debug --trace --verbose --modulepath=/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules /etc/puppetlabs/code/modules/ipam/examples/init.pp"
+# Advanced Puppet Example
+#config.vm.provision :shell, :privileged => false do |shell|
+#  shell.inline = "puppet apply --debug --modulepath '/vagrant/#{ENV.fetch('MODULES_PATH', 'modules')}' --detailed-exitcodes '/vagrant/#{ENV.fetch('MANIFESTS_PATH', 'manifests')}/#{ENV.fetch('MANIFEST_FILE', 'site.pp')}'"
+#end
 
   end
   config.vm.define "ipam1" do |v|
