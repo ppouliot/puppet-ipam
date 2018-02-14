@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     v.linked_clone = true
   config.puppet_install.puppet_version = :latest
   config.vm.provision "shell", inline: "/opt/puppetlabs/puppet/bin/gem install r10k hiera-eyaml"
-  config.vm.provision "shell", inline: "wget -cv https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/Puppetfile -O /etc/puppetlabs/code/environments/production/Puppetfile" 
+  config.vm.provision "shell", inline: "curl -O https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/Puppetfile -o /etc/puppetlabs/code/environments/production/Puppetfile" 
   config.vm.provision "shell", inline: "cd /etc/puppetlabs/code/environments/production && /opt/puppetlabs/puppet/bin/r10k puppetfile install --verbose DEBUG2"
   config.vm.provision "shell", inline: "cd /etc/puppetlabs/puppet/ && wget https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/files/hiera/hiera.yaml"
   config.vm.provision "shell", inline: "/opt/puppetlabs/bin/puppet module list --tree"
