@@ -8,4 +8,11 @@ VERSION=`cat VERSION`
 export USERNAME
 export IMAGE
 export VERSION
-docker-compose build --no-cache --force-rm
+-d () {
+  docker-compose build --no-cache --force-rm
+}
+-v () {
+ vagrant up
+}
+echo "USAGE: -d Docker -v Vagrant"
+$1
