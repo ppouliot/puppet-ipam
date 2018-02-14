@@ -3,6 +3,7 @@
 [
   { :name => "vagrant-scp", :version => ">= 0.5.7" },
   { :name => "vagrant-puppet-install", :version => ">= 5.0.0" },
+  { :name => "vagrant-vbguest", :version => ">= 0.15.1" },
 ].each do |plugin|
   if not Vagrant.has_plugin?(plugin[:name], plugin[:version])
     raise "#{plugin[:name]} #[plugin[:version]} is required. Please run `vagrant plugin install #{plugin[:name]}`"
@@ -27,7 +28,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "ipam1" do |v|
     v.vm.box = "ubuntu/xenial64"
-    v.vm.hostname = "ipam1.contoso.lld"
+    v.vm.hostname = "ipam1.contoso.ltd"
     v.vm.network "private_network", ip: "192.168.0.2"
   end
   config.vm.define "ipam2" do |v|
