@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--memory", "2048"]
     v.linked_clone = true
   config.puppet_install.puppet_version = :latest
-  config.vm.provision "shell", path: "tests/prepare.sh"
+  config.vm.provision "shell", path: "files/prepare.sh"
   config.vm.provision "shell", inline: "/opt/puppetlabs/puppet/bin/gem install r10k hiera-eyaml"
   config.vm.provision "shell", inline: "curl -o /etc/puppetlabs/code/environments/production/Puppetfile https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/Puppetfile"
   config.vm.provision "shell", inline: "curl -o  /etc/puppetlabs/puppet/hiera.yaml https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/files/hiera/hiera.yaml"
@@ -33,11 +33,13 @@ Vagrant.configure("2") do |config|
     v.vm.network "private_network", ip: "192.168.0.2"
   end
   config.vm.define "ipam2" do |v|
-    v.vm.box = "centos/7"
-    v.vm.box_version = "1801.02"
-    v.vm.box_url = "http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7.box"
-    v.vm.hostname = "ipam2.contoso.ltd"
-    v.vm.network "private_network", ip: "192.168.0.3"
+  v.vm.box = "debian/jessie64"
+#  Centos ( Work In progress )
+#   v.vm.box = "centos/7"
+#   v.vm.box_version = "1801.02"
+#   v.vm.box_url = "http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7.box"
+#   v.vm.hostname = "ipam2.contoso.ltd"
+#   v.vm.network "private_network", ip: "192.168.0.3"
   end
 
   config.vm.define :pxe_client do |pxe_client|
