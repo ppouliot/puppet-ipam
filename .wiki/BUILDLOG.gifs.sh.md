@@ -1,0 +1,2 @@
+docker run --rm -v /Users/peter/src/puppet-ipam:/data asciinema/asciicast2gif -s 2 -t solarized-dark ./.wiki/json/buildlog-puppet-ipam-0.0.25-docker.json /.wiki/img/buildlog-puppet-ipam-0.0.25-docker.gif
+docker run --rm -v /Users/peter/src/puppet-ipam:/data asciinema/asciicast2gif -s 2 -t solarized-dark ./.wiki/json/buildlog-puppet-ipam-0.0.25-vagrant.json /.wiki/img/buildlog-puppet-ipam-0.0.25-vagrant.gif
