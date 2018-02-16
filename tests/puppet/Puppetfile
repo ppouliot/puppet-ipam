@@ -8,3 +8,6 @@ mod 'puppetlabs/inifile', :latest
 mod 'puppetlabs/stdlib', :latest
 mod 'puppet/dhcp', :latest
 mod 'ajjahn/dns', :latest
+# Addional Repositories needed for site.pp
+mod 'puppet/staging', :latest
+mod 'puppetlabs/vcsrepo', :latest
