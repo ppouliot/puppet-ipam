@@ -1,6 +1,6 @@
 {
   "name": "ppouliot-ipam",
-"version": "0.0.17",
+"version": "0.0.18",
   "author": "Peter J. Pouliot",
   "summary": "A puppet module for controlling IPAM DNS Primary/Secondary and DHCP Active/Active Clusters",
   "license": "Apache-2.0",

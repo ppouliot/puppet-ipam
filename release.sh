@@ -18,10 +18,8 @@ sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 # run build
 
-asciinema rec -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json
-./build.sh -d
-./build.sh -v 
-exit 
+asciinema rec -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json -c './build.sh -d && ./build.sh -v && exit'
+
 mv ./build-$IMAGE-$VERSION.json ./BUILDLOG.json
 # tag it
 git add -A

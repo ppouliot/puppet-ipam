@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "width": 221,
+  "height": 68,
+  "duration": 0.018321,
+  "command": "./build.sh -d && ./build.sh -v && exit",
+  "title": "BuildLog-puppet-ipam-0.0.18",
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.007147,
+      "++ USERNAME=ppouliot\r\n++ IMAGE=puppet-ipam\r\n"
+    ],
+    [
+      0.00039,
+      "+++ cat VERSION\r\n"
+    ],
+    [
+      0.001858,
+      "++ VERSION=0.0.18\r\n++ export USERNAME\r\n++ export IMAGE\r\n++ export VERSION\r\n"
+    ],
+    [
+      0.007932,
+      "./build.sh: line 13: `-d': not a valid identifier\r\n"
+    ]
+  ]
+}
