@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # SET THE FOLLOWING VARIABLES
 # docker hub username
 USERNAME=ppouliot
@@ -24,11 +26,14 @@ git commit -m "version $VERSION"
 git tag -a "$VERSION" -m "version $VERSION"
 git push
 git push --tags
-docker tag $USERNAME/$IMAGE $USERNAME/$IMAGE:$VERSION $USERNAME/IMAGE:$VERSION-centos $USERNAME/$IMAGE:$VERSION-debian $USERNAME/$IMAGE:$VERSION $USERNAME/$IMAGE:$VERSION-ubuntu
+docker tag $USERNAME/$IMAGE \
+$USERNAME/$IMAGE:$VERSION \
+$USERNAME/IMAGE-centos:$VERSION \
+$USERNAME/$IMAGE-debian:$VERSION \
+$USERNAME/$IMAGE-ubuntu:$VERSION
 
 # push it
-docker push $USERNAME/$IMAGE:latest
-docker push $USERNAME/$IMAGE:$VERSION
-docker push $USERNAME/$IMAGE:$VERSION-centos
-docker push $USERNAME/$IMAGE:$VERSION-debian
-docker push $USERNAME/$IMAGE:$VERSION-ubuntu
+docker push $USERNAME/$IMAGE
+docker push $USERNAME/$IMAGE-centos:$VERSION
+docker push $USERNAME/$IMAGE-debian:$VERSION
+docker push $USERNAME/$IMAGE-ubuntu:$VERSION

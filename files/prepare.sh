@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -x
 YUM=`which yum`
-APT=`which yum`
-if [ -d $YUM ]; then
+APT=`which apt-get`
+if [ -x $YUM ]; then
   echo "Yum is detected installing required packages for the platform."
-  yum install git wget curl
-elif [ -d $APT ]; then
+  $YUM install git wget curl
+elif [ -x $APT ]; then
   echo "Apt is detected installing required packages for the platform."
-  apt-get install git wget curl -y
+  $APT install git wget curl -y
 else 
   echo "No supported Package Management"
 fi
