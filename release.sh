@@ -17,7 +17,7 @@ sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 # run build
 
-asciinema rec -c './build.sh -d && ./build.sh -v && exit' -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json
+asciinema rec -c "./build.sh -d && ./build.sh -v && exit" -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json
 
 mv ./build-$IMAGE-$VERSION.json ./BUILDLOG.json
 # tag it

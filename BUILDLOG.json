@@ -2,32 +2,32 @@
   "version": 1,
   "width": 221,
   "height": 68,
-  "duration": 0.010741,
+  "duration": 0.010208,
   "command": "./build.sh -d && ./build.sh -v && exit",
-  "title": "BuildLog-puppet-ipam-0.0.19",
+  "title": "BuildLog-puppet-ipam-0.0.20",
   "env": {
     "TERM": "xterm-256color",
     "SHELL": "/bin/bash"
   },
   "stdout": [
     [
-      0.007046,
+      0.007036,
       "++ USERNAME=ppouliot\r\n++ IMAGE=puppet-ipam\r\n"
     ],
     [
-      0.00058,
+      0.000274,
       "+++ cat VERSION\r\n"
     ],
     [
-      0.001975,
-      "++ VERSION=0.0.19\r\n"
+      0.001917,
+      "++ VERSION=0.0.20\r\n++ export USERNAME\r\n++ export IMAGE\r\n"
     ],
     [
-      4.6e-05,
-      "++ export USERNAME\r\n++ export IMAGE\r\n++ export VERSION\r\n"
+      2e-05,
+      "++ export VERSION\r\n"
     ],
     [
-      0.000158,
+      0.000207,
       "./build.sh: line 13: `-d': not a valid identifier\r\n"
     ]
   ]
