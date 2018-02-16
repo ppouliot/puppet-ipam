@@ -70,8 +70,8 @@ git push --tags
 
 echo -n "**** ADDING BUILD LOGS TO BASE PROJECT VERSION:$VERSION $USER/$IMAGE.wiki.git ****"
 cd $BASE
-cp ./.wiki/img/buildlog-$IMAGE-$VERSION.gif ./BUILDLOG.gif
-cp ./.wiki/json/build-$IMAGE-$VERSION.json ./BUILDLOG.json
+cp ./.wiki/img/buildlog-$IMAGE-$VERSION.gif ./assets/BUILDLOG.gif
+cp ./.wiki/json/build-$IMAGE-$VERSION.json ./assets/BUILDLOG.json
 # tag it
 git add -A
 echo -n "**** COMMITING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
@@ -91,6 +91,7 @@ $USERNAME/$IMAGE-ubuntu:$VERSION
 # push it
 echo -n "**** PUSHING DOCKER IMAGE VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu)[hub.docker.com]****"
 docker push $USERNAME/$IMAGE
+docker push $USERNAME/$IMAGE:$VERSION
 docker push $USERNAME/$IMAGE-centos:$VERSION
 docker push $USERNAME/$IMAGE-debian:$VERSION
 docker push $USERNAME/$IMAGE-ubuntu:$VERSION
