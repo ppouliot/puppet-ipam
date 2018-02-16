@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env bash 
 # SET THE FOLLOWING VARIABLES
 # docker hub username
 USERNAME=ppouliot
@@ -18,7 +17,7 @@ sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 # run build
 
-asciinema rec -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json -c './build.sh -d && ./build.sh -v && exit'
+asciinema rec -c './build.sh -d && ./build.sh -v && exit' -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json
 
 mv ./build-$IMAGE-$VERSION.json ./BUILDLOG.json
 # tag it
