@@ -5,7 +5,6 @@
 USERNAME=ppouliot
 # image name
 IMAGE=puppet-ipam
-
 # Ensure the repo is up to date
 git pull
 
@@ -19,7 +18,11 @@ sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 # run build
 
-./build.sh
+asciinema rec -q --title=BuildLog-$IMAGE-$VERSION ./build-$IMAGE-$VERSION.json
+./build.sh -d
+./build.sh -v 
+exit 
+mv ./build-$IMAGE-$VERSION.json ./BUILDLOG.json
 # tag it
 git add -A
 git commit -m "version $VERSION"
@@ -37,3 +40,5 @@ docker push $USERNAME/$IMAGE
 docker push $USERNAME/$IMAGE-centos:$VERSION
 docker push $USERNAME/$IMAGE-debian:$VERSION
 docker push $USERNAME/$IMAGE-ubuntu:$VERSION
+
+
