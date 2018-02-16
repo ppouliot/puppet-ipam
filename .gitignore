@@ -16,3 +16,5 @@ log
 Gemfile.lock
 coverage/*
 *.log
+.wiki
+.env
