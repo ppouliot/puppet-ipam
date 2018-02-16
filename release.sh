@@ -31,7 +31,7 @@ git push
 git push --tags
 docker tag $USERNAME/$IMAGE \
 $USERNAME/$IMAGE:$VERSION \
-$USERNAME/IMAGE-centos:$VERSION \
+$USERNAME/$IMAGE-centos:$VERSION \
 $USERNAME/$IMAGE-debian:$VERSION \
 $USERNAME/$IMAGE-ubuntu:$VERSION
 
