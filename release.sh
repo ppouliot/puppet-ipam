@@ -20,46 +20,66 @@ sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 echo -n "***Retrieving and Preparing $IMAGE Wiki for BuildLog Posting ***"
 
+if [ ! -d ./assets ];
+then
+  mkdir ./assets
+  echo `date` > ./assets/.gitkeeper
+fi
 if [ ! -d ./.wiki ];
 then 
   git clone https://github.com/$USERNAME/$IMAGE.wiki.git .wiki
 fi
 
-if [ ! -d ./.wiki/img/buildlog ];
+if [ ! -d ./.wiki/img ];
 then
-  mkdir -p ./.wiki/img/buildlog
+  mkdir -p ./.wiki/img
+  echo `date` > ./.wiki/img/.gitkeeper
 fi
 
 if [ ! -d ./.wiki/json ];
 then
   mkdir -p ./.wiki/json
+  echo `date` > ./.wiki/json/.gitkeeper
 fi
 
 # run build
 
-asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -d && ./build.sh -v' ./.wiki/json/buildlog-$IMAGE-$VERSION.json
-docker run --rm -v $PWD:/data asciinema/asciicast2gif -s 2 ./.wiki/json/buildlog-$IMAGE-$VERSION.json .wiki/images/buildlog-$IMAGE-$VERSION.gif
+
+asciinema rec -q --title="BuildLog-$IMAGE-$VERSION-Docker" -c './build.sh -d' ./.wiki/json/buildlog-$IMAGE-$VERSION-docker.json
+docker run --rm -v $PWD:/data asciinema/asciicast2gif -s 2 -t solarized-dark ./.wiki/json/buildlog-$IMAGE-$VERSION-docker.json /.wiki/img/buildlog-$IMAGE-$VERSION-docker.gif ;
+
+asciinema rec -q --title="BuildLog-$IMAGE-$VERSION-Vagrant" -c './build.sh -d' ./.wiki/json/buildlog-$IMAGE-$VERSION-vagrant.json
+docker run --rm -v $PWD:/data asciinema/asciicast2gif -s 2 -t solarized-dark ./.wiki/json/buildlog-$IMAGE-$VERSION-vagrant.json /.wiki/img/buildlog-$IMAGE-$VERSION-vagrant.gif ;
+
+
+
 # tag Wiki
-echo $WIKI
+echo -n "**** COMMITING VERSION:$VERSION $WIKI TO WIKI $USER/$IMAGE.wiki.git ****"
+echo -n "**** COMMITING $WIKI TO PROJECT WIKI****"
 cd $WIKI
 git add -A
+echo -n "**** COMMITING VERSION:$VERSION $WIKI TO WIKI $USER/$IMAGE.wiki.git ****"
 git commit -m "Build Logs for version $VERSION"
+echo -n "**** TAGGING VERSION:$VERSION $WIKI TO WIKI $USER/$IMAGE.wiki.git ****"
 git tag -a "$VERSION" -m "version $VERSION"
+echo -n "**** PUSHING VERSION:$VERSION $WIKI TO WIKI $USER/$IMAGE.wiki.git ****"
 git push
 git push --tags
 
-echo $BASE
+echo -n "**** ADDING BUILD LOGS TO BASE PROJECT VERSION:$VERSION $USER/$IMAGE.wiki.git ****"
 cd $BASE
-
-cp .wiki/images/buildlog-$IMAGE-$VERSION.gif ./BUILDLOG.gif
+cp ./.wiki/img/buildlog-$IMAGE-$VERSION.gif ./BUILDLOG.gif
 cp ./.wiki/json/build-$IMAGE-$VERSION.json ./BUILDLOG.json
-
 # tag it
 git add -A
-git commit -m "version $VERSION"
+echo -n "**** COMMITING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
+git commit -m "Build Logs for version $VERSION"
+echo -n "**** TAGGING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
 git tag -a "$VERSION" -m "version $VERSION"
+echo -n "**** PUSHING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
 git push
 git push --tags
+echo -n "**** DOCKER IMAGE TAGGING VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu) ****"
 docker tag $USERNAME/$IMAGE \
 $USERNAME/$IMAGE:$VERSION \
 $USERNAME/$IMAGE-centos:$VERSION \
@@ -67,6 +87,7 @@ $USERNAME/$IMAGE-debian:$VERSION \
 $USERNAME/$IMAGE-ubuntu:$VERSION
 
 # push it
+echo -n "**** PUSHING DOCKER IMAGE VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu)[hub.docker.com]****"
 docker push $USERNAME/$IMAGE
 docker push $USERNAME/$IMAGE-centos:$VERSION
 docker push $USERNAME/$IMAGE-debian:$VERSION
