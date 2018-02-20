@@ -11,11 +11,13 @@ An Opinioned DHCP/DNS infrastructure.
 2. [Build - The basics of getting started with ipam](#build)
     * [Building with Docker](#building-with-docker)
     * [Building with Vagrant](#building-with-vagrant)
+3. [Setup - Getting the module working on your system](setup)
+    * [Puppetfile](#puppetfile)
     * [Beginning with ipam](#beginning-with-ipam)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+4. [Usage - Configuration options and additional functionality](#usage)
+5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+6. [Limitations - OS compatibility, etc.](#limitations)
+7. [Development - Guide for contributing to the module](#development)
 
 ## Description
 Welcome to the puppet-ipam module.  This is an opinionated deployment of a DNS/DHCP Infrastructure.
@@ -60,10 +62,9 @@ this deployment run the same [build script](./build.sh) to initate the running. 
 ```
 
 ## Setup
-### What ipam affects **OPTIONAL**
+### Puppetfile
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
-
+This module contains a [Puppetfile](./Puppetfile) for 
 If there's more that they should know about, though, this is the place to mention:
 
 * Files, packages, services, or operations that the module will alter, impact, or execute.
