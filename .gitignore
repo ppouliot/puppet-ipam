@@ -1,4 +1,5 @@
 .*.sw?
+BUILDLOG.gifs.sh.md
 pkg
 spec/fixtures
 .rspec_system
