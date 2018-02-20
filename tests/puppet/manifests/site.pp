@@ -40,7 +40,7 @@ node /^(norman|mother|ipam[0-9\.]+)/ {
     ensure => latest,
   }
   class{'staging':
-    path => '/opt/staging',
+    path  => '/opt/staging',
     owner => 'root',
     group => 'root'
   }
@@ -58,7 +58,7 @@ node /^(norman|mother|ipam[0-9\.]+)/ {
     source  => 'https://downloads.sourceforge.net/project/dhcpd-pools/dhcpd-pools-2.29.tar.xz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fdhcpd-pools%2Ffiles%2F&ts=1510685804&use_mirror=gigenet',
   }
   staging::deploy{'dhcpstatus_0.60.tar.gz':
-    source => 'http://downloads.sourceforge.net/project/dhcpstatus/dhcpstatus/v0.60/dhcpstatus_0.60.tar.gz?r=http%3A%2F%2Fdhcpstatus.sourceforge.net%2F&ts=1480997571&use_mirror=pilotfiber',
+    source  => 'http://downloads.sourceforge.net/project/dhcpstatus/dhcpstatus/v0.60/dhcpstatus_0.60.tar.gz?r=http%3A%2F%2Fdhcpstatus.sourceforge.net%2F&ts=1480997571&use_mirror=pilotfiber',
     target  => '/opt',
     require => Package[$prereq_packages],
   }
@@ -95,7 +95,7 @@ node /^(norman|mother|ipam[0-9\.]+)/ {
    logoutput => true,
   } ->
   file{'/usr/local/dhcpstatus/dhcpstatus.ini':
-    ensure => file,
+    ensure  => file,
     content => '# !!! THIS FILE IS MANAGED BY PUPPET !!!
 title=DHCP Subnet Information
 conf_file=/etc/dhcp/dhcpd.conf
