@@ -9,8 +9,8 @@ An Opinioned DHCP/DNS infrastructure.
 
 1. [Description](#description)
 2. [Build - The basics of getting started with ipam](#build)
-    * [Building in Docker](#build-docker)
-    * [Building with Vagrant](#build-vagrant)
+    * [Building with Docker](#build with docker)
+    * [Building with Vagrant](#build with vagrant)
     * [Beginning with ipam](#beginning-with-ipam)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -28,15 +28,38 @@ on every Server in the MS OpenStack CI.
 
 ## Build 
 The process of building this puppet module has been distilled and encapsulated into two build methods in order to test the deployment
-and formatting of the information supplied to the module. The Dockerfiles for testing and development purposes.
+accuracy across multiple platforms and to ensure formatting of the information supplied to the module.
+  
+  * Dockerfiles (Centos/Debian/Ubuntu)
+  * Vagrantfile
+
+### Building with Docker
+
+The following Dockerfiles and container images artifacts from testing are provided below.  A [docker-compose.yaml](./docker-compose.yaml) is 
+used to build and label container images that versioned and pushed to the dockerhub.  Building all associated Dockerfiles can be achieved
+by running the [build script](./build.sh) located in this directory with the "-d" flag as show in this example:
+
+```
+./build.sh  -d
+```
+
 
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [ppouliot/puppet-ipam](./Dockerfile)
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-centos.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [ppouliot/puppet-ipam-centos](./Dockerfile.centos)
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-debian.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [ppouliot/puppet-ipam-debian](./Dockerfile.debian)
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-ubuntu.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) [ppouliot/puppet-ipam-ubuntu](./Dockerfile.ubuntu)
 
-## Setup
+### Building with Vagrant
+A [Vagrantfile](./Vagrantfile) is supplied in order to test deployment and execution of the puppet code in a virtual machine environment.
+This should validate that all services have started properly and also include a dhcpclient as a test to ensure everything 
+is fully operational within the DHCP/DNS Cluster and that all services are in proper working order. To utilize Vagrant to test
+this deployment run the same [build script](./build.sh) to initate the running.  The following is an example of building using vagrant:
 
+``` 
+./build.sh -v
+```
+
+## Setup
 ### What ipam affects **OPTIONAL**
 
 If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
