@@ -27,7 +27,7 @@ then
 fi
 if [ ! -d ./.wiki ];
 then 
-  git clone https://github.com/$USERNAME/$IMAGE.wiki.git .wiki
+  git clone git@github.com:$USERNAME/$IMAGE.wiki.git .wiki
 fi
 
 if [ ! -d ./.wiki/img ];
