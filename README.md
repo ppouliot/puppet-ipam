@@ -11,13 +11,11 @@ An Opinioned DHCP/DNS infrastructure.
 2. [Build - The basics of getting started with ipam](#build)
     * [Building with Docker](#building-with-docker)
     * [Building with Vagrant](#building-with-vagrant)
-3. [Setup - Getting the module working on your system](setup)
+3. [Setup - Getting the module working on your system](setup-requirements)
     * [Puppetfile](#puppetfile)
     * [Beginning with ipam](#beginning-with-ipam)
 4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-6. [Limitations - OS compatibility, etc.](#limitations)
-7. [Development - Guide for contributing to the module](#development)
+5. [Development - Guide for contributing to the module](#development)
 
 ## Description
 Welcome to the puppet-ipam module.  This is an opinionated deployment of a DNS/DHCP Infrastructure.
@@ -61,46 +59,27 @@ this deployment run the same [build script](./build.sh) to initate the running. 
 ./build.sh -v
 ```
 
-## Setup
+## Setup Requirements
 ### Puppetfile
 
-This module contains a [Puppetfile](./Puppetfile) for 
-If there's more that they should know about, though, this is the place to mention:
-
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here. 
-  
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
+This module contains a [Puppetfile](./Puppetfile) which can be used to install all module dependencies.
+To use the Puppetfile, place it directory above the modules folder and run:
+```
+r10k puppetfile install --verbose
+```
 
 ### Beginning with ipam  
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+The simplest way to consume this module is to include it in your node definition and modify the provided [hieradata](./files/hiera)
+an example configuration and include it in hiera on the system or puppetmaster.
 
 ## Usage
+Basic usage:
 
-This section is where you describe how to customize, configure, and do the fancy stuff with your module here. It's especially helpful if you include usage examples and code samples for doing things with your module.
+```
+class{'ipam':}
 
-## Reference
-
-Users need a complete list of your module's classes, types, defined types providers, facts, and functions, along with the parameters for each. You can provide this list either via Puppet Strings code comments or as a complete list in the README Reference section.
-
-* If you are using Puppet Strings code comments, this Reference section should include Strings information so that your users know how to access your documentation.
-
-* If you are not using Puppet Strings, include a list of all of your classes, defined types, and so on, along with their parameters. Each element in this listing should include:
-
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
-
-## Limitations
-
-This is where you list OS compatibility, version compatibility, etc. If there are Known Issues, you might want to include them under their own heading here.
+'''
 
 ## Development
 
