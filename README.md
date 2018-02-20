@@ -78,8 +78,8 @@ Basic usage:
 
 ```
 class{'ipam':}
+```
 
-'''
 
 ## Development
 
