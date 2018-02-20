@@ -9,8 +9,8 @@ An Opinioned DHCP/DNS infrastructure.
 
 1. [Description](#description)
 2. [Build - The basics of getting started with ipam](#build)
-    * [Building with Docker](#build with docker)
-    * [Building with Vagrant](#build with vagrant)
+    * [Building with Docker](#building-with-docker)
+    * [Building with Vagrant](#building-with-vagrant)
     * [Beginning with ipam](#beginning-with-ipam)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
