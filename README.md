@@ -2,6 +2,7 @@
 # puppet-ipam
 
 An Opinioned DHCP/DNS infrastructure.
+
 [![License](https://img.shields.io/github/license/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/blob/master/LICENSE)
 
 #### Table of Contents
