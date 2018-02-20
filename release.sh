@@ -46,11 +46,9 @@ fi
 
 
 asciinema rec -q --title="BuildLog-$IMAGE-$VERSION-Docker" -c './build.sh -d' ./.wiki/json/buildlog-$IMAGE-$VERSION-docker.json
-echo "# Docker $USER/$IMAGE:$VERSION" >> BUILDLOG.gifs.sh.md
 echo "docker run --rm -v $PWD:/data asciinema/asciicast2gif -s 2 -t solarized-dark ./.wiki/json/buildlog-$IMAGE-$VERSION-docker.json /.wiki/img/buildlog-$IMAGE-$VERSION-docker.gif" >> ./.wiki/BUILDLOG.gifs.sh.md
 
 asciinema rec -q --title="BuildLog-$IMAGE-$VERSION-Vagrant" -c './build.sh -d' ./.wiki/json/buildlog-$IMAGE-$VERSION-vagrant.json
-echo "# Docker $USER/$IMAGE:$VERSION" >> BUILDLOG.gifs.sh.md
 echo "docker run --rm -v $PWD:/data asciinema/asciicast2gif -s 2 -t solarized-dark ./.wiki/json/buildlog-$IMAGE-$VERSION-vagrant.json /.wiki/img/buildlog-$IMAGE-$VERSION-vagrant.gif" >> ./.wiki/BUILDLOG.gifs.sh.md
 
 
