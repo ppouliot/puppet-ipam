@@ -4,9 +4,9 @@
 An Opinioned DHCP/DNS infrastructure.
 
 [![GitHub license](https://img.shields.io/github/license/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/blob/master/LICENSE)
-[![GitHub tag](https://img.shields.io/github/tag/ppouliot/pupppet-ipam.svg)](https://github.com/tag/ppouliot/puppet-ipam)
 [![GitHub issues](https://img.shields.io/github/issues/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/network)
+
 #### Table of Contents
 
 1. [Description](#description)
