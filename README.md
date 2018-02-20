@@ -2,6 +2,7 @@
 # puppet-ipam
 
 An Opinioned DHCP/DNS infrastructure.
+[![License](https://img.shields.io/github/license/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/blob/master/LICENSE)
 
 #### Table of Contents
 
@@ -23,7 +24,6 @@ All records are added via Hiera data.
 This module was used to managed the IPAM networing infrastrucure for Microsoft's OpenStack CI Operations
 from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
 on every Server in the MS OpenStack CI.
-* [![License](https://img.shields.io/github/license/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/blob/master/LICENSE)
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) ppouliot/puppet-ipam
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-centos.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) ppouliot/puppet-ipam-centos
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-debian.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) ppouliot/puppet-ipam-debian
