@@ -8,9 +8,9 @@ An Opinioned DHCP/DNS infrastructure.
 #### Table of Contents
 
 1. [Description](#description)
-2. [Setup - The basics of getting started with ipam](#setup)
-    * [What ipam affects](#what-ipam-affects)
-    * [Setup requirements](#setup-requirements)
+2. [Build - The basics of getting started with ipam](#build)
+    * [Building in Docker](#build-docker)
+    * [Building with Vagrant](#build-vagrant)
     * [Beginning with ipam](#beginning-with-ipam)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -25,10 +25,15 @@ All records are added via Hiera data.
 This module was used to managed the IPAM networing infrastrucure for Microsoft's OpenStack CI Operations
 from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
 on every Server in the MS OpenStack CI.
-* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) ppouliot/puppet-ipam
-* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-centos.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) ppouliot/puppet-ipam-centos
-* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-debian.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) ppouliot/puppet-ipam-debian
-* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-ubuntu.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) ppouliot/puppet-ipam-ubuntu
+
+## Build 
+The process of building this puppet module has been distilled and encapsulated into two build methods in order to test the deployment
+and formatting of the information supplied to the module. The Dockerfiles for testing and development purposes.
+
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [ppouliot/puppet-ipam](./Dockerfile)
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-centos.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [ppouliot/puppet-ipam-centos](./Dockerfile.centos)
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-debian.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [ppouliot/puppet-ipam-debian](./Dockerfile.debian)
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-ubuntu.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) [ppouliot/puppet-ipam-ubuntu](./Dockerfile.ubuntu)
 
 ## Setup
 
