@@ -25,6 +25,9 @@ from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera def
 on every Server in the MS OpenStack CI.
 
 * [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam) ppouliot/puppet-ipam
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-centos.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-centos) ppouliot/puppet-ipam-centos
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-debian.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-debian) ppouliot/puppet-ipam-debian
+* [![](https://images.microbadger.com/badges/image/ppouliot/puppet-ipam-ubuntu.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) [![](https://images.microbadger.com/badges/version/ppouliot/puppet-ipam.svg)](https://microbadger.com/images/ppouliot/puppet-ipam-ubuntu) ppouliot/puppet-ipam-ubuntu
 
 ## Setup
 
