@@ -33,19 +33,22 @@ Vagrant.configure("2") do |config|
 
   end
   config.vm.define "ipam1" do |v|
+#    v.vm.box = "centos/7"
+#    v.vm.box = "centos/6"
     v.vm.box = "ubuntu/xenial64"
     v.vm.hostname = "ipam1.contoso.ltd"
     v.vm.network "private_network", ip: "192.168.0.2"
   end
-  config.vm.define "ipam2" do |v|
-  v.vm.box = "debian/jessie64"
+# IPAM2 Definition
+#  config.vm.define "ipam2" do |v|
+#  v.vm.box = "debian/jessie64"
 #  Centos ( Work In progress )
 #   v.vm.box = "centos/7"
 #   v.vm.box_version = "1801.02"
 #   v.vm.box_url = "http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7.box"
-   v.vm.hostname = "ipam2.contoso.ltd"
-   v.vm.network "private_network", ip: "192.168.0.3"
-  end
+#   v.vm.hostname = "ipam2.contoso.ltd"
+#   v.vm.network "private_network", ip: "192.168.0.3"
+#  end
 
 #  config.vm.define :pxe_client do |pxe_client|
 

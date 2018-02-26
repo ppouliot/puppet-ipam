@@ -24,8 +24,13 @@ dhcp::nameservers:
   
 dhcp::ntpservers:
   - bonehed.lsc.mit.edu
-dhcp::interfaces:
-  - eth0
+#dhcp::interfaces:
+# Docker
+#  - eth0 
+# Centos
+#  - eth1
+# Ubuntu
+#  - enp0s8
 
 dhcpdata:
   contoso.ltd:

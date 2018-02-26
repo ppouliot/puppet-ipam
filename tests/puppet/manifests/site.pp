@@ -13,11 +13,11 @@ node /^(norman|mother|ipam[0-9\.]+)/ {
   case $::osfamily {
     'Debian':{
       $prereq_packages = [
-      'dnsutils',
-      'perl-doc',
-      'libnetaddr-ip-perl',
-#      'bind-pkcs11-utils',
-      'libnet-snmp-perl',
+        'dnsutils',
+        'perl-doc',
+        'libnetaddr-ip-perl',
+#       'bind-pkcs11-utils',
+        'libnet-snmp-perl',
       ]
       $tar = '/bin/tar'
     }
@@ -66,11 +66,11 @@ node /^(norman|mother|ipam[0-9\.]+)/ {
     ensure => directory,
     owner  => 'root',
     group  => 'root',
-  } ->
-  exec{'untar-dhcpstatus_0.60-lib':
-    command => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
-    cwd     =>'/usr/local/dhcpstatus',
-    creates => [
+  }
+-> exec{'untar-dhcpstatus_0.60-lib':
+    command   => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
+    cwd       =>'/usr/local/dhcpstatus',
+    creates   => [
       '/usr/local/dhcpstatus/dhcpstatus',
       '/usr/local/dhcpstatus/dhcpstatus.ini',
       '/usr/local/dhcpstatus/dhcpstatus/common.pm',
@@ -90,11 +90,11 @@ node /^(norman|mother|ipam[0-9\.]+)/ {
       '/usr/local/dhcpstatus/dhcpstatus/Formatted_text.pm',
       '/usr/local/dhcpstatus/dhcpstatus/Lease.pm',
       '/usr/local/dhcpstatus/dhcpstatus/Pool.pm',
-   ],
-   onlyif    => '/usr/bin/test ! -f /usr/local/dhcpstatus/dhcpstatus/common.pm',
-   logoutput => true,
-  } ->
-  file{'/usr/local/dhcpstatus/dhcpstatus.ini':
+    ],
+    onlyif    => '/usr/bin/test ! -f /usr/local/dhcpstatus/dhcpstatus/common.pm',
+    logoutput => true,
+  }
+-> file{'/usr/local/dhcpstatus/dhcpstatus.ini':
     ensure  => file,
     content => '# !!! THIS FILE IS MANAGED BY PUPPET !!!
 title=DHCP Subnet Information
