@@ -50,9 +50,9 @@ Vagrant.configure("2") do |config|
 #   v.vm.network "private_network", ip: "192.168.0.3"
 #  end
 
-  config.vm.define :pxe_client do |pxe_client|
+#  config.vm.define :pxe_client do |pxe_client|
 
-    pxe_client.vm.box = 'centos/atomic-host'
+#    pxe_client.vm.box = 'centos/atomic-host'
 
 #    pxe_client.vm.provider :libvirt do |libvirt|
 #      libvirt.cpu_mode = 'host-passthrough'
@@ -66,22 +66,22 @@ Vagrant.configure("2") do |config|
 #      libvirt.management_network_mode = "nat"
 #    end
 
-    pxe_client.vm.provider :virtualbox do |vb|
-      vb.memory = '1024'
-      vb.cpus = '1'
-      vb.gui = 'true'
+#    pxe_client.vm.provider :virtualbox do |vb|
+#      vb.memory = '1024'
+#      vb.cpus = '1'
+#      vb.gui = 'true'
 #
-      vb.customize [
-        'modifyvm', :id,
-        '--nic1', 'intnet',
-        '--intnet1', 'private_network',
-        '--boot1', 'net',
-        '--boot2', 'none',
-        '--boot3', 'none',
-        '--boot4', 'none'
-      ]
-    end
+#      vb.customize [
+#        'modifyvm', :id,
+#        '--nic1', 'intnet',
+#        '--intnet1', 'private_network',
+#        '--boot1', 'net',
+#        '--boot2', 'none',
+#        '--boot3', 'none',
+#        '--boot4', 'none'
+#      ]
+#    end
 
-  end
+#  end
 
 end
