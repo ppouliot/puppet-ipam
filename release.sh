@@ -1,9 +1,12 @@
+#!/usr/bin/env bash 
 # SET THE FOLLOWING VARIABLES
+BASE=`pwd`
+WIKI="`pwd`/.wiki"
 # docker hub username
 USERNAME=ppouliot
 # image name
 IMAGE=puppet-ipam
-
+echo "base:$BASE wiki:$WIKI"
 # Ensure the repo is up to date
 git pull
 
@@ -16,19 +19,27 @@ echo "version: $VERSION"
 sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 
 # run build
+asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -d && ./build.sh -v' ./BUILDLOG.json 
 
-./build.sh
 # tag it
 git add -A
-git commit -m "version $VERSION"
+echo -n "**** COMMITING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
+git commit -m "Build Logs for version $VERSION"
+echo -n "**** TAGGING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
 git tag -a "$VERSION" -m "version $VERSION"
+echo -n "**** PUSHING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
 git push
 git push --tags
-docker tag $USERNAME/$IMAGE $USERNAME/$IMAGE:$VERSION $USERNAME/IMAGE:$VERSION-centos $USERNAME/$IMAGE:$VERSION-debian $USERNAME/$IMAGE:$VERSION $USERNAME/$IMAGE:$VERSION-ubuntu
+echo -n "**** DOCKER IMAGE TAGGING VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu) ****"
+docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:version
+docker tag $USERNAME/$IMAGE-centos:latest $USERNAME/$IMAGE-centos:$VERSION
+docker tag $USERNAME/$IMAGE-debian:latest $USERNAME/$IMAGE-debian:$VERSION
+docker tag $USERNAME/$IMAGE-ubuntu:latest $USERNAME/$IMAGE-ubuntu:$VERSION
 
 # push it
-docker push $USERNAME/$IMAGE:latest
+echo -n "**** PUSHING DOCKER IMAGE VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu)[hub.docker.com]****"
+docker push $USERNAME/$IMAGE
 docker push $USERNAME/$IMAGE:$VERSION
-docker push $USERNAME/$IMAGE:$VERSION-centos
-docker push $USERNAME/$IMAGE:$VERSION-debian
-docker push $USERNAME/$IMAGE:$VERSION-ubuntu
+docker push $USERNAME/$IMAGE-centos:$VERSION
+docker push $USERNAME/$IMAGE-debian:$VERSION
+docker push $USERNAME/$IMAGE-ubuntu:$VERSION

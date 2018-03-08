@@ -6,7 +6,7 @@
 #
 # @example
 #   ipam::record_a { 'namevar': }
-define ipam::record_a(
+define ipam::record_a (
   $zone,
   $data,
   $ptr,

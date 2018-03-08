@@ -1,0 +1,13 @@
+forge 'https://forge.puppet.com'
+mod 'puppetlabs/apt', :latest
+mod 'puppetlabs/concat', :latest
+mod 'puppetlabs/dummy_service', :latest
+mod 'puppetlabs/firewall', :latest
+mod 'puppetlabs/ntp', :latest
+mod 'puppetlabs/inifile', :latest
+mod 'puppetlabs/stdlib', :latest
+mod 'puppet/dhcp', :latest
+mod 'ajjahn/dns', :latest
+# Addional Repositories needed for site.pp
+mod 'puppet/staging', :latest
+mod 'puppetlabs/vcsrepo', :latest
