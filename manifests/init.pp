@@ -15,7 +15,7 @@ class ipam (
   $static_leases      = hiera('static_leases',{}),
   $dns_records_a      = hiera('dns_records_a',{}),
   $dns_records_cname  = hiera('dns_records_cname',{}),
-  $dhcp_use_failover  = true,
+  $dhcp_use_failover  = false,
   $primary_defaults   = {},
   $slave_defaults     = {},
 ) inherits ipam::params {
