@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "ipam1" do |v|
     v.vm.hostname = "ipam1.dev"
-    v.vm.network "private_network", ip: "192.168.30.2"
+    v.vm.network "private_network", ip: "192.168.0.2"
   end
 #  config.vm.define "ipam2" do |v|
 #    v.vm.hostname = "ipam2.dev"
