@@ -43,10 +43,6 @@ Vagrant.configure("2") do |config|
     v.vm.provision "shell", inline: "/opt/puppetlabs/bin/puppet module list --tree"
     v.vm.provision "shell", inline: "/opt/puppetlabs/bin/puppet apply --debug --trace --verbose --modulepath=/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules /etc/puppetlabs/code/modules/ipam/examples/init.pp"
   end
-#  config.vm.define "ipam2" do |v|
-#    v.vm.hostname = "ipam2.dev"
-#    v.vm.network "private_network", ip: "192.168.30.2"
-
 #  config.vm.define :pxe_client do |pxe_client|
 #    pxe_client.vm.box = 'centos/atomic-host'
 #    pxe_client.vm.provider :libvirt do |libvirt|
