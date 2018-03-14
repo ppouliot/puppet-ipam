@@ -30,6 +30,8 @@ This module was used to managed the IPAM networing infrastrucure for Microsoft's
 from 2003 until june of 2017.  At it peak it processed 18,000 lines of hiera defining every network interface 
 on every Server in the MS OpenStack CI.
 
+![puppet-ipam](/assets/IPAM.svg)
+
 ## Build 
 The process of building this puppet module has been distilled and encapsulated into two build methods in order to test the deployment
 accuracy across multiple platforms and to ensure formatting of the information supplied to the module.
