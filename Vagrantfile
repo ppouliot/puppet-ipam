@@ -49,38 +49,18 @@ Vagrant.configure("2") do |config|
 #   v.vm.network "private_network", ip: "192.168.0.3"
 #  end
 
-#  config.vm.define :pxe_client do |pxe_client|
+  config.vm.define "pxe1", autostart: false do |vb|
+    vb.vm.hostname = "pxe1.contoso.ltd"
+    vb.memory = '1024'
+    vb.cpus = '1'
 
-#    pxe_client.vm.box = 'centos/atomic-host'
-
-#    pxe_client.vm.provider :libvirt do |libvirt|
-#      libvirt.cpu_mode = 'host-passthrough'
-#      libvirt.memory = '1024'
-#      libvirt.cpus = '1'
-#      libvirt.storage :file, :size => '10G', :type => 'qcow2'
-#      libvirt.boot 'network'
-#      libvirt.mgmt_attach = 'false'
-#      libvirt.management_network_name = "pxe_network"
-#      libvirt.management_network_address = "192.168.0.0/24"
-#      libvirt.management_network_mode = "nat"
-#    end
-
-#    pxe_client.vm.provider :virtualbox do |vb|
-#      vb.memory = '1024'
-#      vb.cpus = '1'
-#      vb.gui = 'true'
-#
-#      vb.customize [
-#        'modifyvm', :id,
-#        '--nic1', 'intnet',
-#        '--intnet1', 'private_network',
-#        '--boot1', 'net',
-#        '--boot2', 'none',
-#        '--boot3', 'none',
-#        '--boot4', 'none'
-#      ]
-#    end
-
-#  end
+    #  Advanced network configuration
+    vb.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--macaddress2", "000743141530"]
+    vb.customize ['modifyvm', :id, '--boot1', 'net', '--boot2', 'disk']  # change boot order
+    vb.customize ['modifyvm', :id, '--nic1', 'nat', '--nic2', 'hostonly'] # https://github.com/hashicorp/vagrant/issues/2093
+    vb.customize ["modifyvm", :id, "--hostonlyadapter2", "vboxnet4"]
+    end
+  end
 
 end
