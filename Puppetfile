@@ -6,6 +6,7 @@ mod 'puppetlabs/firewall', :latest
 mod 'puppetlabs/ntp', :latest
 mod 'puppetlabs/inifile', :latest
 mod 'puppetlabs/stdlib', :latest
+mod 'puppetlabs/vcsrepo', :latest
 mod 'puppet/staging', :latest
 mod 'puppet/dhcp', :latest
 mod 'ajjahn/dns',
