@@ -6,7 +6,7 @@ mod 'puppetlabs/firewall', :latest
 mod 'puppetlabs/ntp', :latest
 mod 'puppetlabs/inifile', :latest
 mod 'puppetlabs/stdlib', :latest
-mod 'puppetlabs/staging', :latest
+mod 'puppet/staging', :latest
 mod 'puppet/dhcp', :latest
 mod 'ajjahn/dns',
     :git => 'https://github.com/ajjahn/puppet-dns',
