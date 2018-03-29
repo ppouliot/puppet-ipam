@@ -34,6 +34,18 @@ class ipam::install {
     }
   }
 
+  file{'/root/ipam_min_validate.sh':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0777',
+    content => '#/usr/bin/env bash
+echo "**** Verifying that the ISC-DHCP-SERVER Configuration ****"
+/usr/sbin/dhcpd -t
+echo "**** Verifying that the BIND Configuration ****"
+/usr/sbin/named-checkconf',
+  }
+
   package{ $prereq_packages:
     ensure => latest,
   }
