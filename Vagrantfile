@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
     v.vm.network "private_network", ip: "192.168.0.2"
   end
 
-   IPAM2 Definition
+  # IPAM2 Definition
   config.vm.define "ipam2" do |v|
     v.vm.box = "centos/7"
     v.vm.hostname = "ipam2.contoso.ltd"
