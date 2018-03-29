@@ -4,7 +4,7 @@ COPY Puppetfile /etc/puppetlabs/code/environments/production/Puppetfile
 COPY files/hiera /etc/puppetlabs/code/environments/production/data
 COPY Dockerfile.ubuntu Dockerfile
 RUN \
-    apt-get update -y && apt-get install git software-properties-common -y \
+    apt-get update -y && apt-get install git curl software-properties-common -y \
     && gem install r10k \
     && cd /etc/puppetlabs/code/environments/production/ \
     && r10k puppetfile install --verbose DEBUG2 \

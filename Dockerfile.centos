@@ -7,7 +7,7 @@ COPY files/hiera /etc/puppetlabs/code/environments/production/data
 COPY Dockerfile.centos Dockerfile
 RUN \
     yum makecache \
-    && yum install git -y \
+    && yum install git curl -y \
     && gem install r10k \
     && cd /etc/puppetlabs/code/environments/production/ \
     && r10k puppetfile install --verbose DEBUG2 \
