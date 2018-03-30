@@ -20,10 +20,10 @@ echo "**** Waiting for creation of directory bind.keys.d ****"
 #  exit 1
 #}
 
-until [ -e "$OMAPI_KEYS_DIR" ]
+until [ -d "$OMAPI_KEYS_DIR" ]
 do 
-  sleep 1
-  echo -n "#"
+    sleep 1
+    echo -n "#"
 done
 
 echo "****"$OMAPI_KEYS_DIR" Found ****"
