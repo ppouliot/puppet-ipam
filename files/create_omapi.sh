@@ -4,7 +4,7 @@
 echo "**** Script to create omapi keys for IPAM cluster ****"
 
 OMAPI_KEY_NAME=`hostname -f`
-OMAPI_KEYS_DIR=`find / -name bind.keys.d`
+# OMAPI_KEYS_DIR=`find / -name bind.keys.d`
 
 echo "**** Waiting for creation of directory bind.keys.d ****"
 
@@ -21,9 +21,10 @@ echo "**** Waiting for creation of directory bind.keys.d ****"
 #}
 
 until [ -d "$OMAPI_KEYS_DIR" ]
+#while [ ! -d /etc/named/bind.keys.d ] || [ ! -d /etc/named/bind.keys.d ]
 do 
-    sleep 1
-    echo -n "#"
+  OMAPI_KEYS_DIR=`find / -name bind.keys.d`
+  echo -n "#"
 done
 
 echo "****"$OMAPI_KEYS_DIR" Found ****"
