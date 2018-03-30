@@ -8,20 +8,7 @@ OMAPI_KEY_NAME=`hostname -f`
 
 echo "**** Waiting for creation of directory bind.keys.d ****"
 
-#wait_file() {
-#  local file="$1"; shift
-#  local wait_seconds="${1:-60}"; shift # 120 Second Default Timeout
-#  until test $((wait_seconds--)) -eq 0 -o -e "$file" ; do sleep 1 ; done
-#  ((++wait_seconds))
-#}
-
-#wait_file "$OMAPI_KEYS_DIR" ||{
-#  echo "**** Found: "$OMAPI_KEYS_DIR"****"
-#  exit 1
-#}
-
 until [ -d "$OMAPI_KEYS_DIR" ]
-#while [ ! -d /etc/named/bind.keys.d ] || [ ! -d /etc/named/bind.keys.d ]
 do 
   OMAPI_KEYS_DIR=`find / -name bind.keys.d`
   echo -n "#"
