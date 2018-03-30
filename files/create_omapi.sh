@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exec &>> /tmp/create_omapi_key.log
 
 
 echo "**** Script to create omapi keys for IPAM cluster ****"
