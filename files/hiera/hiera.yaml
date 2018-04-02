@@ -1,5 +1,5 @@
-# hiera.yaml
 ---
+# hiera.yaml
 version: 5
 defaults:
   datadir: data
