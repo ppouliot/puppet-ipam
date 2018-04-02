@@ -21,9 +21,6 @@ ipam::primary_defaults:
     - 192.168.0.2
     - 192.168.0.3
   
-  
-  
-  
 primary:
   contoso.ltd: {}
   0.168.192.IN-ADDR.ARPA: {}
@@ -50,19 +47,13 @@ dns_records_a:
     zone: contoso.ltd
     data: 192.168.0.14
     ptr: true
-  round-robin0:
+  roundrobin:
     zone: contoso.ltd
-    data: 192.168.0.4
+    data:
+      - 192.168.0.4
+      - 192.168.0.5
+      - 192.168.0.6
     ptr: true
-  round-robin1:
-    zone: contoso.ltd
-    data: 192.168.0.5
-    ptr: true
-  round-robin2:
-    zone: contoso.ltd
-    data: 192.168.0.6
-    ptr: true
-  # Round Robin in A Record Test
 #  round-robin:
 #    zone: contoso.ltd
 #    data: 192.168.0.4
@@ -112,15 +103,5 @@ dns_records_cname:
   puppetboard:
     zone: contoso.ltd
     data: puppetmaster.contoso.ltd
-  # Round Robin CNAME TEST
-  roundrobin:
-    zone: contoso.ltd
-    data: round-robin0.contoso.ltd
-  roundrobin:
-    zone: contoso.ltd
-    data: round-robin1.contoso.ltd
-  roundrobin:
-    zone: contoso.ltd
-    data: round-robin1.contoso.ltd
 
 # End Cname Records

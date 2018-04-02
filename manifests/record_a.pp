@@ -9,7 +9,7 @@
 define ipam::record_a (
   $zone,
   $data,
-  $ptr,
+  $ptr = undef,
 ) {
   dns::record::a { $name:
     zone    => $zone,

@@ -18,9 +18,9 @@ done
 echo "****"$OMAPI_KEYS_DIR" Found ****"
 cd $OMAPI_KEYS_DIR
 
-if $OMAPI_KEY_NAME == 'ipam2.contoso.ltd' ; then
-  export REMOTE_OMAPI_KEYS_DIR=`ssh ipam1.contoso.ltd 'find / -name bind.keys.d`
-  rsync -av -e ssh ipam1.contoso.ltd:$REMOTE_OMAPI_KEYS_DIR/ $OMAPI_KEYS_DIR/
+if [[ $OMAPI_KEY_NAME == 'ipam2.contoso.ltd' ]]; then
+  export REMOTE_OMAPI_KEYS_DIR=`ssh ipam1.contoso.ltd 'find / -name bind.keys.d'`
+  rsync -av -e ssh ipam1.contoso.ltd:${REMOTE_OMAPI_KEYS_DIR}/${OMAPI_KEYS_DIR}/
 exit
 else
 
