@@ -36,11 +36,11 @@ Vagrant.configure("2") do |config|
   end
 
   # IPAM2 Definition
-#  config.vm.define "ipam2" do |v|
-#    v.vm.box = "centos/7"
-#    v.vm.hostname = "ipam2.contoso.ltd"
-#    v.vm.network "private_network", ip: "192.168.0.3"
-#  end
+  config.vm.define "ipam2" do |v|
+    v.vm.box = "centos/7"
+    v.vm.hostname = "ipam2.contoso.ltd"
+    v.vm.network "private_network", ip: "192.168.0.3"
+  end
 
   # Pxe Client
 #  config.vm.define "pxe1", autostart: false do |vb|

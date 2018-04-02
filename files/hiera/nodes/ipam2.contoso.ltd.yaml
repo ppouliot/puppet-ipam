@@ -4,6 +4,10 @@
 
 
 ipam::master: false
+
+#dhcp::interfaces:
+#  - eth1
+
 dhcp::failover::role: secondary
 dhcp::failover::peer_address: 192.168.0.1
 ddnskey: undef

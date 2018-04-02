@@ -123,7 +123,10 @@ screen_width=80
   }
 
   # Install DNS Server
-  include dns::server
+#  include dns::server
+  class{'dns::server':
+    enable_default_zones => false,
+  }
 
   if $::osfamily == 'Redhat' {
     dns::server::options{'/etc/named/named.conf.options':
@@ -137,8 +140,9 @@ screen_width=80
     ensure => absent,
   }
 
-  if $::master == !false {
-    @dns::key{ $::ddnskey: }
+  if $ipam::master == !false {
+  #    @dns::key{ $::ddnskey: }
+    notice("Ipam Master Hiera Value Found")
   }
 
   class { 'dhcp':

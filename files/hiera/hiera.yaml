@@ -8,7 +8,13 @@ hierarchy:
 
   - name: "Per-node data (yaml version)"
     path: "nodes/%{trusted.certname}.yaml" # Add file extension.
-    # Omitting datadir and data_hash to use defaults.
+
+  - name: "Per-Datacenter business Group Data"
+    path: "location/%{facts.whereami}/%{facts.group}.yaml"
+
+  - name: "Global business Group Data"
+    path: "groups/%{facts.group}.yaml"
+
 
   - name: "Per-node secrets"
     path: "nodes/%{facts.group}.eyaml"
@@ -19,11 +25,13 @@ hierarchy:
       pkcs7_private_key: /etc/puppetlabs/puppet/secure/eyaml.keys.d/private_key.pkcs7.pem
       pkcs7_public_key: /etc/puppetlabs/puppet/secure/eyaml.keys.d/public_key.pkcs7.pem
 
+  - name: "Per Virtualization Group Data"
+    path: "virtual/%{facts.virtual}.yaml"
+
+  - name: "Per OS Group Data"
+    path: "os/%{facts.os.family}.yaml"
+
   - name: "General YAML hierarchy levels"
     paths: # Can specify an array of paths instead of a single one.
       - "puppet_role/%{facts.puppet_role}.yaml"
-      - "location/%{facts.whereami}/%{facts.group}.yaml"
-      - "groups/%{facts.group}.yaml"
-      - "os/%{facts.os.family}.yaml"
-#      - "%{calling_module}"
       - "common.yaml"
