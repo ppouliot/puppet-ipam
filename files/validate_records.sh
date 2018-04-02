@@ -1,4 +1,11 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
+echo "*** Checking Zone record ***"
+dig @192.168.0.2 contoso +short
+echo "*** Checking Athorative DNS records ***"
+dig @192.168.0.2 +short NS contoso.ltd
+dig @192.168.0.2 +nssearch contoso.ltd
+dig @!92.168.0.2 +short contoso.ltd | cut -d' ' -f1
+
 echo "*** Checking A records ***"
 dig @192.168.0.2 ipam1.contoso.ltd +short
 dig @192.168.0.2 ipam2.contoso.ltd +short
