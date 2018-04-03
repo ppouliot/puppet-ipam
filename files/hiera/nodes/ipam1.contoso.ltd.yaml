@@ -5,10 +5,6 @@ master: true
 ipam::master: true
 dhcp::failover::role: primary
 dhcp::failover::peer_address: 192.168.0.3
-
-#dhcp::interfaces:
-#  - enp0s8
-
 ipam::primary_defaults:
   soa: ipam1.contoso.ltd
   soa_email: admin.contoso.ltd
