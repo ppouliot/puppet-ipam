@@ -1,35 +1,32 @@
 ---
-# hiera.yaml
 version: 5
-defaults:
-  datadir: data
-  data_hash: yaml_data
+defaults:  # Used for any hierarchy level that omits these keys.
+  datadir: data         # This path is relative to hiera.yaml's directory.
+  data_hash: yaml_data  # Use the built-in YAML backend.
 
 hierarchy:
-  - name: "Per-node data (yaml version)"
-    path: "nodes/%{trusted.certname}.yaml" # Add file extension.
+  - name: "Per-node data"                   # Unique human-readable name.
+    path: "nodes/%{trusted.certname}.yaml"  # File path, relative to datadir.
+                                   # ^^^ IMPORTANT: include the file extension!
 
-  - name: "Per-Datacenter business Group Data"
+  - name: "Per-datacenter business group data" # Uses custom facts.
     path: "location/%{facts.whereami}/%{facts.group}.yaml"
 
-  - name: "Global business Group Data"
+  - name: "Global business group data"
     path: "groups/%{facts.group}.yaml"
 
-  - name: "Per-node secrets"
-    path: "nodes/%{facts.group}.eyaml"
-    lookup_key: eyaml_lookup_key
+  - name: "Per-datacenter secret data (encrypted)"
+    lookup_key: eyaml_lookup_key   # Uses non-default backend.
+    path: "secrets/%{facts.whereami}.eyaml"
     options:
-      pkcs7_private_key: /etc/puppetlabs/puppet/secure/eyaml.keys.d/private_key.pkcs7.pem
-      pkcs7_public_key: /etc/puppetlabs/puppet/secure/eyaml.keys.d/public_key.pkcs7.pem
+      pkcs7_private_key: /etc/puppetlabs/puppet/eyaml/private_key.pkcs7.pem
+      pkcs7_public_key:  /etc/puppetlabs/puppet/eyaml/public_key.pkcs7.pem
 
-  - name: "Per Virtualization Group Data"
-    path: "virtual/%{facts.virtual}.yaml"
-
-  - name: "Per OS Group Data"
+  - name: "Per-OS defaults"
     path: "os/%{facts.os.family}.yaml"
 
-  - name: "Puppet Roles"
-    path: "puppet_role/%{facts.puppet_role}.yaml"
+  - name: "Calling Module Specifics"
+    path: "%{calling_module}.yaml"
 
-  - name: "Common Data"
+  - name: "Common data"
     path: "common.yaml"
