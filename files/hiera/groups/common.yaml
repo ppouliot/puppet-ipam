@@ -1,0 +1,6 @@
+---
+dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/ipam1.contoso.ltd.key"
+dhcp::dnskeyname: ipam1.contoso.ltd
+dhcp::omapi_name: ipam1.contoso.ltd
+dhcp::omapi_key: D8udPN+G4+JVHyVMeGHv310D75CbYQqyEu+hh0CY4Vzpe+7NRcQozPo/qVAqXxj1BN0gChj5fgNCZxGyZWqxFw==
+dhcp::omapi_port: 7911
