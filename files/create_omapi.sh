@@ -39,7 +39,7 @@ key "${OMAPI_KEY_NAME}" {
   secret "${OMAPI_SECRET}";
 }
 EOF
-tar -cvzf omapi_key.tgz *.*
+tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz *.*
 
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
