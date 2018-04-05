@@ -35,7 +35,7 @@ key "${OMAPI_KEY_NAME}" {
 }
 EOF
 
-cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/ipam.yaml
+cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
 dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/${OMAPI_KEY_NAME}.key"
 dhcp::dnskeyname: ${OMAPI_KEY_NAME}

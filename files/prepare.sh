@@ -16,6 +16,3 @@ cat <<EOF >> /etc/hosts
 192.168.0.2 ipam1.contoso.ltd ipam1
 192.168.0.3 ipam2.contoso.ltd ipam2
 EOF
-
-echo "**** creating /etc/puppetlabs/puppet/data directory  ****"
-mkdir -p /etc/puppetlabs/puppet/data

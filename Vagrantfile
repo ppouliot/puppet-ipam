@@ -13,6 +13,7 @@ end
 Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/etc/puppetlabs/code/modules/ipam", :mount_options => ['dmode=775','fmode=777']
   config.vm.synced_folder "./files/hiera", "/etc/puppetlabs/code/environments/production/data", :mount_options => ['dmode=775','fmode=777']
+  config.vm.synced_folder "./files/hiera/groups", "/etc/puppetlabs/puppet/data", :mount_options => ['dmode=775','fmode=777']
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", "2048"]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
