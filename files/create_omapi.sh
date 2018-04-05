@@ -14,13 +14,18 @@ echo "**** which is created during first execution of puppet. ****"
 until [ -d "$OMAPI_KEYS_DIR" ]
 do 
   OMAPI_KEYS_DIR=`find / -name bind.keys.d`
-  echo -n "#"
+  echo "#"
 done
 echo "**** "$OMAPI_KEYS_DIR" Found ***********************"
 cd $OMAPI_KEYS_DIR
 if [[ $OMAPI_KEY_NAME == $SECONDARY ]]; then
-  rsync -av -e ssh root@$PRIMARY:${REMOTE_OMAPI_KEYS_DIR}/${OMAPI_KEYS_DIR}/
-exit
+  until [ -e /etc/puppetlabs/puppet/data/omapi_key.tgz ]
+  do
+    echo "!"
+  done
+  echo "**** Extracting OMAPI Key Archive from ipam1"
+  tar -xvzf /etc/puppetlabs/puppet/data/omapi_key.tgz . 
+  exit
 else
 echo "**** Creating OMAPI Key ****"
 dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST $OMAPI_KEY_NAME
@@ -34,6 +39,7 @@ key "${OMAPI_KEY_NAME}" {
   secret "${OMAPI_SECRET}";
 }
 EOF
+tar -cvzf omapi_key.tgz *.*
 
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
