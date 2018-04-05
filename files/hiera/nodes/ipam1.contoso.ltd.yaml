@@ -1,6 +1,6 @@
 ---
 # Site Wide Puppet Classes being applied
-
+group: ipam
 master: true
 ipam::master: true
 dhcp::failover::role: primary

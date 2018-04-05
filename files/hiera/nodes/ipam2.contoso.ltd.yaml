@@ -1,7 +1,7 @@
 ---
 # Site Wide Puppet Classes being applied
 # classes:
-
+group: ipam
 ipam::master: false
 dhcp::failover::role: secondary
 dhcp::failover::peer_address: 192.168.0.1

@@ -39,11 +39,18 @@ class ipam::install {
     owner   => 'root',
     group   => 'root',
     mode    => '0777',
-    content => '#/usr/bin/env bash
+    content => '#!/usr/bin/env bash
 echo "**** Verifying that the ISC-DHCP-SERVER Configuration ****"
 /usr/sbin/dhcpd -t
 echo "**** Verifying that the BIND Configuration ****"
 /usr/sbin/named-checkconf',
+  }
+  file{'/root/create_omapi_key.sh':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0777',
+    source  => 'puppet:///modules/ipam/create_omapi.sh',
   }
 
   package{ $prereq_packages:
