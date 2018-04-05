@@ -23,8 +23,8 @@ if [[ $OMAPI_KEY_NAME == $SECONDARY ]]; then
   do
     echo "!"
   done
-  echo "**** Extracting OMAPI Key Archive from ipam1"
-  tar -xvzf /etc/puppetlabs/puppet/data/omapi_key.tgz . 
+  echo "**** Extracting OMAPI Key Archive from ipam1 ****"
+  tar -xvzf /etc/puppetlabs/puppet/data/omapi_key.tgz
   exit
 else
 echo "**** Creating OMAPI Key ****"

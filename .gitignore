@@ -20,3 +20,4 @@ coverage/*
 .wiki
 .env
 files/hiera/groups/*.yaml
+files/hiera/groups/*.tgz
