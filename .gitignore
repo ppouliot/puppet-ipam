@@ -19,3 +19,4 @@ coverage/*
 *.log
 .wiki
 .env
+files/hiera/groups/*.yaml
