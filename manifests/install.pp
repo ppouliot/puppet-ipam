@@ -18,7 +18,6 @@ class ipam::install {
 #      'bind-pkcs11-utils',
       ]
       $tar = '/bin/tar'
-      $linux_kernel_security_module = 'apparmor'
       notice("**** ${::osfamily} uses Apparmor ****")
       notice("**** ${::osfamily} Apparmor will be uninstalled ****")
       # Remove Apparmor
