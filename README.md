@@ -9,8 +9,6 @@ An Opinioned DHCP/DNS infrastructure.
 [![GitHub issues](https://img.shields.io/github/issues/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/network)
 
-<script src="https://asciinema.org/a/174702.js" id="asciicast-14" async data-autoplay="true" data-size="small"></script>
-
 #### Table of Contents
 
 1. [Description](#description)
@@ -40,6 +38,8 @@ accuracy across multiple platforms and to ensure formatting of the information s
   
   * Dockerfiles (Centos/Debian/Ubuntu)
   * Vagrantfile
+
+<script src="https://asciinema.org/a/174702.js" id="asciicast-14" async data-autoplay="true" data-size="small"></script>
 
 ### Building with Docker
 
