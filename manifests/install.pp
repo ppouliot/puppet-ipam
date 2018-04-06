@@ -19,7 +19,6 @@ class ipam::install {
       ]
       $tar = '/bin/tar'
       $linux_kernel_security_module = 'apparmor'
-  if $ipam::master == !false {
     }
     'RedHat':{
       $prereq_packages = [
@@ -148,16 +147,19 @@ screen_width=80
   case $linux_kernel_security_module {
     'apparmor':{
       notice("**** ${::osfamily} uses Apparmor ****")
+      notice("**** ${::osfamily} Apparmor will be uninstalled ****")
+      # Remove Apparmor
+      package {'apparmor':
+        ensure => absent,
+      }
     }
     'selinux':{
       notice("**** ${::osfamily} uses SeLinux ****")
       notice("**** ${::osfamily} needs to run: 'setsebool -P named_write_master_zones true' ****")
+      class{'::selinux':
+        mode => 'disabled',
+      }
     }
-  }
-
-  # Remove Apparmor
-  package {'apparmor':
-    ensure => absent,
   }
 
   if $ipam::master == !false {
