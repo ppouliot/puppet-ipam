@@ -19,8 +19,8 @@ class ipam::install {
       ]
       $tar = '/bin/tar'
 
-      notice("**** ${::osfamily} uses Apparmor ****")
-      notice("**** ${::osfamily} Apparmor will be uninstalled ****")
+      notice("**** ${::osfamily} uses Apparmor *************************************************")
+      notice("**** ${::osfamily} Apparmor will be uninstalled **********************************")
       # Remove Apparmor
       package {'apparmor':
         ensure => absent,
@@ -38,12 +38,20 @@ class ipam::install {
       # Adding Epel Repos for dhcping
       include epel
       Package{ require => Class['epel'], }
-      notice("**** ${::osfamily} uses SeLinux ****")
-      notice("**** ${::osfamily} needs to run: 'setsebool -P named_write_master_zones true' ****")
-      # Disable SELinux
-      class{'::selinux':
-        mode => 'disabled',
-      }
+      notice("**** ${::osfamily} uses SeLinux **************************************************")
+      notice("**** ${::osfamily} running 'setsebool -P named_write_master_zones true' works ****")
+      case $::virtual {
+        'docker':{
+          notice("**** ${::osfamily} in docker does not require selinux ****************************")
+        }
+        default:{
+          notice("**** ${::osfamily} attempting to disable selinux via the selinux module **********")
+          # Disable SELinux
+          class{'::selinux':
+            mode => 'disabled',
+          }
+        }
+      } 
     }
     default:{
       warning("${fqdn} is using an unsupported platform prerequisit packaging will not function properly.")
