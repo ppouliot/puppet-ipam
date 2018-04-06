@@ -39,7 +39,7 @@ accuracy across multiple platforms and to ensure formatting of the information s
   * Dockerfiles (Centos/Debian/Ubuntu)
   * Vagrantfile
 
-<script src="https://asciinema.org/a/174702.js" id="asciicast-14" async data-autoplay="true" data-size="small"></script>
+<script src="https://asciinema.org/a/174702.js" id="asciicast-174702" async data-autoplay="true" data-size="small"></script>
 
 ### Building with Docker
 
