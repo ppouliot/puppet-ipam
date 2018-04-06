@@ -4,6 +4,7 @@ MAINTAINER peter@pouliot.net
 COPY VERSION /VERSION
 COPY Puppetfile /etc/puppetlabs/code/environments/production/Puppetfile
 COPY files/hiera /etc/puppetlabs/code/environments/production/data
+COPY files/hiera/hiera.conf /etc/puppetlabs/code/environments/production/hiera.conf
 COPY Dockerfile.centos Dockerfile
 RUN \
     yum makecache \
@@ -11,7 +12,7 @@ RUN \
     && gem install r10k \
     && cd /etc/puppetlabs/code/environments/production/ \
     && r10k puppetfile install --verbose DEBUG2 \
-    && ln -s data/hiera.yaml /etc/puppetlabs/hiera.yaml \
+#   && ln -s data/hiera.yaml /etc/puppetlabs/hiera.yaml \
     && cp data/nodes/ipam1.yaml data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'| awk -F. '{print $1}'`.yaml \
     && cp data/nodes/ipam1.yaml data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'`yaml \
     && ls data/nodes && echo $HOSTNAME \
