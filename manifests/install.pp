@@ -18,6 +18,8 @@ class ipam::install {
 #      'bind-pkcs11-utils',
       ]
       $tar = '/bin/tar'
+      $linux_kernel_security_module = 'apparmor'
+  if $ipam::master == !false {
     }
     'RedHat':{
       $prereq_packages = [
@@ -28,6 +30,7 @@ class ipam::install {
       'net-snmp',
       ]
       $tar = '/usr/bin/tar'
+      $linux_kernel_security_module = 'selinux'
     }
     default:{
       warning("${fqdn} is using an unsupported platform prerequisit packaging will not function properly.")
@@ -139,6 +142,16 @@ screen_width=80
     dns::server::options{'/etc/named/named.conf.options':
       listen_on_port  => '53',
       allow_recursion => ['any'],
+    }
+  }
+
+  case $linux_kernel_security_module {
+    'apparmor':{
+      notice("**** ${::osfamily} uses Apparmor ****")
+    }
+    'selinux':{
+      notice("**** ${::osfamily} uses SeLinux ****")
+      notice("**** ${::osfamily} needs to run: 'setsebool -P named_write_master_zones true' ****")
     }
   }
 
