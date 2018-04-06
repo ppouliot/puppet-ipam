@@ -2,7 +2,7 @@ FROM puppet/puppet-agent-ubuntu
 MAINTAINER peter@pouliot.net
 COPY Puppetfile /etc/puppetlabs/code/environments/production/Puppetfile
 COPY files/hiera /etc/puppetlabs/code/environments/production/data
-COPY files/hiera/hiera.conf /etc/puppetlabs/code/environments/production/hiera.conf
+COPY files/hiera/hiera.yaml /etc/puppetlabs/code/environments/production/hiera.yaml
 COPY Dockerfile.ubuntu Dockerfile
 RUN \
     apt-get update -y && apt-get install git curl software-properties-common -y \

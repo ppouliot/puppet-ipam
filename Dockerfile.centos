@@ -4,7 +4,7 @@ MAINTAINER peter@pouliot.net
 COPY VERSION /VERSION
 COPY Puppetfile /etc/puppetlabs/code/environments/production/Puppetfile
 COPY files/hiera /etc/puppetlabs/code/environments/production/data
-COPY files/hiera/hiera.conf /etc/puppetlabs/code/environments/production/hiera.conf
+COPY files/hiera/hiera.yaml /etc/puppetlabs/code/environments/production/hiera.yaml
 COPY Dockerfile.centos Dockerfile
 RUN \
     yum makecache \
