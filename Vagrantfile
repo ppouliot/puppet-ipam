@@ -45,16 +45,16 @@ Vagrant.configure("2") do |config|
     v.vm.network "private_network", ip: "192.168.0.3"
   end
 
-  # Pxe Client
-  config.vm.define "pxe1", autostart: false do |vb|
-    vb.vm.box = "ubuntu/xenial64"
-    vb.vm.hostname = "pxe1.contoso.ltd"
-    #  Advanced network configuration
-    vb.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--macaddress2", "000743141530"]
-    vb.customize ['modifyvm', :id, '--boot1', 'net', '--boot2', 'disk']  # change boot order
-    vb.customize ['modifyvm', :id, '--nic1', 'nat', '--nic2', 'hostonly'] # https://github.com/hashicorp/vagrant/issues/2093
-    vb.customize ["modifyvm", :id, "--hostonlyadapter2", "vboxnet0"]
-    end
-  end
+#  # Pxe Client
+#  config.vm.define "pxe1", autostart: false do |vb|
+#    vb.vm.box = "c33s/empty"
+#    vb.vm.boot_timeout = 600
+#    vb.vm.hostname = "pxe1.contoso.ltd"
+#    #  Advanced network configuration
+#    vb.vm.provider "virtualbox" do |vb|
+#      vb.customize ["modifyvm", :id, "--macaddress2", "000743141530"]
+#      vb.customize ['modifyvm', :id, '--boot1', 'net']
+#      vb.customize ["modifyvm", :id, "--nic1", "private_network"]
+#    end
+#  end
 end
