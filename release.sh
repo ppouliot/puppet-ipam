@@ -15,10 +15,10 @@ docker run --rm -v "$PWD":/app treeder/bump patch
 VERSION=`cat VERSION`
 set -x
 echo "version: $VERSION"
-# Bump Version in metadata.json
+echo "Bump Version in metadata.json"
 sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
-
-# run build
+echo "Remove previous log and  run build"
+rm -rf ./BUILDLOG.json
 asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -d && ./build.sh -v' ./BUILDLOG.json 
 
 # tag it
