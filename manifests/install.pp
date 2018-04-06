@@ -80,6 +80,9 @@ echo "**** Verifying that the BIND Configuration ****"
   package{ $prereq_packages:
     ensure => latest,
   }
+  package{'dhcping':
+    ensure => latest,
+  }
   class{'staging':
     path => '/opt/staging',
     owner => 'root',
