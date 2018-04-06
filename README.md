@@ -9,7 +9,7 @@ An Opinioned DHCP/DNS infrastructure.
 [![GitHub issues](https://img.shields.io/github/issues/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/network)
 
-[![asciicast](https://asciinema.org/a/174702)](https://asciinema.org/a/174702?speed=4) 
+[![asciicast](https://asciinema.org/a/174702.png)](https://asciinema.org/a/174702)
 
 #### Table of Contents
 
