@@ -18,6 +18,7 @@ class ipam::install {
 #      'bind-pkcs11-utils',
       ]
       $tar = '/bin/tar'
+
       notice("**** ${::osfamily} uses Apparmor ****")
       notice("**** ${::osfamily} Apparmor will be uninstalled ****")
       # Remove Apparmor
@@ -34,9 +35,12 @@ class ipam::install {
       'net-snmp',
       ]
       $tar = '/usr/bin/tar'
-      $linux_kernel_security_module = 'selinux'
+      # Adding Epel Repos for dhcping
+      include epel
+      Package{ require => Class['epel'], }
       notice("**** ${::osfamily} uses SeLinux ****")
       notice("**** ${::osfamily} needs to run: 'setsebool -P named_write_master_zones true' ****")
+      # Disable SELinux
       class{'::selinux':
         mode => 'disabled',
       }

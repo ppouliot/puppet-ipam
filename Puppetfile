@@ -1,4 +1,5 @@
 forge 'https://forge.puppet.com'
+mod 'stahnma-epel', :latest
 mod 'puppetlabs/apt', :latest
 mod 'puppetlabs/concat', :latest
 mod 'puppetlabs/dummy_service', :latest
