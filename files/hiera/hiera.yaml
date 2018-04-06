@@ -27,8 +27,5 @@ hierarchy:
   - name: "Per-OS defaults"
     path: "os/%{facts.os.family}.yaml"
 
-  - name: "Calling Module Specifics"
-    path: "%{calling_module}.yaml"
-
   - name: "Common data"
     path: "common.yaml"
