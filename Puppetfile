@@ -7,8 +7,9 @@ mod 'puppetlabs/ntp', :latest
 mod 'puppetlabs/inifile', :latest
 mod 'puppetlabs/stdlib', :latest
 mod 'puppetlabs/vcsrepo', :latest
-mod 'puppet/staging', :latest
 mod 'puppet/dhcp', :latest
+mod 'puppet/staging', :latest
+mod 'puppet/selinux', :latest
 mod 'ajjahn/dns',
     :git => 'https://github.com/ajjahn/puppet-dns',
     :branch => 'master'
