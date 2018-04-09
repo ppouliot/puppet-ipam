@@ -21,7 +21,7 @@ for ((i=1;i<=3;i++)); do
 done
 
 echo "*** Scanning for available DHCP servers ***"
-dhcping -v -r -s 255.255.255.255
+dhcping -v -r -s 192.168.0.255
 
 echo "*** Attempting to get a dhcp lease for the All-Numeric Mac address via DHCPing from ipam1 ***"
 dhcping -v -r -h 00:07:43:14:15:30 -s 192.168.0.2
