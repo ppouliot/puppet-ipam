@@ -42,7 +42,7 @@ if [[ $FQDN == $SECONDARY ]]; then
 else
 
 echo "**** Creating rndc.key *************************************"
-rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k $RNDC_KEY_NAME
+rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k ${RNDC_KEY_NAME} -c ${OMAPI_KEYS_DIR}/${RNDC_KEY_NAME}.key
 export RNDC_KEY_FILE=`find / -name rndc.key`
 export RNDC_CONF_FILE=`find / -name rndc.conf`
 echo "**** $RNDC_KEY_FILE ****"
@@ -79,7 +79,7 @@ tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz ${RNDC_KEY_FILE} *.*
 echo "**** Creating groups/common.yaml with Key Data for IPAM2 Vagrant Host ****"
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
-dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/${RNDC_KEY_NAME}.key"
+dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/${RNDC_KEY_NAME}.key"
 dhcp::dnskeyname: ${RNDC_KEY_NAME}
 dhcp::omapi_name: ${OMAPI_KEY_NAME}
 dhcp::omapi_key: ${OMAPI_SECRET_KEY}
