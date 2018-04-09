@@ -41,11 +41,22 @@ if [[ $OMAPI_KEY_NAME == $SECONDARY ]]; then
   exit
 else
 echo "**** Creating rndc.key *************************************"
-rndc-confgen -r /dev/urandom -A HMAC-MD5 -b 512 -c -n $FQDN $RNDC_KEY_NAME
-export RNDC_KEY_FILE=`find / -name rndc.
+rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k $RNDC_KEY_NAME
+export RNDC_KEY_FILE=`find / -name rndc.key`
+export RNDC_CONF_FILE=`find / -name rndc.conf`
 echo "**** $RNDC_KEY_FILE ****"
 export RNDC_SECRET_KEY=`cat ${RNDC_KEY_FILE} |awk '{ print $8 }'`
 echo "**** $RNDC_SECRET_KEY ****"
+cat <<EOF > ${OMAPI_KEYS_DIR}/${RNDC_KEY_NAME}.conf
+key "${RNDC_KEY_NAME}" {
+  algorithm hmac-md5;
+  secret "${RNDC_SECRET_KEY}";
+}
+EOF
+export RNDC_CONF_FILE=`find / -name ${RNDC_KEY_NAME}.conf`
+echo "**** $RNDC_CONF_FILE ****"
+echo "**** Copy $RNDC_KEY_FILE to $OMAPI_KEYS_DIR ****"
+cp $RNDC_KEY_FILE $OMAPI_KEYS_DIR/
 
 echo "**** Creating OMAPI Key for ISC-DHCP-Server Mgmt ****"
 dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST $OMAPI_KEY_NAME
@@ -82,4 +93,3 @@ EOF
 
 exit
 fi
-
