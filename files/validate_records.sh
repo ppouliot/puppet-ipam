@@ -19,3 +19,8 @@ for ((i=1;i<=3;i++)); do
   echo $i
   dig @192.168.0.2 roundrobin.contoso.ltd  +short
 done
+
+echo "*** Attempting to get a dhcp lease for the All-Numeric Mac address via DHCPing from ipam1 ***"
+dhcping -H 00:07:43:14:15:30 -s 192.168.0.2
+echo "*** Attempting to get a dhcp lease for the All-Numeric Mac address via DHCPing from ipam2 ***"
+dhcping -H 00:07:43:14:15:30 -s 192.168.0.3
