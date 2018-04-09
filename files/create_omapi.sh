@@ -31,7 +31,7 @@ do
 done
 echo "**** "$OMAPI_KEYS_DIR" Found ***********************"
 cd $OMAPI_KEYS_DIR
-if [[ $OMAPI_KEY_NAME == $SECONDARY ]]; then
+if [[ $FQDN == $SECONDARY ]]; then
   until [ -e /etc/puppetlabs/puppet/data/omapi_key.tgz ]
   do
     echo "!"
@@ -40,6 +40,7 @@ if [[ $OMAPI_KEY_NAME == $SECONDARY ]]; then
   tar -xvzf /etc/puppetlabs/puppet/data/omapi_key.tgz
   exit
 else
+
 echo "**** Creating rndc.key *************************************"
 rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k $RNDC_KEY_NAME
 export RNDC_KEY_FILE=`find / -name rndc.key`
