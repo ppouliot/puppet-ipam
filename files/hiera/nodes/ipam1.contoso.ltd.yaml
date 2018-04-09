@@ -68,10 +68,10 @@ dns_records_a:
 #    data: 192.168.0.6
 #    ptr: true
   # All Numeric Mac Address Test
-  allnumericmac:
-    zone: contoso.ltd
-    data: 192.168.0.7
-    ptr: true
+#  allnumericmac:
+#    zone: contoso.ltd
+#    data: 192.168.0.7
+#    ptr: true
   jenkins-master:
     zone: contoso.ltd
     data: 192.168.0.15
