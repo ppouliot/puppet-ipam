@@ -42,6 +42,10 @@ if [[ $OMAPI_KEY_NAME == $SECONDARY ]]; then
 else
 echo "**** Creating rndc.key *************************************"
 rndc-confgen -r /dev/urandom -A HMAC-MD5 -b 512 -c -n $FQDN $RNDC_KEY_NAME
+export RNDC_KEY_FILE=`find / -name rndc.
+echo "**** $RNDC_KEY_FILE ****"
+export RNDC_SECRET_KEY=`cat ${RNDC_KEY_FILE} |awk '{ print $8 }'`
+echo "**** $RNDC_SECRET_KEY ****"
 
 echo "**** Creating OMAPI Key for ISC-DHCP-Server Mgmt ****"
 dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST $OMAPI_KEY_NAME
@@ -58,13 +62,13 @@ key "${OMAPI_KEY_NAME}" {
 EOF
 
 echo "**** Creating Tarball of DHCP/DNS Key Data *****************"
-tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz *.*
+tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz ${RNDC_KEY_FILE} *.*
 
 echo "**** Creating groups/common.yaml with Key Data for IPAM2 Vagrant Host ****"
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
-dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/${OMAPI_KEY_NAME}.key"
-dhcp::dnskeyname: ${OMAPI_KEY_NAME}
+dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/${RNDC_KEY_NAME}.key"
+dhcp::dnskeyname: ${RNDC_KEY_NAME}
 dhcp::omapi_name: ${OMAPI_KEY_NAME}
 dhcp::omapi_key: ${OMAPI_SECRET_KEY}
 dhcp::omapi_port: 7911
