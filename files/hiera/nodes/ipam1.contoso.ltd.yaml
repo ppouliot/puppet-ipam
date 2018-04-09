@@ -4,6 +4,7 @@ group: ipam
 master: true
 ipam::master: true
 dhcp::failover::role: primary
+dhcp::failover::address: 192.168.0.2
 dhcp::failover::peer_address: 192.168.0.3
 ipam::primary_defaults:
   soa: ipam1.contoso.ltd

@@ -4,6 +4,7 @@
 group: ipam
 ipam::master: false
 dhcp::failover::role: secondary
+dhcp::failover::address: 192.168.0.3
 dhcp::failover::peer_address: 192.168.0.2
 ddnskey: undef
 ipam::slave_defaults:
