@@ -13,7 +13,9 @@ export VERSION
   docker-compose build --no-cache --force-rm
 }
 -v () {
- vagrant up
+ vagrant up ipam1 
+ vagrant ssh ipam1 -c 'sudo /etc/puppetlabs/code/modules/ipam/tests/dns_watch_named_xfer_primary_secondary.sh' &
+ vagrant up ipam2
 }
 echo "USAGE: -d Docker -v Vagrant"
 $1
