@@ -10,7 +10,7 @@ dhcp::failover::peer_address: 192.168.0.3
 
 dhcp::default_lease_time: 86400
 dhcp::max_lease_time: 259200
-# dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/ipam1.contoso.ltd.key"
+# dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/omapi.key"
 # dhcp::dnskeyname: ipam1.contoso.ltd
 # dhcp::omapi_name: ipam1.contoso.ltd
 # dhcp::omapi_key: "JFuV5v6ZHk1nJb6wlxrbCQ=="

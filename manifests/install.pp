@@ -182,6 +182,15 @@ screen_width=80
 #   dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key",
 #   require      => Dns::Key[$ddnskey],
   }
+  
+  if ($dhcp::omapi_key){
+    dns::tsig { $dhcp::omapi_name :
+      ensure    => present,
+      algorithm => "hmac-md5",
+      secret    => $::dhcp::omapi_key,
+      server    => ['192.168.0.2','192.168.0.3'],
+    }
+  }
 
   if ($ipam::dhcp_use_failover) {
     class {'dhcp::failover':
