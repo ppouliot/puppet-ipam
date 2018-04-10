@@ -84,12 +84,6 @@ dhcp::dnskeyname: ${OMAPI_KEY_NAME}
 dhcp::omapi_name: ${OMAPI_KEY_NAME}
 dhcp::omapi_key: ${OMAPI_SECRET_KEY}
 dhcp::omapi_port: 7911
-dns::tsig:
-  ${OMAPI_KEY_NAME}:
-    ensure: present
-    algorithm: "hmac-md5"
-    secret: ${OMAPI_SECRET_KEY}
-    server: "%{::ipaddress}"
 EOF
 
 exit
