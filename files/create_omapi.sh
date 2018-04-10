@@ -59,7 +59,7 @@ else
 
 echo "**** Creating OMAPI Key for ISC-DHCP-Server Mgmt ****"
 dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST $OMAPI_KEY_NAME
-chmod 0775 ${OMAPI_KEYS_DIR}/omapi.key
+
 echo "**** Creating OMAPI Secret FIle  ***************************"
 export OMAPI_PRIVATE_KEY=`cat $OMAPI_KEYS_DIR/K${OMAPI_KEY_NAME}.+*.private |grep ^Key| cut -d ' ' -f2-`
 export OMAPI_SECRET_KEY=`cat $OMAPI_KEYS_DIR/K${OMAPI_KEY_NAME}.+*.key |awk '{ print $8 }'`
@@ -71,7 +71,7 @@ key "${OMAPI_KEY_NAME}" {
   secret "${OMAPI_SECRET_KEY}";
 };
 EOF
-
+chmod 775 ${OMAPI_KEYS_DIR}/omapi.key
 echo "**** Creating Tarball of DHCP/DNS Key Data *****************"
 tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz ${RNDC_KEY_FILE} *.*
 
