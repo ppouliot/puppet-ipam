@@ -18,8 +18,8 @@ echo "**** Displaying Variables                               ****"
 echo "**** Domain Name:$DN                          ****"
 echo "**** Fully Qualified Domain Name:$FQDN        ****"
 echo "**** PRIMARY:$PRIMARY                   ****"
-echo "**** OMAPI_KEY_NAME                            ****"
-echo "**** RNDC_KEY_NAME                              ****"
+echo "**** OMAPI_KEY_NAME: $OMAPI_KEY_NAME          ****"
+echo "**** RNDC_KEY_NAME: $RNDC_KEY_NAME            ****"
 echo "**** SECONDARY:$SECONDARY               ****"
 
 echo "**** Waiting for creation of directory bind.keys.d      ****"
@@ -41,29 +41,15 @@ if [[ $FQDN == $SECONDARY ]]; then
   exit
 else
 
-#echo "**** Creating rndc.key *************************************"
-#rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k ${RNDC_KEY_NAME} -c ${OMAPI_KEYS_DIR}/rndc.key
-#export RNDC_KEY_FILE=`find / -name rndc.key`
-#export RNDC_CONF_FILE=`find / -name rndc.conf`
-#echo "**** $RNDC_KEY_FILE ****"
-#export RNDC_SECRET_KEY=`cat ${RNDC_KEY_FILE} |awk '{ print $8 }'`
-#echo "**** $RNDC_SECRET_KEY ****"
-#cat <<EOF > ${OMAPI_KEYS_DIR}/rndc.conf
-#key "${RNDC_KEY_NAME}" {
-#  algorithm hmac-md5;
-#  secret "${RNDC_SECRET_KEY}";
-#}
-#EOF
-#export RNDC_CONF_FILE=`find / -name rndc.conf`
-#echo "**** $RNDC_CONF_FILE ****"
-
 echo "**** Creating OMAPI Key for ISC-DHCP-Server Mgmt ****"
 dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST $OMAPI_KEY_NAME
 
 echo "**** Creating OMAPI Secret FIle  ***************************"
-export OMAPI_PRIVATE_KEY=`cat $OMAPI_KEYS_DIR/K${OMAPI_KEY_NAME}.+*.private |grep ^Key| cut -d ' ' -f2-`
-export OMAPI_SECRET_KEY=`cat $OMAPI_KEYS_DIR/K${OMAPI_KEY_NAME}.+*.key |awk '{ print $8 }'`
+export OMAPI_PRIVATE_KEY=`cat ${OMAPI_KEYS_DIR}/K${OMAPI_KEY_NAME}.+*.private |grep ^Key| cut -d ' ' -f2-`
+export OMAPI_SECRET_KEY=`cat ${OMAPI_KEYS_DIR}/K${OMAPI_KEY_NAME}.+*.key |awk '{ print $8 }'`
 echo 'secret "'$OMAPI_PRIVATE_KEY'";' > ${OMAPI_KEYS_DIR}/${OMAPI_KEY_NAME}.secret
+echo "**** OMAPI_PRIVATE_KEY: ${OMAPI_PRIVATE_KEY} ****"
+echo "**** OMAPI_SECRET_KEY: ${OMAPI_SECRET_KEY} ****"
 echo "**** Creating OMAPI Key FIle  ****"
 cat <<EOF > ${OMAPI_KEYS_DIR}/omapi.key
 key "${OMAPI_KEY_NAME}" {
@@ -72,17 +58,18 @@ key "${OMAPI_KEY_NAME}" {
 };
 EOF
 chmod 775 ${OMAPI_KEYS_DIR}/omapi.key
+
 echo "**** Creating Tarball of DHCP/DNS Key Data *****************"
 tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz ${RNDC_KEY_FILE} *.*
 
 echo "**** Creating groups/common.yaml with Key Data for IPAM2 Vagrant Host ****"
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
-dns::server::params::rndc_key_file: "%{::dns::server::params::cfg_dir}/bind.keys.d/omapi.key"
-dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/omapi.key"
-dhcp::dnskeyname: ${OMAPI_KEY_NAME}
-dhcp::omapi_name: ${OMAPI_KEY_NAME}
-dhcp::omapi_key: ${OMAPI_SECRET_KEY}
+dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
+dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
+dhcp::dnskeyname: "${OMAPI_KEY_NAME}"
+dhcp::omapi_name: "${OMAPI_KEY_NAME}"
+dhcp::omapi_key: "${OMAPI_SECRET_KEY}"
 dhcp::omapi_port: 7911
 EOF
 

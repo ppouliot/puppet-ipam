@@ -184,11 +184,11 @@ screen_width=80
   }
   
   if ($dhcp::omapi_key){
-    dns::tsig { $dhcp::omapi_name :
+    dns::tsig { 'omapi_key':
       ensure    => present,
       algorithm => "hmac-md5",
-      secret    => $::dhcp::omapi_key,
-      server    => ['192.168.0.2','192.168.0.3'],
+      secret    => hiera('dhcp::omapi_key'),
+      server    => '127.0.0.1',
     }
   }
 

@@ -1,3 +1,4 @@
 ---
+ipam::server_interface: "%{::ipaddress_eth1}"
 dhcp::interfaces:
   - eth1
