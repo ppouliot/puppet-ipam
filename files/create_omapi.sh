@@ -8,7 +8,7 @@ echo "**** Determining Key Variables *****************************"
 # OMAPI_KEY_NAME=dhcp-failover
 #
 OMAPI_KEY_NAME=omapi_key
-RNDC_KEY_NAME=rndc_key
+RNDC_KEY_NAME=rndc-key
 DN=`hostname -d`
 FQDN=`hostname -f`
 PRIMARY=ipam1.$DN
@@ -42,22 +42,20 @@ if [[ $FQDN == $SECONDARY ]]; then
 else
 
 echo "**** Creating rndc.key *************************************"
-rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k ${RNDC_KEY_NAME} -c ${OMAPI_KEYS_DIR}/${RNDC_KEY_NAME}.key
+rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k ${RNDC_KEY_NAME} -c ${OMAPI_KEYS_DIR}/rndc.key
 export RNDC_KEY_FILE=`find / -name rndc.key`
 export RNDC_CONF_FILE=`find / -name rndc.conf`
 echo "**** $RNDC_KEY_FILE ****"
 export RNDC_SECRET_KEY=`cat ${RNDC_KEY_FILE} |awk '{ print $8 }'`
 echo "**** $RNDC_SECRET_KEY ****"
-cat <<EOF > ${OMAPI_KEYS_DIR}/${RNDC_KEY_NAME}.conf
+cat <<EOF > ${OMAPI_KEYS_DIR}/rndc.conf
 key "${RNDC_KEY_NAME}" {
   algorithm hmac-md5;
   secret "${RNDC_SECRET_KEY}";
 }
 EOF
-export RNDC_CONF_FILE=`find / -name ${RNDC_KEY_NAME}.conf`
+export RNDC_CONF_FILE=`find / -name rndc.conf`
 echo "**** $RNDC_CONF_FILE ****"
-echo "**** Copy $RNDC_KEY_FILE to $OMAPI_KEYS_DIR ****"
-cp $RNDC_KEY_FILE $OMAPI_KEYS_DIR/
 
 echo "**** Creating OMAPI Key for ISC-DHCP-Server Mgmt ****"
 dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST $OMAPI_KEY_NAME
@@ -86,7 +84,7 @@ tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz ${RNDC_KEY_FILE} *.*
 echo "**** Creating groups/common.yaml with Key Data for IPAM2 Vagrant Host ****"
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 ---
-dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/${RNDC_KEY_NAME}.key"
+dhcp::dnsupdatekey: "%{::dns::server::params::cfg_dir}/bind.keys.d/rndc.key"
 dhcp::dnskeyname: ${RNDC_KEY_NAME}
 dhcp::omapi_name: ${OMAPI_KEY_NAME}
 dhcp::omapi_key: ${OMAPI_SECRET_KEY}
