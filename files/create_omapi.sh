@@ -73,6 +73,13 @@ key "${OMAPI_KEY_NAME}" {
 }
 EOF
 
+cat <<EOF> $OMAPI_KEYS_DIR/ddnskey.pp 
+bind::key{'$OMAP_KEY_NAME':
+  ensure => present,
+  secret => '$OMAPI_PRIVATE_KEY',
+}
+EOF
+
 echo "**** Creating Tarball of DHCP/DNS Key Data *****************"
 tar -cvzf /etc/puppetlabs/puppet/data/omapi_key.tgz ${RNDC_KEY_FILE} *.*
 
