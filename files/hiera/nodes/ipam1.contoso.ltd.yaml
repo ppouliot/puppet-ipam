@@ -1,6 +1,5 @@
 ---
 # Site Wide Puppet Classes being applied
-group: ipam
 master: true
 ipam::master: true
 dhcp::failover::role: primary
@@ -16,8 +15,9 @@ ipam::primary_defaults:
     - 192.168.0.2
     - 192.168.0.3
   allow_update:
-    - 192.168.0.2
-    - 192.168.0.3
+    - 'key "omapi_key"'
+#    - 192.168.0.2
+#    - 192.168.0.3
   also_notify:
     - 192.168.0.2
     - 192.168.0.3
