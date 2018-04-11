@@ -50,6 +50,10 @@ class ipam::install {
           class{'::selinux':
             mode => 'disabled',
           }
+          service{'polkit':
+            enable => 'false',
+            ensure => 'stopped',
+          } 
         }
       } 
     }
@@ -188,7 +192,7 @@ screen_width=80
       ensure    => present,
       algorithm => "hmac-md5",
       secret    => hiera('dhcp::omapi_key'),
-      server    => '127.0.0.1',
+      server    => $::ipam::server_interface,
     }
   }
 
