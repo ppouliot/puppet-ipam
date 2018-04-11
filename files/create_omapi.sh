@@ -121,7 +121,7 @@ cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 # Test using rndc key dhcpupdater
 dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
 # dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
-dhcp::dnsupdatekey: /etc/dhcp/dhcpupdater.key"
+dhcp::dnsupdatekey: /etc/dhcp/dhcpupdater.key
 dhcp::dnskeyname: "${RNDC_KEY_NAME}"
 
 # Test using omapi key omapi.key
