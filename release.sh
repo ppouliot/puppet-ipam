@@ -21,7 +21,7 @@ rm -rf ./BUILDLOG.json
 
 asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -d && ./build.sh -v' ./BUILDLOG.json 
 echo "**** Removing build artifacts before commiting and tagging ****"
-./files/cleanup.sh
+./tests/cleanup.sh
 
 # tag it
 git add -A

@@ -8,7 +8,7 @@
 #   include ipam
 class ipam (
   $master             = hiera('master',true),
-  $server_interface   = hiera('ipam::server_interface',$::ipaddress),
+  $server_interface   = hiera('ipam::server_interface',{}),
   $primary            = hiera('primary',{}),
   $ddnskey            = hiera('ddnskey','default'),
   $slave              = hiera('slave',{}),

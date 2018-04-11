@@ -33,6 +33,17 @@ done
 echo "**** "$BIND_KEYS_DIR" Found ***********************"
 cd $BIND_KEYS_DIR
 
+echo "**** Detecting & Renaming Original Bind Keys   ****"
+if [ -e /etc/named.root.key ]; then
+   echo "**** Moving named.root.key to /etc/named.root.key.orig ****"
+   mv /etc/named.root.key /etc/named.root.key.orig
+   DEFAULT_RNDC='/etc/named.root.key'
+elseif [ -e /etc/bind/rndc.key ]
+   echo "**** Moving rndc.key to /etc/bind/bind.keys.d/ ************"
+   mv /etc/bind/rndc.key /etc/bind/rndc.key.orig
+   DEFAULT_RNDC='/etc/bind/rndc.key'
+fi
+
 # Check if Secondary else Create RNDC/OMAPI Keys
 if [[ $FQDN == $SECONDARY ]]; then
   until [ -e $OMAPI_TARBALL ]
@@ -43,6 +54,10 @@ if [[ $FQDN == $SECONDARY ]]; then
   echo "!!!! OMAPI_TARBALL Found                              !!!!"
   echo "**** Extracting OMAPI Key Archive from ipam1          ****"
   tar -xvzf $VAGRANT_IPAM_SHARE/omapi_key.tgz
+  echo "**** Creating hard link for ${DEFAULT_RNDC}           ****"
+  ln ${BIND_KEYS_DIR}/omapi.key $DEFAULT_RNDC
+  echo "**** Creating hard link for /etc/dhcp/omapi.key           ****"
+  ln ${BIND_KEYS_DIR}/omapi.key /etc/dhcp/omapi.key
   exit
 else
 
@@ -85,8 +100,12 @@ key "${OMAPI_KEY_NAME}" {
 };
 EOF
 echo "**** Set Permissions on ${BIND_KEYS_DIR}/omapi.key ********"
-chmod 775 ${BIND_KEYS_DIR}/omapi.key
+chmod 777 ${BIND_KEYS_DIR}/omapi.key
 
+echo "**** Creating hard link for ${DEFAULT_RNDC}           ****"
+ln ${BIND_KEYS_DIR}/omapi.key $DEFAULT_RNDC
+echo "**** Creating hard link for /etc/dhcp/omapi.key           ****"
+ln ${BIND_KEYS_DIR}/omapi.key /etc/dhcp/omapi.key
 
 echo "**** Creating groups/common.yaml with Key Data for IPAM2 Vagrant Host ****"
 cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
@@ -101,8 +120,10 @@ cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 #dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
 #dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
 #dhcp::dnskeyname: "${RNDC_KEY_NAME}"
-dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
-dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
+#dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
+#dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
+
+dhcp::dnsupdatekey: "/etc/dhcp/omapi.key"
 dhcp::dnskeyname: "${OMAPI_KEY_NAME}"
 dhcp::omapi_name: "${OMAPI_KEY_NAME}"
 dhcp::omapi_key: "${OMAPI_SECRET_KEY}"
