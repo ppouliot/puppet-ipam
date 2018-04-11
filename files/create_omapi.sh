@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-exec &>> $HOME/create_omapi_key.log
+exec & >> $HOME/create_omapi_key.log
 echo "**** Script to create omapi keys for IPAM cluster **********"
 echo "**** Determining Key Variables *****************************"
 
 # Variables
 OMAPI_KEY_NAME=omapi_key
-RNDC_KEY_NAME=dhcp_updater
+RNDC_KEY_NAME=dhcpupdater
 DN=`hostname -d`
 FQDN=`hostname -f`
 PRIMARY=ipam1.$DN
@@ -54,8 +54,8 @@ if [[ $FQDN == $SECONDARY ]]; then
   echo "!!!! OMAPI_TARBALL Found                              !!!!"
   echo "**** Extracting OMAPI Key Archive from ipam1          ****"
   tar -xvzf $VAGRANT_IPAM_SHARE/omapi_key.tgz
-  echo "**** Creating hard link for ${DEFAULT_RNDC}           ****"
-  ln ${BIND_KEYS_DIR}/omapi.key $DEFAULT_RNDC
+  echo "**** Creating hard link for /etc/dhcp/dhcpupdater.key     ****"
+  ln ${BIND_KEYS_DIR}/dhcpupdater.key /etc/dhcp/dhcpupdater.key
   echo "**** Creating hard link for /etc/dhcp/omapi.key           ****"
   ln ${BIND_KEYS_DIR}/omapi.key /etc/dhcp/omapi.key
   exit
@@ -99,11 +99,12 @@ key "${OMAPI_KEY_NAME}" {
   secret "${OMAPI_SECRET_KEY}";
 };
 EOF
-echo "**** Set Permissions on ${BIND_KEYS_DIR}/omapi.key ********"
+echo "**** Set Permissions on ${BIND_KEYS_DIR}/*.key ********"
+chmod 777 ${BIND_KEYS_DIR}/dhcpupdater.key
 chmod 777 ${BIND_KEYS_DIR}/omapi.key
 
 echo "**** Creating hard link for ${DEFAULT_RNDC}           ****"
-ln ${BIND_KEYS_DIR}/omapi.key $DEFAULT_RNDC
+ln ${BIND_KEYS_DIR}/dhcpupdater.key /etc/dhcp/dhcpupdater.key
 echo "**** Creating hard link for /etc/dhcp/omapi.key           ****"
 ln ${BIND_KEYS_DIR}/omapi.key /etc/dhcp/omapi.key
 
@@ -119,7 +120,8 @@ cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 # Commented Out for Testing
 # Test using rndc key dhcpupdater
 dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
-dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
+# dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
+dhcp::dnsupdatekey: /etc/dhcp/dhcpupdater.key"
 dhcp::dnskeyname: "${RNDC_KEY_NAME}"
 
 # Test using omapi key omapi.key

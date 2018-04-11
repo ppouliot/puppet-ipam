@@ -2,6 +2,7 @@
 # Site Wide Puppet Classes being applied
 master: true
 ipam::master: true
+ipam::server_interface: 192.168.0.2
 dhcp::failover::role: primary
 dhcp::failover::address: 192.168.0.2
 dhcp::failover::peer_address: 192.168.0.3
