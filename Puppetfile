@@ -1,7 +1,5 @@
 forge 'https://forge.puppet.com'
 mod 'stahnma-epel', :latest
-# mod 'camptocamp/bind', :latest
-mod 'jhoblitt/policykit', :latest
 mod 'puppetlabs/apt', :latest
 mod 'puppetlabs/concat', :latest
 mod 'puppetlabs/dummy_service', :latest
