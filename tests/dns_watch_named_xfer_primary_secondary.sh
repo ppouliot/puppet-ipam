@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 if [ -e /var/log/messages ]; then
-  SYSLOG_PATH='/var/log/messages'
+  SYSLOG_PATH=/var/log/messages
+  NAMED_PATH=/etc/named
 elif [ -e /var/log/syslog ]
 then
-  SYSLOG_PATH='/var/log/syslog'
+  SYSLOG_PATH=/var/log/syslog
+  NAMED_PATH=/etc/bind
 else
   echo "!!!!!!!!!! No Logfiles Detected !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
   exit
@@ -18,3 +20,5 @@ tail -f ${SYSLOG_PATH} | grep --line-buffered -Ei 'Both servers have entered rec
 echo "!!!!!!!!!! Cluster recovery successfully detected !!!!!!!!!!!!"
 echo "?????????? Checking for DyN DNS ??????????????????????????????"
 cat ${SYSLOG_PATH} | grep --line-buffered -Ei 'generating session key for dynamic DNS'-m 2
+echo "?????????? Checking for Key Access ??????????????????????????????"
+cat ${SYSLOG_PATH} | grep --line-buffered -Ei 'dhcpd: Can't open ${NAMED_PATH}/bind.keys.d/dhcpupdater.key: No such file or directory' -m 1

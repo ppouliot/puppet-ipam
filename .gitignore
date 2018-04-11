@@ -21,3 +21,4 @@ coverage/*
 .env
 files/hiera/groups/*.yaml
 files/hiera/groups/*.tgz
+files/hiera/groups/ipam.env
