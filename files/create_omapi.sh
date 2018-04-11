@@ -117,14 +117,20 @@ cat <<EOF > /etc/puppetlabs/code/modules/ipam/files/hiera/groups/common.yaml
 # artifacts created and used during the vagrant run.
 
 # Commented Out for Testing
-#dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
-#dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
-#dhcp::dnskeyname: "${RNDC_KEY_NAME}"
+# Test using rndc key dhcpupdater
+dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
+dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/dhcpupdater.key"
+dhcp::dnskeyname: "${RNDC_KEY_NAME}"
+
+# Test using omapi key omapi.key
 #dns::server::params::rndc_key_file: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
 #dhcp::dnsupdatekey: "%{::dns::server::cfg_dir}/bind.keys.d/omapi.key"
+#dhcp::dnskeyname: "${OMAPI_KEY_NAME}"
 
-dhcp::dnsupdatekey: "/etc/dhcp/omapi.key"
-dhcp::dnskeyname: "${OMAPI_KEY_NAME}"
+# Test using omapi key located in dhcpd dir
+#dhcp::dnsupdatekey: "/etc/dhcp/omapi.key"
+#dhcp::dnskeyname: "${OMAPI_KEY_NAME}"
+
 dhcp::omapi_name: "${OMAPI_KEY_NAME}"
 dhcp::omapi_key: "${OMAPI_SECRET_KEY}"
 dhcp::omapi_port: 7911
