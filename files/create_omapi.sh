@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -x
+#exec &>> $HOME/create_omapi_key.log
 
-exec & >> $HOME/create_omapi_key.log
 echo "**** Script to create omapi keys for IPAM cluster **********"
 echo "**** Determining Key Variables *****************************"
 
@@ -33,15 +34,18 @@ done
 echo "**** "$BIND_KEYS_DIR" Found ***********************"
 cd $BIND_KEYS_DIR
 
-echo "**** Detecting & Renaming Original Bind Keys   ****"
+echo "**** Detecting existing bind key and platform inforamtion ****"
 if [ -e /etc/named.root.key ]; then
    echo "**** Moving named.root.key to /etc/named.root.key.orig ****"
    mv /etc/named.root.key /etc/named.root.key.orig
    DEFAULT_RNDC='/etc/named.root.key'
-elseif [ -e /etc/bind/rndc.key ]
+   RNDC_CONFGEN_A=' '
+elif [ -e /etc/bind/rndc.key ]
+then
    echo "**** Moving rndc.key to /etc/bind/bind.keys.d/ ************"
    mv /etc/bind/rndc.key /etc/bind/rndc.key.orig
    DEFAULT_RNDC='/etc/bind/rndc.key'
+   RNDC_CONFGEN_A='-A HMAC-MD5'
 fi
 
 # Check if Secondary else Create RNDC/OMAPI Keys
@@ -62,7 +66,9 @@ if [[ $FQDN == $SECONDARY ]]; then
 else
 
 echo "**** Creating rndc.key *************************************"
-rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k ${RNDC_KEY_NAME} -c ${BIND_KEYS_DIR}/dhcpupdater.key
+# Command below works on ubuntu/debian systems, on RH based systems there is no -A HMAC-MD5
+#rndc-confgen -a -r /dev/urandom -A HMAC-MD5 -b 512 -k ${RNDC_KEY_NAME} -c ${BIND_KEYS_DIR}/dhcpupdater.key
+rndc-confgen -a -r /dev/urandom ${RNDC_CONFGEN_A} -b 512 -k ${RNDC_KEY_NAME} -c ${BIND_KEYS_DIR}/dhcpupdater.key
 
 export RNDC_KEY_FILE=`find / -name dhcpupdater.key`
 export RNDC_CONF_FILE=`find / -name rndc.conf`
