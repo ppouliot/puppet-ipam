@@ -8,7 +8,7 @@ if [ $YUM ]; then
   echo "**** Policy Kit needs to be disabled for DyNDNS to work properly. ****"
   systemctl disable polkit.service
   echo "**** Stopping policy kit from running. ****"
-  systemctl stope polkit.service
+  systemctl stop polkit.service
 elif [ $APT ]; then
   echo "**** Apt is detected installing required packages for the platform. ****"
   $APT install git wget curl -y

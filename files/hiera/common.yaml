@@ -5,7 +5,7 @@ dhcp::default_lease_time: 86400
 dhcp::max_lease_time: 259200
 dhcp::dnsdomain:
       - contoso.ltd
-      - 0.168.192.IN-ADDR.ARPA
+      - 0.168.192.in-addr.arpa
   
 dhcp::nameservers:
       - 192.168.0.2
@@ -26,7 +26,7 @@ dhcpdata:
       - domain-name "contoso.ltd"
       - ntp-servers bonehed.lcs.mit.edu
     parameters:
-      - ddns-domainname "contoso.ltd, 0.168.192.IN-ADDR.ARPA"
+      - ddns-domainname "contoso.ltd, 0.168.192.in-addr.arpa"
 
 static_leases:
 # Begin Static Leases

@@ -50,10 +50,13 @@ class ipam::install {
           class{'::selinux':
             mode => 'disabled',
           }
-          
-          package{'polkit':
-            ensure => absent,
-          } notice("Removing Policy kit on ${::osfamily}")
+           service{'polkit':
+             ensure => stopped,
+             enable => false,
+           }          
+#          package{'polkit':
+#            ensure => absent,
+#          } notice("Removing Policy kit on ${::osfamily}")
         }
       } 
     }
