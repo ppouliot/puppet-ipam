@@ -1,12 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-[
-  { :name => "vagrant-scp", :version => ">= 0.5.7" },
-  { :name => "vagrant-puppet-install", :version => ">= 5.0.0" },
-  { :name => "vagrant-vbguest", :version => ">= 0.15.1" }
-].each do |plugin|
-  if not Vagrant.has_plugin?(plugin[:name], plugin[:version])
-    system "vagrant plugin install #{plugin}" unless VAgrant.has_plugin plugin
+required_plugins = %w(vagrant-scp vagrant-puppet-install vagrant-vbguest)
+
+plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
+if not plugins_to_install.empty?
+  puts "Installing plugins: #{plugins_to_install.join(' ')}"
+  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting."
   end
 end
 
