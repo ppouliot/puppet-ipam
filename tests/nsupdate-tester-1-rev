@@ -1,0 +1,5 @@
+server ipam1.contoso.ltd
+zone 0.168.192.in-addr.arpa
+update add 166.0.168.192.in-addr.arpa. 86400 PTR nsupdate-tester-1.contoso.ltd.
+show
+send

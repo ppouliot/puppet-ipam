@@ -1,0 +1,5 @@
+server ipam1.contoso.ltd
+zone contoso.ltd
+update add nsupdate-tester-1.contoso.ltd. 86400 A 192.168.0.166
+show
+send
