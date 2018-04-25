@@ -25,7 +25,7 @@ ipam::primary_defaults:
   
 primary:
   contoso.ltd: {}
-  0.168.192.in-addr.arpa: {}
+  0.168.192.IN-ADDR.APRA: {}
 #    soa: ns3.opensack.tld
 
 #  ad.contoso.ltd:
