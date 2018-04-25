@@ -15,6 +15,7 @@ class ipam::install {
       'perl-doc',
       'libnetaddr-ip-perl',
       'libnet-snmp-perl',
+      'ntpdate',
 #      'bind-pkcs11-utils',
       ]
       $tar = '/bin/tar'
@@ -33,6 +34,7 @@ class ipam::install {
       'perl-NetAddr-IP',
       'bind-pkcs11-utils',
       'net-snmp',
+      'ntpdate',
       ]
       $tar = '/usr/bin/tar'
       # Adding Epel Repos for dhcping
