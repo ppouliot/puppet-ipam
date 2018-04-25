@@ -188,7 +188,7 @@ screen_width=80
     nameservers  => hiera('dhcp::nameservers'),
     ntpservers   => hiera('dhcp::ntpservers'),
     interfaces   => hiera('dhcp::interfaces'),
-    dnsupdatekey => hiera('dhcp::dnsupdatekey',undef),
+#   dnsupdatekey => hiera('dhcp::dnsupdatekey',undef),
 #   require      => Dns::Key[$ddnskey],
   }
   

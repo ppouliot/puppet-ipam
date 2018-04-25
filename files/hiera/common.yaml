@@ -26,7 +26,9 @@ dhcpdata:
       - domain-name "contoso.ltd"
       - ntp-servers bonehed.lcs.mit.edu
     parameters:
-      - ddns-domainname "contoso.ltd., 0.168.192.in-addr.arpa."
+#      - ddns-domainname "contoso.ltd., 0.168.192.in-addr.arpa."
+      - ddns-domainname "contoso.ltd."
+      - ddns-rev-domainname "in-addr.arpa"
 
 static_leases:
 # Begin Static Leases
