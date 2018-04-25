@@ -182,15 +182,16 @@ screen_width=80
   }
 
   class { 'dhcp':
-    dnsdomain   => hiera('dhcp::dnsdomain'),
-    nameservers => hiera('dhcp::nameservers'),
-    ntpservers  => hiera('dhcp::ntpservers'),
-    interfaces  => hiera('dhcp::interfaces'),
-#   dnsupdatekey => "/etc/bind/bind.keys.d/${ddnskey}.key",
+    dnsdomain    => hiera('dhcp::dnsdomain'),
+    nameservers  => hiera('dhcp::nameservers'),
+    ntpservers   => hiera('dhcp::ntpservers'),
+    interfaces   => hiera('dhcp::interfaces'),
+    dnsupdatekey => hiera('dhcp::dnsupdatekey',undef),
 #   require      => Dns::Key[$ddnskey],
   }
   
   if ($dhcp::omapi_key){
+    
     dns::tsig { 'omapi_key':
       ensure    => present,
       algorithm => "hmac-md5",

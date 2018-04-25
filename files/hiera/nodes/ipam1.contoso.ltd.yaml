@@ -37,18 +37,22 @@ primary:
 dns_records_a:
 # Begin SOA
 # Begin contoso.ltd
+
   ipam1:
     zone: contoso.ltd
     data: 192.168.0.2
     ptr: true
+
   ipam2:
     zone: contoso.ltd
     data: 192.168.0.3
     ptr: true
+
   puppetmaster:
     zone: contoso.ltd
     data: 192.168.0.14
     ptr: true
+
   roundrobin:
     zone: contoso.ltd
     data:
@@ -56,6 +60,7 @@ dns_records_a:
       - 192.168.0.5
       - 192.168.0.6
     ptr: true
+
 #  round-robin:
 #    zone: contoso.ltd
 #    data: 192.168.0.4
