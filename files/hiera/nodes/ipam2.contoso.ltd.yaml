@@ -11,4 +11,4 @@ ipam::slave_defaults:
   zone_type: slave
 slave:
   contoso.ltd: {}
-  0.168.192.IN-ADDR.ARPA: {}
+  0.168.192.in-addr.arpa: {}
