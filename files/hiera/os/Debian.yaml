@@ -1,4 +1,4 @@
 ---
 ipam::server_interface: "%{::ipaddress_enp0s8}"
 dhcp::interfaces:
-  - eth0
+  - enp0s8
