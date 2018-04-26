@@ -93,6 +93,12 @@ class{'ipam':}
 
 Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
 
+## Reference 
+
+ * https://www.techrepublic.com/blog/linux-and-open-source/setting-up-a-dynamic-dns-service-part-2-dhcpd/
+ * https://ubuntuforums.org/showthread.php?t=2161213
+ * https://www.linuxquestions.org/questions/linux-server-73/dynamic-dhcp-update-to-dns-921318/
+
 ## Release Notes/Contributors/Etc. **Optional**
 
 If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
