@@ -57,19 +57,3 @@ static_leases:
   allnumericmac:
     mac: "00:07:43:14:15:30"
     ip: 192.168.0.7
-dns_records_cname:
-  q:
-    zone: contoso.ltd
-    data: quartermaster.contoso.ltd
-  puppet:
-    zone: contoso.ltd
-    data: puppetmaster.contoso.ltd
-  puppetdb:
-    zone: contoso.ltd
-    data: puppetmaster.contoso.ltd
-  puppetboard:
-    zone: contoso.ltd
-    data: puppetmaster.contoso.ltd
-  puppetexplorer:
-    zone: contoso.ltd
-    data: puppetmaster.contoso.ltd

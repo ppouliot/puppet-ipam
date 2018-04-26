@@ -110,5 +110,8 @@ dns_records_cname:
   puppetboard:
     zone: contoso.ltd
     data: puppetmaster.contoso.ltd
+  puppetexplorer:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
 
 # End Cname Records
