@@ -12,7 +12,7 @@ dhcp::nameservers:
   - 192.168.0.3
   
 dhcp::ntpservers:
-  - bonehed.lsc.mit.edu
+  - time.nist.gov
 
 dhcpdata:
   contoso.ltd:
@@ -24,9 +24,7 @@ dhcpdata:
     options:
       - 'domain-name-servers 192.168.0.2, 192.168.0.3'
       - domain-name "contoso.ltd"
-      - ntp-servers bonehed.lcs.mit.edu
     parameters:
-#      - ddns-domainname "contoso.ltd., 0.168.192.in-addr.arpa."
       - ddns-domainname "contoso.ltd."
       - ddns-rev-domainname "in-addr.arpa"
 
@@ -59,3 +57,19 @@ static_leases:
   allnumericmac:
     mac: "00:07:43:14:15:30"
     ip: 192.168.0.7
+dns_records_cname:
+  q:
+    zone: contoso.ltd
+    data: quartermaster.contoso.ltd
+  puppet:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetdb:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetboard:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetexplorer:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
