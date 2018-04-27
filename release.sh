@@ -19,8 +19,7 @@ sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 echo "Remove previous log and  run build"
 rm -rf ./BUILDLOG.json
 
-# asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -d && ./build.sh -v' ./BUILDLOG.json 
-asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -v' ./BUILDLOG.json 
+asciinema rec -q --title="BuildLog-$IMAGE-$VERSION" -c './build.sh -d && ./build.sh -v' ./BUILDLOG.json 
 echo "**** Removing build artifacts before commiting and tagging ****"
 ./tests/cleanup.sh
 
