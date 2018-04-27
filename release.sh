@@ -33,10 +33,14 @@ echo -n "**** PUSHING VERSION:$VERSION $BASE TO $USER/$IMAGE.git ****"
 git push
 git push --tags
 echo -n "**** DOCKER IMAGE TAGGING VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu) ****"
-docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:version
-docker tag $USERNAME/$IMAGE-centos:latest $USERNAME/$IMAGE-centos:$VERSION
-docker tag $USERNAME/$IMAGE-debian:latest $USERNAME/$IMAGE-debian:$VERSION
-docker tag $USERNAME/$IMAGE-ubuntu:latest $USERNAME/$IMAGE-ubuntu:$VERSION
+docker tag $USERNAME/$IMAGE $USERNAME/$IMAGE:$VERSION
+docker tag $USERNAME/$IMAGE:$VERSION $USERNAME/$IMAGE:latest
+docker tag $USERNAME/$IMAGE-centos $USERNAME/$IMAGE-centos:$VERSION
+docker tag $USERNAME/$IMAGE-centos:$VERSION $USERNAME/$IMAGE-centos:latest
+docker tag $USERNAME/$IMAGE-debian $USERNAME/$IMAGE-debian:$VERSION
+docker tag $USERNAME/$IMAGE-debian:$VERSION $USERNAME/$IMAGE-debian:latest
+docker tag $USERNAME/$IMAGE-ubuntu $USERNAME/$IMAGE-ubuntu:$VERSION
+docker tag $USERNAME/$IMAGE-ubuntu:$VERSION $USERNAME/$IMAGE-ubuntu:latest
 
 # push it
 echo -n "**** PUSHING DOCKER IMAGE VERSION:$VERSION $BASE TO $USER/$IMAGE:$VERSION (centos,debian,ubuntu)[hub.docker.com]****"
