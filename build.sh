@@ -14,7 +14,7 @@ export VERSION
 }
 -v () {
  vagrant up ipam1 
- vagrant ssh ipam1 -c 'sudo /etc/puppetlabs/code/modules/ipam/tests/dns_watch_named_xfer_primary_secondary.sh' &
+ vagrant ssh ipam1 -c 'sudo /etc/puppetlabs/code/modules/ipam/tests/start_watchers.sh' &
  vagrant up ipam2
 }
 echo "USAGE: -d Docker -v Vagrant"

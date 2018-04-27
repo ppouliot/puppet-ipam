@@ -28,4 +28,5 @@ dhcping -v -r -c 192.168.0.7 -h 00:07:43:14:15:30 -s 192.168.0.2
 echo "*** Attempting to get a dhcp lease for the All-Numeric Mac address via DHCPing from ipam2 ***"
 dhcping -v -r -c 192.168.0.7 -h 00:07:43:14:15:30 -s 192.168.0.3
 
-
+./do-nsupdate.sh nsupdate-tester-1-fwd
+./do-nsupdate.sh nsupdate-tester-1-rev
