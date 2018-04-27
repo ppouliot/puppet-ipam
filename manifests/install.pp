@@ -52,18 +52,18 @@ class ipam::install {
           class{'::selinux':
             mode => 'disabled',
           }
-           service{'polkit':
-             ensure => stopped,
-             enable => false,
-           }          
-#          package{'polkit':
-#            ensure => absent,
-#          } notice("Removing Policy kit on ${::osfamily}")
+          service{'polkit':
+            ensure => stopped,
+            enable => false,
+          }
+#         package{'polkit':
+#           ensure => absent,
+#         } notice("Removing Policy kit on ${::osfamily}")
         }
-      } 
+      }
     }
     default:{
-      warning("${fqdn} is using an unsupported platform prerequisit packaging will not function properly.")
+      warning("${::fqdn} is using an unsupported platform prerequisit packaging will not function properly.")
     }
   }
 
@@ -79,11 +79,11 @@ echo "**** Verifying that the BIND Configuration ****"
 /usr/sbin/named-checkconf',
   }
   file{'/root/create_omapi_key.sh':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0777',
-    source  => 'puppet:///modules/ipam/create_omapi.sh',
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0777',
+    source => 'puppet:///modules/ipam/create_omapi.sh',
   }
 
   package{ $prereq_packages:
@@ -93,7 +93,7 @@ echo "**** Verifying that the BIND Configuration ****"
     ensure => latest,
   }
   class{'staging':
-    path => '/opt/staging',
+    path  => '/opt/staging',
     owner => 'root',
     group => 'root'
   }
@@ -108,10 +108,10 @@ echo "**** Verifying that the BIND Configuration ****"
     require => Package[$prereq_packages],
   }
   staging::file{'dhcpd-pools-2.29.tar.xz':
-    source  => 'https://downloads.sourceforge.net/project/dhcpd-pools/dhcpd-pools-2.29.tar.xz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fdhcpd-pools%2Ffiles%2F&ts=1510685804&use_mirror=gigenet',
+    source => 'https://downloads.sourceforge.net/project/dhcpd-pools/dhcpd-pools-2.29.tar.xz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fdhcpd-pools%2Ffiles%2F&ts=1510685804&use_mirror=gigenet',
   }
   staging::deploy{'dhcpstatus_0.60.tar.gz':
-    source => 'http://downloads.sourceforge.net/project/dhcpstatus/dhcpstatus/v0.60/dhcpstatus_0.60.tar.gz?r=http%3A%2F%2Fdhcpstatus.sourceforge.net%2F&ts=1480997571&use_mirror=pilotfiber',
+    source  => 'http://downloads.sourceforge.net/project/dhcpstatus/dhcpstatus/v0.60/dhcpstatus_0.60.tar.gz?r=http%3A%2F%2Fdhcpstatus.sourceforge.net%2F&ts=1480997571&use_mirror=pilotfiber',
     target  => '/opt',
     require => Package[$prereq_packages],
   }
@@ -119,11 +119,11 @@ echo "**** Verifying that the BIND Configuration ****"
     ensure => directory,
     owner  => 'root',
     group  => 'root',
-  } ->
-  exec{'untar-dhcpstatus_0.60-lib':
-    command => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
-    cwd     =>'/usr/local/dhcpstatus',
-    creates => [
+  }
+->exec{'untar-dhcpstatus_0.60-lib':
+   command  => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
+   cwd      =>'/usr/local/dhcpstatus',
+   creates  => [
       '/usr/local/dhcpstatus/dhcpstatus',
       '/usr/local/dhcpstatus/dhcpstatus.ini',
       '/usr/local/dhcpstatus/dhcpstatus/common.pm',
@@ -143,12 +143,12 @@ echo "**** Verifying that the BIND Configuration ****"
       '/usr/local/dhcpstatus/dhcpstatus/Formatted_text.pm',
       '/usr/local/dhcpstatus/dhcpstatus/Lease.pm',
       '/usr/local/dhcpstatus/dhcpstatus/Pool.pm',
-   ],
-   onlyif    => '/usr/bin/test ! -f /usr/local/dhcpstatus/dhcpstatus/common.pm',
-   logoutput => true,
-   require   =>  Staging::Deploy['dhcpstatus_0.60.tar.gz'],
-  } ->
-  file{'/usr/local/dhcpstatus/dhcpstatus.ini':
+    ],
+    onlyif    => '/usr/bin/test ! -f /usr/local/dhcpstatus/dhcpstatus/common.pm',
+    logoutput => true,
+    require   =>  Staging::Deploy['dhcpstatus_0.60.tar.gz'],
+  }
+-> file{'/usr/local/dhcpstatus/dhcpstatus.ini':
     ensure => file,
     content => '# !!! THIS FILE IS MANAGED BY PUPPET !!!
 title=DHCP Subnet Information
@@ -180,7 +180,7 @@ screen_width=80
 
   if $ipam::master == !false {
   #    @dns::key{ $::ddnskey: }
-    notice("Ipam Master Hiera Value Found")
+    notice('Ipam Master Hiera Value Found')
   }
 
   class { 'dhcp':
@@ -191,12 +191,12 @@ screen_width=80
 #   dnsupdatekey => hiera('dhcp::dnsupdatekey',undef),
 #   require      => Dns::Key[$ddnskey],
   }
-  
+
   if ($dhcp::omapi_key){
-    
+
     dns::tsig { 'omapi_key':
       ensure    => present,
-      algorithm => "hmac-md5",
+      algorithm => 'hmac-md5',
       secret    => hiera('dhcp::omapi_key'),
       server    => $::ipam::server_interface,
     }
