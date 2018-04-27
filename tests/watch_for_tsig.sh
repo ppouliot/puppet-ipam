@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exec &>> $HOME/watch_for_tsig.log
 if [ -e /var/log/messages ]; then
   SYSLOG_PATH=/var/log/messages
   NAMED_PATH=/etc/named

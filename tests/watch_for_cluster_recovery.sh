@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+exec &>> $HOME/watch_for_cluster_recovery.log
+
 if [ -e /var/log/messages ]; then
   SYSLOG_PATH=/var/log/messages
   NAMED_PATH=/etc/named

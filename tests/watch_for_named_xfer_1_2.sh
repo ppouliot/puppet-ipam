@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exec &>> $HOME/watch_for_named_xfer_1_2.log
 if [ -e /var/log/messages ]; then
   SYSLOG_PATH=/var/log/messages
   NAMED_PATH=/etc/named

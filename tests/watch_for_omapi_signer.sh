@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-exec &>> $HOME/watch_for_omapi_protocol_failure.log
+exec &>> $HOME/watch_for_omapi_signer.log
 if [ -e /var/log/messages ]; then
   SYSLOG_PATH=/var/log/messages
   NAMED_PATH=/etc/named
@@ -15,4 +14,6 @@ fi
 
 echo "!!!!!!!!!! Detected /var/log/messages !!!!!!!!!!!!!!!!!!!!!!!!"
 echo "?????????? Watching for OMAPI Protocol failure ???????????????????????"
-tail -f ${SYSLOG_PATH} | grep --line-buffered -Ei "Can't start OMAPI protocol: address not available" -m 1 &
+tail -f ${SYSLOG_PATH} | grep --line-buffered -Ei 'omapi_key: signer "omapi_key" approved' -m1 &
+wait
+echo "?????????? Watching for OMAPI Protocol failure ???????????????????????"
