@@ -7,8 +7,8 @@
 # @example
 #   ipam::record_cname { 'namevar': }
 define ipam::record_cname(
-  $zone,
-  $data,
+  String $zone,
+  String $data,
 ) {
   dns::record::cname { $name:
     zone    => $zone,

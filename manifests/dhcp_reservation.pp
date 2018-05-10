@@ -7,11 +7,12 @@
 # @example
 #   ipam::dhcp_reservation { 'namevar': }
 define ipam::dhcp_reservation(
-  $mac,
-  $ip,
+  String $mac,
+  String $ip,
 ) {
+  $ip =~ Stdlib::IP::Address::V4::Nosubnet
   dhcp::host { $name:
-    mac     => $mac,
+    mac     => $mac.is_mac_address,
     ip      => $ip,
     require => Class['ipam::config'],
   }

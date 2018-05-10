@@ -7,9 +7,9 @@
 # @example
 #   ipam::record_a { 'namevar': }
 define ipam::record_a (
-  $zone,
-  $data,
-  $ptr = undef,
+  String $zone,
+  String $data,
+  Optional[Boolean] $ptr = undef,
 ) {
   dns::record::a { $name:
     zone    => $zone,

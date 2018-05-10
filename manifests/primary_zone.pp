@@ -7,8 +7,8 @@
 # @example
 #   ipam::primary_zone { 'namevar': }
 define ipam::primary_zone(
-  $soa,
-  $soa_email,
+  String $soa,
+  String $soa_email,
   $nameservers,
   $allow_transfer,
   $allow_update,

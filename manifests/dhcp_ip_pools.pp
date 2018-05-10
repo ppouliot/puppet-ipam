@@ -7,13 +7,13 @@
 # @example
 #   ipam::dhcp_ip_pools { 'namevar': }
 define ipam::dhcp_ip_pools(
-    $failover,
-    $network,
-    $mask,
-    $gateway,
-    $range,
-    $options,
-    $parameters,
+  String $failover,
+  String $network,
+  String $mask,
+  String $gateway,
+  String $range,
+  $options,
+  $parameters,
 ) {
   dhcp::pool{ $name :
     failover   => $failover,

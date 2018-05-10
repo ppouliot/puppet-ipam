@@ -7,8 +7,8 @@
 # @example
 #   ipam::slave_zone { 'namevar': }
 define ipam::slave_zone(
-  $slave_masters,
-  $zone_type,
+  String $slave_masters,
+  String $zone_type,
 ){
   dns::zone { $name:
     slave_masters => $slave_masters,

@@ -43,6 +43,10 @@ static_leases:
   jenkins-master:
     mac: "00:0c:29:be:87:31"
     ip: 192.168.0.15
+  quartermaster:
+    mac: "00:0c:29:e1:de:13"
+    ip: 192.168.0.22
+
   round-robin0:
     mac: "00:0c:29:0f:08:2f"
     ip: 192.168.0.4
