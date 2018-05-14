@@ -10,7 +10,6 @@ define ipam::dhcp_reservation(
   String $mac,
   String $ip,
 ) {
-  $ip =~ Stdlib::IP::Address::V4::Nosubnet
   dhcp::host { $name:
     mac     => $mac.is_mac_address,
     ip      => $ip,
