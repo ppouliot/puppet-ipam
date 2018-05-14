@@ -8,7 +8,8 @@
 #   ipam::record_a { 'namevar': }
 define ipam::record_a (
   String $zone,
-  String $data,
+#  Touple[Interger,Interger,Interger,Interger] $data,
+  $data,
   Optional[Boolean] $ptr = undef,
 ) {
   dns::record::a { $name:
