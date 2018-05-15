@@ -10,8 +10,14 @@ define ipam::dhcp_reservation(
   String $mac,
   String $ip,
 ) {
+  if $mac.is_mac_address == 'true' {
+    notice("${mac} is a valid mac address.") 
+  } else {
+    fail("$(mac) is not a valid mac address!")
+  }
+
   dhcp::host { $name:
-    mac     => $mac.is_mac_address,
+    mac     => $mac,
     ip      => $ip,
     require => Class['ipam::config'],
   }
