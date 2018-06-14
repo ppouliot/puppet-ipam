@@ -1,5 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#
 required_plugins = %w(vagrant-scp vagrant-puppet-install vagrant-vbguest)
 
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
