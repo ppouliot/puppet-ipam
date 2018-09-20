@@ -51,13 +51,16 @@ do
 	
 	fi
 
-#Creating the data section of the file.
+#Showing output on stdout.
 	echo "   $hostname:"
 	echo "     mac: "\"$mac\"
 	echo "     ip: $ipaddr"
 	echo "" 
+	
+#Creating the data section of the file.
 	echo "   $hostname:" >> $OUTPUT
 	echo "     mac: "\"$mac\" >> $OUTPUT
 	echo "     ip: $ipaddr" >> $OUTPUT
 	echo ""  >> $OUTPUT
+	
 done
