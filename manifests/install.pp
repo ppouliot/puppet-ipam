@@ -121,9 +121,9 @@ echo "**** Verifying that the BIND Configuration ****"
     group  => 'root',
   }
 ->exec{'untar-dhcpstatus_0.60-lib':
-   command  => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
-   cwd      =>'/usr/local/dhcpstatus',
-   creates  => [
+    command  => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
+    cwd      =>'/usr/local/dhcpstatus',
+    creates  => [
       '/usr/local/dhcpstatus/dhcpstatus',
       '/usr/local/dhcpstatus/dhcpstatus.ini',
       '/usr/local/dhcpstatus/dhcpstatus/common.pm',
@@ -149,7 +149,7 @@ echo "**** Verifying that the BIND Configuration ****"
     require   =>  Staging::Deploy['dhcpstatus_0.60.tar.gz'],
   }
 -> file{'/usr/local/dhcpstatus/dhcpstatus.ini':
-    ensure => file,
+    ensure  => file,
     content => '# !!! THIS FILE IS MANAGED BY PUPPET !!!
 title=DHCP Subnet Information
 conf_file=/etc/dhcp/dhcpd.conf
@@ -184,10 +184,10 @@ screen_width=80
   }
 
   class { 'dhcp':
-    dnsdomain    => hiera('dhcp::dnsdomain'),
-    nameservers  => hiera('dhcp::nameservers'),
-    ntpservers   => hiera('dhcp::ntpservers'),
-    interfaces   => hiera('dhcp::interfaces'),
+    dnsdomain   => hiera('dhcp::dnsdomain'),
+    nameservers => hiera('dhcp::nameservers'),
+    ntpservers  => hiera('dhcp::ntpservers'),
+    interfaces  => hiera('dhcp::interfaces'),
 #   dnsupdatekey => hiera('dhcp::dnsupdatekey',undef),
 #   require      => Dns::Key[$ddnskey],
   }
