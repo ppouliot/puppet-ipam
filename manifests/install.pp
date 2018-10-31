@@ -121,9 +121,9 @@ echo "**** Verifying that the BIND Configuration ****"
     group  => 'root',
   }
 ->exec{'untar-dhcpstatus_0.60-lib':
-    command  => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
-    cwd      =>'/usr/local/dhcpstatus',
-    creates  => [
+    command   => "${tar} -xvf /opt/dhcpstatus_0.60/libraries.tar",
+    cwd       =>'/usr/local/dhcpstatus',
+    creates   => [
       '/usr/local/dhcpstatus/dhcpstatus',
       '/usr/local/dhcpstatus/dhcpstatus.ini',
       '/usr/local/dhcpstatus/dhcpstatus/common.pm',
@@ -143,7 +143,7 @@ echo "**** Verifying that the BIND Configuration ****"
       '/usr/local/dhcpstatus/dhcpstatus/Formatted_text.pm',
       '/usr/local/dhcpstatus/dhcpstatus/Lease.pm',
       '/usr/local/dhcpstatus/dhcpstatus/Pool.pm',
-    ],
+      ],
     onlyif    => '/usr/bin/test ! -f /usr/local/dhcpstatus/dhcpstatus/common.pm',
     logoutput => true,
     require   =>  Staging::Deploy['dhcpstatus_0.60.tar.gz'],
