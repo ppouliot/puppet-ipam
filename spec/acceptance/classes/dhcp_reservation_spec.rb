@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'ipam::dhcp_reservation ipam::dhcp_reservation' do
   describe 'running puppet code' do
-    it 'should work with no errors' do
+    it 'might work with no errors' do
       pp = <<-EOS
       ipam::dhcp_reservation{'some_value':
         mac: nil,

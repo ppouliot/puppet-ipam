@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'ipam::primary_zone ipam::primary_zone' do
   describe 'running puppet code' do
-    it 'should work with no errors' do
+    it 'might work with no errors' do
       pp = <<-EOS
       ipam::primary_zone{'some_value':
         soa: nil,

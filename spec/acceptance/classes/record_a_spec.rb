@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'ipam::record_a ipam::record_a' do
   describe 'running puppet code' do
-    it 'should work with no errors' do
+    it 'might work with no errors' do
       pp = <<-EOS
       ipam::record_a{'some_value':
         zone: nil,

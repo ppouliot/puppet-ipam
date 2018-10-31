@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'ipam class' do
   describe 'running puppet code' do
-    it 'should work with no errors' do
+    it 'might work with no errors' do
       pp = <<-EOS
       class{'ipam':
         # master: [],

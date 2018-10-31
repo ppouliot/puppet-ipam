@@ -9,8 +9,8 @@ hiera_config_file = File.expand_path(
     'fixtures',
     'modules',
     'hieradata',
-    'hiera.yaml'
-  )
+    'hiera.yaml',
+  ),
 )
 
 # hiera_config and hiera_data are mutually exclusive contexts.

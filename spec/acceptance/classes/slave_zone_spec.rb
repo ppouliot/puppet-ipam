@@ -2,7 +2,7 @@ require 'spec_helper_acceptance'
 
 describe 'ipam::slave_zone ipam::slave_zone' do
   describe 'running puppet code' do
-    it 'should work with no errors' do
+    it 'might work with no errors' do
       pp = <<-EOS
       ipam::slave_zone{'some_value':
         slave_masters: nil,

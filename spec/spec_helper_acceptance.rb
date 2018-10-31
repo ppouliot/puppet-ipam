@@ -1,6 +1,6 @@
 require 'beaker-rspec'
 
-UNSUPPORTED_PLATFORMS = %w[Windows Solaris AIX].freeze
+UNSUPPORTED_PLATFORMS = '%w[Windows Solaris AIX]'.freeze
 
 unless ENV['RS_PROVISION'] == 'no' || ENV['BEAKER_provision'] == 'no'
   # This will install the latest available package on el and deb based
@@ -30,7 +30,7 @@ RSpec.configure do |c|
       on host, puppet(
         'module',
         'install',
-        'puppetlabs-stdlib'
+        'puppetlabs-stdlib',
       ), acceptable_exit_codes: [0, 1]
     end
   end

@@ -7,9 +7,10 @@ describe 'ipam' do
       id => 'root',
       kernel => 'Linux',
       osfamily => 'Debian',
-      operatingsystems => 'Debian'
+      operatingsystems => 'Debian',
     }
   end
+
   # this is the simplest test possible to make sure the Puppet code compiles
   it { is_expected.to compile }
   # same as above except it will test all the dependencies
