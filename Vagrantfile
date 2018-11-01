@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     v.linked_clone = true
   end
-  config.puppet_install.puppet_version = :latest
+  config.puppet_install.puppet_version = "5.5.7"
   config.vm.provision "shell", path: "files/prepare.sh"
   config.vm.provision "shell", inline: "/opt/puppetlabs/puppet/bin/gem install r10k hiera-eyaml"
   config.vm.provision "shell", inline: "curl -o /etc/puppetlabs/code/environments/production/Puppetfile https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/Puppetfile"
