@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 dir("${env.WORKSPACE}") {
-                    sh './build -d'
+                    sh './build.sh -d'
                 }
             } 
         }
