@@ -11,7 +11,7 @@ pipeline {
         BRANCH = "${env.BRANCH_NAME}".replaceAll('/','_')
     }
     options {
-        buildDiscarder(logRotator(numToKeepStr: '30'))
+        build.shDiscarder(logRotator(numToKeepStr: '30'))
     }
     stages {
         stage ('Use the Puppet Development Kit Validation to Check for Linting Errors') {
@@ -19,7 +19,7 @@ pipeline {
                 sh 'pdk validate'
             }
         }
-        stage ('Checkout and build puppet-ipam in Docker to validate code as well as changes across OSes.') {
+        stage ('Checkout and build.sh puppet-ipam in Docker to validate code as well as changes across OSes.') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -27,11 +27,11 @@ pipeline {
             }
             steps {
                 dir("${env.WORKSPACE}") {
-                    sh './build -d'
+                    sh './build.sh -d'
                 }
             } 
         }
-        stage ('Checkout and build puppet-ipam in Vagrant to assemble a functional IPAM cluster') {
+        stage ('Checkout and build.sh puppet-ipam in Vagrant to assemble a functional IPAM cluster') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -40,12 +40,12 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}") {
 
-                    sh './build.sh -v'
+                    sh './build.sh.sh -v'
                 }
             } 
         }
         
-        stage ('Cleanup vagrant after successful build.') {
+        stage ('Cleanup vagrant after successful build.sh.') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
