@@ -16,10 +16,15 @@ pipeline {
     stages {
         stage ('Use the Puppet Development Kit Validation to Check for Linting Errors') {
             steps {
-                sh ''
+                sh 'pdk validate'
             }
         }
         stage ('Checkout and build puppet-ipam in Docker to validate code as well as changes across OSes.') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
             steps {
                 dir('build_puppet_module_puppet-ipam') {
                     sh './build -d'
@@ -27,6 +32,11 @@ pipeline {
             } 
         }
         stage ('Checkout and build puppet-ipam in Vagrant to assemble a functional IPAM cluster') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
             steps {
                 dir('build_menu') {
 
@@ -36,6 +46,11 @@ pipeline {
         }
         
         stage ('Cleanup vagrant after successful build.') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
             steps {
                 sh 'vagrant destroy -f'
             }
