@@ -1,8 +1,6 @@
 def SUFFIX = ''
-
 pipeline {
     agent any
-
     parameters {
         string (name: 'VERSION_PREFIX', defaultValue: '0.0.0', description: 'puppet-ipam version')
     }
@@ -26,6 +24,7 @@ pipeline {
               }
             }
             steps {
+                dir("${env.WORKSPACE}") {
                     sh './build -d'
                 }
             } 
@@ -37,11 +36,11 @@ pipeline {
               }
             }
             steps {
+                dir("${env.WORKSPACE}") {
                     sh './build.sh -v'
                 }
             } 
         }
-        
         stage ('Cleanup vagrant after successful build.') {
             when {
               expression {
@@ -49,9 +48,9 @@ pipeline {
               }
             }
             steps {
+                dir("${env.WORKSPACE}") {
                 sh 'vagrant destroy -f'
             }
         }
-
     } 
 }
