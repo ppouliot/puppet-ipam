@@ -26,7 +26,6 @@ pipeline {
               }
             }
             steps {
-                dir('build_puppet_module_puppet-ipam') {
                     sh './build -d'
                 }
             } 
@@ -38,8 +37,6 @@ pipeline {
               }
             }
             steps {
-                dir('build_menu') {
-
                     sh './build.sh -v'
                 }
             } 
