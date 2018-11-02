@@ -11,7 +11,7 @@ pipeline {
         BRANCH = "${env.BRANCH_NAME}".replaceAll('/','_')
     }
     options {
-        build.Discarder(logRotator(numToKeepStr: '30'))
+        buildDiscarder(logRotator(numToKeepStr: '30'))
     }
     stages {
         stage ('Use the Puppet Development Kit Validation to Check for Linting Errors') {
@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 dir("${env.WORKSPACE}") {
-                    sh './build.sh -d'
+                    sh './build -d'
                 }
             } 
         }
@@ -45,16 +45,14 @@ pipeline {
             } 
         }
         
-        stage ('Cleanup vagrant after successful build.sh.') {
+        stage ('Cleanup vagrant after successful build.') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
               }
             }
             steps {
-                dir("${env.WORKSPACE}") {
-                    sh 'vagrant destroy -f'
-                }
+                sh 'vagrant destroy -f'
             }
         }
 
