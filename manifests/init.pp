@@ -23,9 +23,7 @@ class ipam (
 # Installs DNS Server and DHCP Server
 
   class{'ipam::install':}
-->  class{'ipam::config':
-      require => Class['dns::server'],
-    }
+->  class{'ipam::config': }
 
 #  Slave and Primary Zones
   create_resources(ipam::primary_zone,$primary,$primary_defaults)
