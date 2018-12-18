@@ -15,7 +15,7 @@ VERSION=`cat VERSION`
 set -x
 echo "version: $VERSION"
 echo "Bump Version in metadata.json"
-sed -i '' 's/^.*\"version\"\:.*/\"version\"\:\ \"'"$VERSION"'\",/' metadata.json
+sed -i '' 's/^.*\"version\"\:.*/\ \ \"version\"\:\ \"'"$VERSION"'\",/' metadata.json
 echo "Remove previous log and  run build"
 rm -rf ./BUILDLOG.json
 
