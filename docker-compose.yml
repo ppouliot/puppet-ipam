@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: Dockerfile.ubuntu
 
-  imap3:
+  ipam3:
     image: "${USERNAME}/${IMAGE}-debian:${VERSION}"
     container_name: ipam1
     build:
