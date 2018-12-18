@@ -9,21 +9,21 @@ services:
 
   ipam2:
     image: "${USERNAME}/${IMAGE}-ubuntu:${VERSION}"
-    container_name: ipam1
+    container_name: ipam2
     build:
       context: .
       dockerfile: Dockerfile.ubuntu
 
   ipam3:
     image: "${USERNAME}/${IMAGE}-debian:${VERSION}"
-    container_name: ipam1
+    container_name: ipam3
     build:
       context: .
       dockerfile: Dockerfile.debian
 
   ipam4:
     image: "${USERNAME}/${IMAGE}-centos:${VERSION}"
-    container_name: ipam1
+    container_name: ipam4
     build:
       context: .
       dockerfile: Dockerfile.centos
