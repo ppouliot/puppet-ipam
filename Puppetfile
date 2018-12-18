@@ -11,8 +11,9 @@ mod 'puppetlabs/vcsrepo', :latest
 mod 'puppet/dhcp', :latest
 mod 'puppet/staging', :latest
 mod 'puppet/selinux', :latest
+# Currently Using Downstream due to processing issues.
 mod 'ajjahn/dns',
-    :git => 'https://github.com/ajjahn/puppet-dns',
+    :git => 'https://github.com/ppouliot/puppet-dns',
     :branch => 'master'
 mod 'ppouliot/ipam',
     :git => 'https://github.com/ppouliot/puppet-ipam',
