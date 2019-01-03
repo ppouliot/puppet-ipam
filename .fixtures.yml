@@ -10,6 +10,9 @@ fixtures:
     inifile: 'puppetlabs-inifile'
     ntp: 'puppetlabs-ntp'
     stdlib: 'puppetlabs-stdlib'
+    vcsrepo: 'puppetlabs-vcsrepo'
+    staging: 'puppet-staging'
+    epel: 'stahnma-epel'
 symlinks:
   ipam: "#{source_dir}"
   repositories:
