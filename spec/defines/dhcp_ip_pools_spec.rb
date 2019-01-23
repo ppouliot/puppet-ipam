@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ipam::dhcp_ip_pools' do
   let(:title) { 'namevar' }
-  let(:pre_condition) {'include ::ipam::config' }
+  let(:pre_condition) { 'include ::ipam::config' }
   let(:params) do
     {
       failover: 'dhcp-failover',

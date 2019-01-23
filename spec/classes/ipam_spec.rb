@@ -8,7 +8,7 @@ describe 'ipam' do
       kernel: 'Linux',
       osfamily: 'Debian',
       operatingsystems: 'Debian',
-      os: { family: 'Debian' }
+      os: { family: 'Debian' },
     }
   end
 
@@ -16,8 +16,8 @@ describe 'ipam' do
   it { is_expected.to compile }
   # same as above except it will test all the dependencies
   it { is_expected.to compile.with_all_deps }
-  it { is_expected.to contain_class('dns::server') }
-  it { is_expected.to contain_class('dhcp') }
+  it { is_expected.to contain_class('ipam::install') }
+  it { is_expected.to contain_class('ipam::config') }
   # same again except it expects an error message
   # it { is_expected.to compile.and_raise_error(/error message/)
 end
