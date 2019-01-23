@@ -2,8 +2,12 @@ require 'spec_helper'
 
 describe 'ipam::dhcp_reservation' do
   let(:title) { 'namevar' }
+  let(:pre_condition) {'include ::ipam::config' }
   let(:params) do
-    {}
+    {
+      mac: "00:0c:29:55:26:f8",
+      ip: "192.168.0.2",
+    }
   end
 
   on_supported_os(facterversion: '2.4').each do |os, os_facts|

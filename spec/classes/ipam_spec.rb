@@ -1,11 +1,23 @@
 require 'spec_helper'
-
 describe 'ipam' do
-  on_supported_os(facterversion: '2.4').each do |os, os_facts|
-    context "on #{os}" do
-      let(:facts) { os_facts }
-
-      it { is_expected.to compile }
-    end
+  let(:title) { 'ipam' }
+  let(:node) { 'ipam1.contoso.ltd' }
+  let :facts do
+    {
+      id: 'root',
+      kernel: 'Linux',
+      osfamily: 'Debian',
+      operatingsystems: 'Debian',
+      os: { family: 'Debian' }
+    }
   end
+
+  # this is the simplest test possible to make sure the Puppet code compiles
+  it { is_expected.to compile }
+  # same as above except it will test all the dependencies
+  it { is_expected.to compile.with_all_deps }
+  it { is_expected.to contain_class('dns::server') }
+  it { is_expected.to contain_class('dhcp') }
+  # same again except it expects an error message
+  # it { is_expected.to compile.and_raise_error(/error message/)
 end

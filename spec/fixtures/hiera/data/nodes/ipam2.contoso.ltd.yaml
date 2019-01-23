@@ -1,16 +1,14 @@
 ---
 # Site Wide Puppet Classes being applied
 # classes:
-
-
 ipam::master: false
+ipam::server_interface: 192.168.0.3
 dhcp::failover::role: secondary
-dhcp::failover::peer_address: 192.168.0.1
-ddnskey: undef
+dhcp::failover::address: 192.168.0.3
+dhcp::failover::peer_address: 192.168.0.2
 ipam::slave_defaults:
-  slave_masters: 192.168.0.1
+  slave_masters: 192.168.0.2
   zone_type: slave
-
 slave:
   contoso.ltd: {}
   0.168.192.IN-ADDR.ARPA: {}

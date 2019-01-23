@@ -1,28 +1,27 @@
 ---
 # Site Wide Puppet Classes being applied
-
 master: true
 ipam::master: true
+ipam::server_interface: 192.168.0.2
 dhcp::failover::role: primary
-dhcp::failover::peer_address: 192.168.0.2
+dhcp::failover::address: 192.168.0.2
+dhcp::failover::peer_address: 192.168.0.3
 ipam::primary_defaults:
   soa: ipam1.contoso.ltd
   soa_email: admin.contoso.ltd
   nameservers:
-    - ipam1
-    - ipam2
+    - ipam1.contoso.ltd
+    - ipam2.contoso.ltd
   allow_transfer:
     - 192.168.0.2
-    - 192.168.0.1
+    - 192.168.0.3
   allow_update:
-    - 192.168.0.2
-    - 192.168.0.1
+    - 'key "omapi_key"'
+#    - 192.168.0.2
+#    - 192.168.0.3
   also_notify:
     - 192.168.0.2
-    - 192.168.0.1
-  
-  
-  
+    - 192.168.0.3
   
 primary:
   contoso.ltd: {}
@@ -38,60 +37,58 @@ primary:
 dns_records_a:
 # Begin SOA
 # Begin contoso.ltd
+
   ipam1:
-    zone: contoso.ltd
-    data: 192.168.0.1
-    ptr: true
-  ipam2:
     zone: contoso.ltd
     data: 192.168.0.2
     ptr: true
-  puppetmaster:
+
+  ipam2:
     zone: contoso.ltd
     data: 192.168.0.3
     ptr: true
-  round-robin0:
+
+  puppetmaster:
     zone: contoso.ltd
-    data: 192.168.0.4
+    data: 192.168.0.14
     ptr: true
-  round-robin1:
+
+  roundrobin:
     zone: contoso.ltd
-    data: 192.168.0.5
+    data:
+      - 192.168.0.4
+      - 192.168.0.5
+      - 192.168.0.6
     ptr: true
-  round-robin2:
-    zone: contoso.ltd
-    data: 192.168.0.6
-    ptr: true
-  # Round Robin in A Record Test
-  round-robin:
-    zone: contoso.ltd
-    data: 192.168.0.6
-    ptr: true
-  round-robin:
-    zone: contoso.ltd
-    data: 192.168.0.6
-    ptr: true
-  round-robin:
-    zone: contoso.ltd
-    data: 192.168.0.6
-    ptr: true
-  # All Numeric Mac Address Test
-  allnumericmac:
-    zone: contoso.ltd
-    data: 192.168.0.7
-    ptr: true
+
+# All Numeric Mac Address Test
+# This is just holder however it's added once the tests scripts are run
+#  allnumericmac:
+#    zone: contoso.ltd
+#    data: 192.168.0.7
+#    ptr: true
+
   jenkins-master:
     zone: contoso.ltd
     data: 192.168.0.15
     ptr: true
-  gw:
+
+  quartermaster:
     zone: contoso.ltd
-    data: 192.168.0.254
+    data: 192.168.0.22
     ptr: true
 
+  gw:
+    zone: contoso.ltd
+    data: 192.168.0.1
+    ptr: true
+
+# Placeholder for AD Zone Delegation
 #  ad.contoso.ltd:
 #    zone: ad.contoso.ltd
-#    data: 192.168.0.111
+#    data:
+#      -  192.168.0.112
+#      -  192.168.0.113
 #    ptr: true
 #  ad1.contoso.ltd:
 #    zone: ad.contoso.ltd
@@ -112,15 +109,8 @@ dns_records_cname:
   puppetboard:
     zone: contoso.ltd
     data: puppetmaster.contoso.ltd
-  # Round Robin CNAME TEST
-  roundrobin:
+  puppetexplorer:
     zone: contoso.ltd
-    data: round-robin0.contoso.ltd
-  roundrobin:
-    zone: contoso.ltd
-    data: round-robin1.contoso.ltd
-  roundrobin:
-    zone: contoso.ltd
-    data: round-robin1.contoso.ltd
+    data: puppetmaster.contoso.ltd
 
 # End Cname Records

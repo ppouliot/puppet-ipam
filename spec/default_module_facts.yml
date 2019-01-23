@@ -1,0 +1,10 @@
+---
+osfamily: Debian
+operatingsystem: Debian
+operatingsystemmajrelease: 7
+hostname: ipam1
+domain: contoso.ltd
+fqdn: ipam1.contoso.ltd
+staging_http_get: default
+staging::path: '/opt/staging'
+path: '/usr/local/bin:/usr/bin:/bin'

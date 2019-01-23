@@ -1,0 +1,182 @@
+---
+# common.yaml
+
+dhcp::interfaces:
+  - eth0
+
+dhcp::default_lease_time: 86400
+dhcp::max_lease_time: 259200
+dhcp::dnsdomain:
+      - contoso.ltd
+      - 0.168.192.IN-ADDR.ARPA
+  
+dhcp::nameservers:
+  - 192.168.0.2
+  - 192.168.0.3
+  
+dhcp::ntpservers:
+  - time.nist.gov
+
+dhcpdata:
+  contoso.ltd:
+    failover: dhcp-failover
+    network: 192.168.0.0
+    mask: 255.255.255.0
+    gateway: 192.168.0.254
+    range: 192.168.0.25 192.168.0.220
+    options:
+      - 'domain-name-servers 192.168.0.2, 192.168.0.3'
+      - domain-name "contoso.ltd"
+    parameters:
+      - ddns-domainname "contoso.ltd."
+      - ddns-rev-domainname "IN-ADDR.ARPA"
+
+static_leases:
+# Begin Static Leases
+
+  ipam1: 
+    mac: "00:0c:29:55:26:f8"
+    ip: 192.168.0.2
+  ipam2: 
+    mac: "00:0c:29:3a:3e:fc"
+    ip: 192.168.0.3
+  puppetmaster:
+    mac: "00:0c:29:e1:de:13"
+    ip: 192.168.0.14
+  jenkins-master:
+    mac: "00:0c:29:be:87:31"
+    ip: 192.168.0.15
+  quartermaster:
+    mac: "00:0c:29:e1:de:13"
+    ip: 192.168.0.22
+
+  round-robin0:
+    mac: "00:0c:29:0f:08:2f"
+    ip: 192.168.0.4
+  round-robin1:
+    mac: "00:0c:29:e9:2a:7e"
+    ip: 192.168.0.5
+  round-robin2:
+    mac: "00:0c:29:60:2c:e9"
+    ip: 192.168.0.6
+
+# All Numeric Mac Test
+  allnumericmac:
+    mac: "00:07:43:14:15:30"
+    ip: 192.168.0.7
+
+# Site Wide Puppet Classes being applied
+master: true
+ipam::master: true
+ipam::server_interface: 192.168.0.2
+dhcp::failover::role: primary
+dhcp::failover::address: 192.168.0.2
+dhcp::failover::peer_address: 192.168.0.3
+ipam::primary_defaults:
+  soa: ipam1.contoso.ltd
+  soa_email: admin.contoso.ltd
+  nameservers:
+    - ipam1.contoso.ltd
+    - ipam2.contoso.ltd
+  allow_transfer:
+    - 192.168.0.2
+    - 192.168.0.3
+  allow_update:
+    - 'key "omapi_key"'
+#    - 192.168.0.2
+#    - 192.168.0.3
+  also_notify:
+    - 192.168.0.2
+    - 192.168.0.3
+  
+primary:
+  contoso.ltd: {}
+  0.168.192.IN-ADDR.ARPA: {}
+#    soa: ns3.opensack.tld
+
+#  ad.contoso.ltd:
+#    soa: ad0.contoso.ltd
+#    nameservers:
+#      - ad0
+#      - ad1
+
+dns_records_a:
+# Begin SOA
+# Begin contoso.ltd
+
+  ipam1:
+    zone: contoso.ltd
+    data: 192.168.0.2
+    ptr: true
+
+  ipam2:
+    zone: contoso.ltd
+    data: 192.168.0.3
+    ptr: true
+
+  puppetmaster:
+    zone: contoso.ltd
+    data: 192.168.0.14
+    ptr: true
+
+  roundrobin:
+    zone: contoso.ltd
+    data:
+      - 192.168.0.4
+      - 192.168.0.5
+      - 192.168.0.6
+    ptr: true
+
+# All Numeric Mac Address Test
+# This is just holder however it's added once the tests scripts are run
+#  allnumericmac:
+#    zone: contoso.ltd
+#    data: 192.168.0.7
+#    ptr: true
+
+  jenkins-master:
+    zone: contoso.ltd
+    data: 192.168.0.15
+    ptr: true
+
+  quartermaster:
+    zone: contoso.ltd
+    data: 192.168.0.22
+    ptr: true
+
+  gw:
+    zone: contoso.ltd
+    data: 192.168.0.1
+    ptr: true
+
+# Placeholder for AD Zone Delegation
+#  ad.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data:
+#      -  192.168.0.112
+#      -  192.168.0.113
+#    ptr: true
+#  ad1.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.112
+#    ptr: true
+#  ad2.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.113
+#    ptr: true
+
+dns_records_cname:
+  puppet:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetdb:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetboard:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetexplorer:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+
+# End Cname Records
