@@ -5,15 +5,74 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     ast (2.4.0)
+    beaker (4.5.0)
+      beaker-hostgenerator
+      hocon (~> 1.0)
+      in-parallel (~> 0.1)
+      inifile (~> 3.0)
+      minitar (~> 0.6)
+      minitest (~> 5.4)
+      net-scp (~> 1.2)
+      net-ssh (~> 4.0)
+      open_uri_redirections (~> 0.2.1)
+      pry-byebug (~> 3.4.2)
+      rb-readline (~> 0.5.3)
+      rsync (~> 1.0.9)
+      stringify-hash (~> 0.0)
+      thor (~> 0.19)
+    beaker-abs (0.5.0)
+    beaker-answers (0.25.0)
+      hocon (~> 1.0)
+      require_all (~> 1.3.2)
+      stringify-hash (~> 0.0.0)
+    beaker-docker (0.5.1)
+      docker-api
+      stringify-hash (~> 0.0.0)
+    beaker-hostgenerator (1.1.25)
+      deep_merge (~> 1.0)
+      stringify-hash (~> 0.0.0)
+    beaker-module_install_helper (0.1.7)
+      beaker (>= 2.0)
+    beaker-pe (2.0.6)
+      beaker (~> 4.0)
+      beaker-abs
+      beaker-answers (~> 0.0)
+      beaker-puppet (~> 1.0)
+      beaker-vmpooler (~> 1.0)
+      stringify-hash (~> 0.0.0)
+    beaker-puppet (1.14.0)
+      beaker (~> 4.1)
+      in-parallel (~> 0.1)
+      oga
+      stringify-hash (~> 0.0.0)
+    beaker-puppet_install_helper (0.9.7)
+      beaker (~> 4.0)
+      beaker-pe (~> 2.0)
+    beaker-rspec (6.2.4)
+      beaker (> 3.0)
+      rspec (~> 3.0)
+      serverspec (~> 2)
+      specinfra (~> 2)
+    beaker-task_helper (1.7.2)
+    beaker-vagrant (0.5.0)
+      stringify-hash (~> 0.0.0)
+    beaker-vmpooler (1.3.1)
+      stringify-hash (~> 0.0.0)
+    byebug (9.0.6)
     codecov (0.1.14)
       json
       simplecov
       url
     coderay (1.1.2)
+    deep_merge (1.2.1)
     diff-lcs (1.3)
     docile (1.3.1)
+    docker-api (1.34.2)
+      excon (>= 0.47.0)
+      multi_json
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    excon (0.62.0)
     facter (2.5.1)
     facterdb (0.6.0)
       facter
@@ -32,6 +91,8 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httpclient (2.8.3)
+    in-parallel (0.1.17)
+    inifile (3.0.0)
     jgrep (1.5.0)
     json (2.1.0)
     json-schema (2.8.1)
@@ -49,6 +110,8 @@ GEM
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
+    minitar (0.8)
+    minitest (5.11.3)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.13.1)
@@ -57,6 +120,11 @@ GEM
     net-ssh (4.2.0)
     net-telnet (0.1.1)
     netrc (0.11.0)
+    oga (2.15)
+      ast
+      ruby-ll (~> 2.1)
+    open_uri_redirections (0.2.1)
+    optimist (3.0.0)
     parallel (1.13.0)
     parallel_tests (2.14.2)
       parallel
@@ -68,6 +136,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.3)
+      byebug (>= 9.0, < 9.1)
+      pry (~> 0.10)
     public_suffix (3.0.3)
     puppet (6.0.2)
       facter (> 2.0.1, < 4)
@@ -124,6 +195,8 @@ GEM
     rainbow (2.2.2)
       rake
     rake (12.3.2)
+    rb-readline (0.5.5)
+    require_all (1.3.3)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -138,6 +211,9 @@ GEM
     rspec-expectations (3.8.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
@@ -152,6 +228,7 @@ GEM
     rspec-support (3.8.0)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
+    rsync (1.0.9)
     rubocop (0.49.1)
       parallel (~> 1.10)
       parser (>= 2.3.3.1, < 3.0)
@@ -163,8 +240,16 @@ GEM
       rubocop (~> 0.49.0)
     rubocop-rspec (1.16.0)
       rubocop (>= 0.49.0)
+    ruby-ll (2.1.2)
+      ansi
+      ast
     ruby-progressbar (1.10.0)
     semantic_puppet (1.0.2)
+    serverspec (2.41.3)
+      multi_json
+      rspec (~> 3.0)
+      rspec-its
+      specinfra (~> 2.72)
     sfl (2.3)
     simplecov (0.16.1)
       docile (~> 1.1)
@@ -183,25 +268,40 @@ GEM
       net-telnet (= 0.1.1)
       sfl
     stomp (1.4.8)
+    stringify-hash (0.0.2)
     systemu (2.6.5)
     text (1.3.1)
+    thor (0.20.3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.1)
     url (0.3.2)
+    vagrant-wrapper (2.0.3)
     yard (0.9.18)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  beaker (~> 4.0)
+  beaker-docker
+  beaker-module_install_helper
+  beaker-pe
+  beaker-puppet
+  beaker-puppet_install_helper
+  beaker-rspec
+  beaker-task_helper
+  beaker-vagrant (= 0.5.0)
   fast_gettext
+  optimist
   puppet (= 6.0.2)
   puppet-module-posix-default-r2.5
   puppet-module-posix-dev-r2.5
   puppet-module-win-default-r2.5
   puppet-module-win-dev-r2.5
+  rspec-puppet-facts
+  vagrant-wrapper
 
 BUNDLED WITH
    1.16.6
