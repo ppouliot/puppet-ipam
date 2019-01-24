@@ -11,6 +11,10 @@ describe 'ipam::install' do
       it { is_expected.to contain_class('dns::server') }
       it { is_expected.to contain_class('dhcp') }
 
+      if f[:os]['family'] == 'Debian' && f[:os]['release']['major'] == '12'
+        it { is_expected.to contain_file('/var/run/ntp/servers-netconfig').with_ensure_absent }
+      end
+
     end
   end
 #  context 'on redhat-7-x86_64 with default parmas' do
