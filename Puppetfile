@@ -9,8 +9,8 @@ mod 'puppetlabs/inifile', :latest
 mod 'puppetlabs/stdlib', :latest
 mod 'puppetlabs/translate', :latest
 mod 'puppetlabs/vcsrepo', :latest
+mod 'puppet/archive', :latest
 mod 'puppet/dhcp', :latest
-mod 'puppet/staging', :latest
 mod 'puppet/selinux', :latest
 # Currently Using Downstream due to processing issues.
 mod 'ajjahn/dns',

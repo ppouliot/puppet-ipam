@@ -92,28 +92,30 @@ echo "**** Verifying that the BIND Configuration ****"
   package{'dhcping':
     ensure => latest,
   }
-  class{'staging':
-    path  => '/opt/staging',
-    owner => 'root',
-    group => 'root'
-  }
+#  class{'staging':
+#    path  => '/opt/staging',
+#    owner => 'root',
+#    group => 'root'
+#  }
   # dhcpd-pool 
   # script for generating dhcpd monitoring information 
   # More information on usage
   # http://folk.uio.no/trondham/software/dhcpd-pool.html
 
-  staging::deploy{'dhcpd-pool-0.2.tar.gz':
-    source  => 'http://folk.uio.no/trondham/software/dhcpd-pool-0.2.tar.gz',
-    target  => '/opt',
-    require => Package[$prereq_packages],
+  archive{'/opt/staging/dhcpd-pool-0.2.tar.gz':
+    source       => 'http://folk.uio.no/trondham/software/dhcpd-pool-0.2.tar.gz',
+    extract      => true,
+    extract_path => '/opt',
+    require      => Package[$prereq_packages],
   }
-  staging::file{'dhcpd-pools-2.29.tar.xz':
+  archive{'/opt/staging/dhcpd-pools-2.29.tar.xz':
     source => 'https://downloads.sourceforge.net/project/dhcpd-pools/dhcpd-pools-2.29.tar.xz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fdhcpd-pools%2Ffiles%2F&ts=1510685804&use_mirror=gigenet',
   }
-  staging::deploy{'dhcpstatus_0.60.tar.gz':
-    source  => 'http://downloads.sourceforge.net/project/dhcpstatus/dhcpstatus/v0.60/dhcpstatus_0.60.tar.gz?r=http%3A%2F%2Fdhcpstatus.sourceforge.net%2F&ts=1480997571&use_mirror=pilotfiber',
-    target  => '/opt',
-    require => Package[$prereq_packages],
+  archive{'/opt/staging/dhcpstatus_0.60.tar.gz':
+    source       => 'http://downloads.sourceforge.net/project/dhcpstatus/dhcpstatus/v0.60/dhcpstatus_0.60.tar.gz?r=http%3A%2F%2Fdhcpstatus.sourceforge.net%2F&ts=1480997571&use_mirror=pilotfiber',
+    extract      => true,
+    extract_path => '/opt',
+    require      => Package[$prereq_packages],
   }
   file{'/usr/local/dhcpstatus':
     ensure => directory,
@@ -146,7 +148,7 @@ echo "**** Verifying that the BIND Configuration ****"
       ],
     onlyif    => '/usr/bin/test ! -f /usr/local/dhcpstatus/dhcpstatus/common.pm',
     logoutput => true,
-    require   =>  Staging::Deploy['dhcpstatus_0.60.tar.gz'],
+    require   =>  Archive['/opt/staging/dhcpstatus_0.60.tar.gz'],
   }
 -> file{'/usr/local/dhcpstatus/dhcpstatus.ini':
     ensure  => file,
