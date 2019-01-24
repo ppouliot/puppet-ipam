@@ -63,7 +63,8 @@ on_supported_os.reject { |_, f| f[:os]['family'] == 'Solaris' }.each do |os, f|
               is_expected.to contain_package(package)
                 .with(
                   ensure: 'latest',
-              )
+                  require: 'Class[Epel]',
+                ) 
             }
           end
           it { is_expected.to contain_class('selinux').with(mode: 'disabled') }
