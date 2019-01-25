@@ -1,0 +1,116 @@
+---
+# Site Wide Puppet Classes being applied
+master: true
+ipam::master: true
+ipam::server_interface: 192.168.0.2
+dhcp::failover::role: primary
+dhcp::failover::address: 192.168.0.2
+dhcp::failover::peer_address: 192.168.0.3
+ipam::primary_defaults:
+  soa: ipam1.contoso.ltd
+  soa_email: admin.contoso.ltd
+  nameservers:
+    - ipam1.contoso.ltd
+    - ipam2.contoso.ltd
+  allow_transfer:
+    - 192.168.0.2
+    - 192.168.0.3
+  allow_update:
+    - 'key "omapi_key"'
+#    - 192.168.0.2
+#    - 192.168.0.3
+  also_notify:
+    - 192.168.0.2
+    - 192.168.0.3
+  
+primary:
+  contoso.ltd: {}
+  0.168.192.IN-ADDR.ARPA: {}
+#    soa: ns3.opensack.tld
+
+#  ad.contoso.ltd:
+#    soa: ad0.contoso.ltd
+#    nameservers:
+#      - ad0
+#      - ad1
+
+dns_records_a:
+# Begin SOA
+# Begin contoso.ltd
+
+  ipam1:
+    zone: contoso.ltd
+    data: 192.168.0.2
+    ptr: true
+
+  ipam2:
+    zone: contoso.ltd
+    data: 192.168.0.3
+    ptr: true
+
+  puppetmaster:
+    zone: contoso.ltd
+    data: 192.168.0.14
+    ptr: true
+
+  roundrobin:
+    zone: contoso.ltd
+    data:
+      - 192.168.0.4
+      - 192.168.0.5
+      - 192.168.0.6
+    ptr: true
+
+# All Numeric Mac Address Test
+# This is just holder however it's added once the tests scripts are run
+#  allnumericmac:
+#    zone: contoso.ltd
+#    data: 192.168.0.7
+#    ptr: true
+
+  jenkins-master:
+    zone: contoso.ltd
+    data: 192.168.0.15
+    ptr: true
+
+  quartermaster:
+    zone: contoso.ltd
+    data: 192.168.0.22
+    ptr: true
+
+  gw:
+    zone: contoso.ltd
+    data: 192.168.0.1
+    ptr: true
+
+# Placeholder for AD Zone Delegation
+#  ad.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data:
+#      -  192.168.0.112
+#      -  192.168.0.113
+#    ptr: true
+#  ad1.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.112
+#    ptr: true
+#  ad2.contoso.ltd:
+#    zone: ad.contoso.ltd
+#    data: 192.168.0.113
+#    ptr: true
+
+dns_records_cname:
+  puppet:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetdb:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetboard:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+  puppetexplorer:
+    zone: contoso.ltd
+    data: puppetmaster.contoso.ltd
+
+# End Cname Records

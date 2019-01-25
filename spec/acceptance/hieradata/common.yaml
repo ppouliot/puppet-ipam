@@ -1,0 +1,63 @@
+---
+# common.yaml
+
+dhcp::default_lease_time: 86400
+dhcp::max_lease_time: 259200
+dhcp::dnsdomain:
+      - contoso.ltd
+      - 0.168.192.IN-ADDR.ARPA
+  
+dhcp::nameservers:
+  - 192.168.0.2
+  - 192.168.0.3
+  
+dhcp::ntpservers:
+  - time.nist.gov
+
+dhcpdata:
+  contoso.ltd:
+    failover: dhcp-failover
+    network: 192.168.0.0
+    mask: 255.255.255.0
+    gateway: 192.168.0.254
+    range: 192.168.0.25 192.168.0.220
+    options:
+      - 'domain-name-servers 192.168.0.2, 192.168.0.3'
+      - domain-name "contoso.ltd"
+    parameters:
+      - ddns-domainname "contoso.ltd."
+      - ddns-rev-domainname "IN-ADDR.ARPA"
+
+static_leases:
+# Begin Static Leases
+
+  ipam1: 
+    mac: "00:0c:29:55:26:f8"
+    ip: 192.168.0.2
+  ipam2: 
+    mac: "00:0c:29:3a:3e:fc"
+    ip: 192.168.0.3
+  puppetmaster:
+    mac: "00:0c:29:e1:de:13"
+    ip: 192.168.0.14
+  jenkins-master:
+    mac: "00:0c:29:be:87:31"
+    ip: 192.168.0.15
+  quartermaster:
+    mac: "00:0c:29:e1:de:13"
+    ip: 192.168.0.22
+
+  round-robin0:
+    mac: "00:0c:29:0f:08:2f"
+    ip: 192.168.0.4
+  round-robin1:
+    mac: "00:0c:29:e9:2a:7e"
+    ip: 192.168.0.5
+  round-robin2:
+    mac: "00:0c:29:60:2c:e9"
+    ip: 192.168.0.6
+
+# All Numeric Mac Test
+  allnumericmac:
+    mac: "00:07:43:14:15:30"
+    ip: 192.168.0.7
