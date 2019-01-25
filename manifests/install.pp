@@ -92,11 +92,6 @@ echo "**** Verifying that the BIND Configuration ****"
   package{'dhcping':
     ensure => latest,
   }
-#  class{'staging':
-#    path  => '/opt/staging',
-#    owner => 'root',
-#    group => 'root'
-#  }
   # dhcpd-pool 
   # script for generating dhcpd monitoring information 
   # More information on usage

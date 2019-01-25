@@ -15,6 +15,14 @@ describe 'ipam::dhcp_reservation' do
       let(:facts) { os_facts }
 
       it { is_expected.to compile }
+      it {
+        is_expected.to contain_dhcp__host('namevar')
+          .with(
+            mac: '00:0c:29:55:26:f8',
+            ip: '192.168.0.2',
+            require: 'Class[Ipam::Config]',
+          )
+      }
     end
   end
 end

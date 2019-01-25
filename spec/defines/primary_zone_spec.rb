@@ -20,6 +20,17 @@ describe 'ipam::primary_zone' do
       let(:facts) { os_facts }
 
       it { is_expected.to compile }
+      it {
+        is_expected.to contain_dns__zone('namevar')
+          .with(
+            soa: 'ipam1.contoso.ltd',
+            soa_email: 'admin.contoso.ltd',
+            nameservers: ['ipam1.contoso.ltd', 'ipam2.contoso.ltd'],
+            allow_transfer: ['192.168.0.2', '192.168.0.3'],
+            allow_update: ['key "omapi_key"'],
+            also_notify: ['192.168.0.2'],
+          )
+      }
     end
   end
 end

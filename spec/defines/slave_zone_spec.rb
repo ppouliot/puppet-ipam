@@ -16,6 +16,14 @@ describe 'ipam::slave_zone' do
       let(:facts) { os_facts }
 
       it { is_expected.to compile }
+      it {
+        is_expected.to contain_dns__zone('namevar')
+          .with(
+            slave_masters: '192.168.0.2',
+            zone_type: 'slave',
+            require: 'Class[Ipam::Config]',
+          )
+      }
     end
   end
 end

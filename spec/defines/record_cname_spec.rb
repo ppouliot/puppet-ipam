@@ -16,6 +16,14 @@ describe 'ipam::record_cname' do
       let(:facts) { os_facts }
 
       it { is_expected.to compile }
+      it {
+        is_expected.to contain_dns__record__cname('namevar')
+          .with(
+            zone: 'contoso.ltd',
+            data: '192.168.0.2',
+            require: 'Class[Ipam::Config]',
+          )
+      }
     end
   end
 end
