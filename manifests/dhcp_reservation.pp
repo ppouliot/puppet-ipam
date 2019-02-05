@@ -12,10 +12,10 @@ define ipam::dhcp_reservation(
 ) {
   if $mac.is_mac_address == true {
     # notice("${mac} is a valid mac address.") 
-    warning("${mac} is a valid mac address.")
+    notice("${mac} is a valid mac address.")
   }
   if $mac.is_mac_address == false {
-    warning("${mac} is not a valid mac address!")
+    failure("${mac} is not a valid mac address!")
   }
 
   dhcp::host { $name:

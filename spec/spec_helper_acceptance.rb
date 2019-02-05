@@ -19,16 +19,19 @@ RSpec.configure do |c|
     hosts.each do |host|
       # install git
       install_package host, 'git'
-      shell('/opt/puppetlabs/puppet/bin/gem install r10k hiera-eyaml')
+      install_package host, 'rsync'
+      shell('/opt/puppetlabs/puppet/bin/gem install r10k')
       shell('curl https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/Puppetfile -o /etc/puppetlabs/code/environments/production/Puppetfile')
       shell('curl https://raw.githubusercontent.com/ppouliot/puppet-ipam/master/files/hiera/hiera.yaml -o /etc/puppetlabs/code/environments/production/hiera.yaml')
       shell('cd /etc/puppetlabs/code/environments/production && /opt/puppetlabs/puppet/bin/r10k puppetfile install --verbose DEBUG')
-      shell('cp -R /etc/puppetlabs/code/environments/production/modules/ipam/files/hiera /etc/puppetlabs/code/environments/production/data')
+      shell('rsync -av /etc/puppetlabs/code/environments/production/modules/ipam/files/hiera/ /etc/puppetlabs/code/environments/production/data/')
+      shell("cp /etc/puppetlabs/code/environments/production/modules/ipam/files/hiera/nodes/ipam1.contoso.ltd.yaml \
+            /etc/puppetlabs/code/environments/production/data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'| awk -F, '{print $1}'`.yaml")
+      shell("cp /etc/puppetlabs/code/environments/production/modules/ipam/files/hiera/nodes/ipam1.contoso.ltd.yaml \
+            /etc/puppetlabs/code/environments/production/data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'| awk -F, '{print $1}'`.contoso.ltd.yaml")
+      shell("cp /etc/puppetlabs/code/environments/production/modules/ipam/files/hiera/nodes/ipam1.contoso.ltd.yaml \
+            /etc/puppetlabs/code/environments/production/data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'`yaml")
       shell('rm -rf /etc/puppetlabs/code/environments/production/modules/ipam')
-      shell("cp /etc/puppetlabs/code/environments/production/data/nodes/ipam1.contoso.ltd.yaml /etc/puppetlabs/code/environments/production/data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'| awk -F, '{print $1}'`.yaml")
-      shell("cp /etc/puppetlabs/code/environments/production/data/nodes/ipam1.contoso.ltd.yaml /etc/puppetlabs/code/environments/production/data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'| awk -F, '{print $1}'`.contoso.ltd.yaml")
-      shell("cp /etc/puppetlabs/code/environments/production/data/nodes/ipam1.contoso.ltd.yaml /etc/puppetlabs/code/environments/production/data/nodes/`facter | grep fqdn | awk '{print $3}'| sed -e 's/\"//g'`yaml")
-
     end
     install_module_on(hosts)
     # install_module_dependencies_on(hosts)

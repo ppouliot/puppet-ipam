@@ -4,6 +4,7 @@ fixtures:
     ipam: "#{source_dir}"
   forge_modules:
     apt: "puppetlabs-apt"
+    archive: "puppet-archive"
     concat: "puppetlabs-concat"
     dhcp: "puppet-dhcp"
     dummy_service: "puppetlabs-dummy_service"
@@ -13,7 +14,6 @@ fixtures:
     ntp: "puppetlabs-ntp"
     selinux: "puppet-selinux"
     stdlib: "puppetlabs-stdlib"
-    staging: "puppet-staging"
     translate: "puppetlabs/translate"
     vcsrepo: "puppetlabs-vcsrepo"
     yumrepo_core: "puppetlabs-yumrepo_core"
