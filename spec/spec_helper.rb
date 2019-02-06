@@ -26,8 +26,13 @@ default_fact_files.each do |f|
 end
 
 RSpec.configure do |c|
+  c.formatter = :documentation
+  c.tty       = true
   c.default_facts = default_facts
+  c.hiera_config = 'spec/fixtures/hiera/hiera.yaml'
   c.before :each do
+    # avoid "Only root can execute commands as other users"
+    Puppet.features.stubs(root?: true)
     # set to strictest setting for testing
     # by default Puppet runs at warning level
     Puppet.settings[:strict] = :warning
