@@ -43,17 +43,54 @@ pipeline {
                 sh 'pdk test -d unit'
             }
         }
-
         stage ('Use the Puppet Development Kit To run Rake/Rspec Unit Tests') {
             when {
               expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                currentBuild.result == null || currentBuild.result == 'SUCCESS'
               }
             }
             steps {
                 sh 'pdk bundle exec rake test'
             }
         }
+        stage ('Checkout and build puppet-ipam in Docker to validate code as well as changes across OSes.') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                dir("${env.WORKSPACE}") {
+                    sh './build.sh -d'
+                }
+            } 
+        }
+
+        stage ('Checkout and build puppet-ipam in Vagrant to assemble a functional IPAM cluster') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                dir("${env.WORKSPACE}") {
+
+                    sh './build.sh -v'
+                }
+            } 
+        }
+        
+        stage ('Cleanup vagrant after successful build.') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                sh 'vagrant destroy -f'
+            }
+        }
+
 // Comment Out  Acceptance tests until they are working
 /*
 
