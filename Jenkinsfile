@@ -33,7 +33,7 @@ pipeline {
             }
         }
 
-        stage ('Use the Puppet Development Kit Test Unit for Module Unit Testing') {
+        stage ('UNIT TESTS: Use the Puppet Development Kit Test Unit for Module Unit Testing') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -43,17 +43,17 @@ pipeline {
                 sh 'pdk test -d unit'
             }
         }
-        stage ('Use the Puppet Development Kit To run Rake/Rspec Unit Tests') {
+        stage ('UNIT TESTS: Use the Puppet Development Kit To run Rake/Rspec Unit Tests for full visibility') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS'
               }
             }
             steps {
-                sh 'pdk bundle exec rake spec'
+                sh 'pdk bundle exec rake test'
             }
         }
-        stage ('Checkout and build puppet-ipam in Docker to validate code as well as changes across OSes.') {
+        stage ('DOCKER SMOKE TESTS: Checkout and build puppet-ipam in Docker to validate code as well as changes across OSes using build.sh script') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -66,7 +66,7 @@ pipeline {
             } 
         }
 
-        stage ('Checkout and build puppet-ipam in Vagrant to assemble a functional IPAM cluster') {
+        stage ('VAGRANT SMOKE TESTS: Checkout and build puppet-ipam in Vagrant to assemble a functional IPAM cluster') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -80,7 +80,7 @@ pipeline {
             } 
         }
         
-        stage ('Cleanup vagrant after successful build.') {
+        stage ('VAGRANT SMOKE TESTS CLEANUP: Cleanup vagrant after successful build.') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -94,7 +94,7 @@ pipeline {
 // Comment Out  Acceptance tests until they are working
 /*
 
-        stage ('Use the Puppet Development Kit To run Beaker Acceptance Tests') {
+        stage ('ACCEPTANCE TESTS: Use the Puppet Development Kit To run Beaker Acceptance Tests') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
