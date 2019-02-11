@@ -42,7 +42,8 @@ Vagrant.configure("2") do |config|
 #   v.vm.box = "ubuntu/xenial64"
     v.vm.box = "ubuntu/bionic64"
     v.vm.hostname = "ipam1.contoso.ltd"
-    v.vm.network "private_network", ip: "192.168.0.2", nic_type: "virtio"
+#   v.vm.network "private_network", ip: "192.168.0.2", nic_type: "virtio"
+    v.vm.network "private_network", ip: "192.168.0.2"
   end
 
   # IPAM2 Definition
@@ -52,7 +53,8 @@ Vagrant.configure("2") do |config|
 #   v.vm.box = "ubuntu/xenial64"
     v.vm.box = "ubuntu/bionic64"
     v.vm.hostname = "ipam2.contoso.ltd"
-    v.vm.network "private_network", ip: "192.168.0.3", nic_type: "virtio"
+#   v.vm.network "private_network", ip: "192.168.0.3", nic_type: "virtio"
+    v.vm.network "private_network", ip: "192.168.0.3"
   end
 
 #  # Pxe Client
