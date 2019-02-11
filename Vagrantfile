@@ -39,7 +39,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "ipam1" do |v|
 #   v.vm.box = "centos/7"
 #   v.vm.box = "debian/jessie64"
-    v.vm.box = "ubuntu/xenial64"
+#   v.vm.box = "ubuntu/xenial64"
+    v.vm.box = "ubuntu/bionic64"
     v.vm.hostname = "ipam1.contoso.ltd"
     v.vm.network "private_network", ip: "192.168.0.2", nic_type: "virtio"
   end
@@ -48,7 +49,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "ipam2" do |v|
 #   v.vm.box = "centos/7"
 #   v.vm.box = "debian/jessie64"
-    v.vm.box = "ubuntu/xenial64"
+#   v.vm.box = "ubuntu/xenial64"
+    v.vm.box = "ubuntu/bionic64"
     v.vm.hostname = "ipam2.contoso.ltd"
     v.vm.network "private_network", ip: "192.168.0.3", nic_type: "virtio"
   end
