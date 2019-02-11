@@ -50,7 +50,7 @@ pipeline {
               }
             }
             steps {
-                sh 'pdk bundle exec rake test'
+                sh 'pdk bundle exec rake spec'
             }
         }
         stage ('DOCKER SMOKE TESTS: Checkout and build puppet-ipam in Docker to validate code as well as changes across OSes using build.sh script') {
