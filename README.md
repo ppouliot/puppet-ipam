@@ -3,7 +3,7 @@
 
 An Opinioned DHCP/DNS infrastructure.
 
-[![License](https://img.shields.io/github/license/ppouliot/puppet-ipam.svg)](./LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Source Code](https://img.shields.io/badge/source-GitHub-blue.svg?style=flat)](https://github.com/ppouliot/puppet-ipam)
 [![Latest version](https://img.shields.io/github/tag/ppouliot/puppet-ipam.svg?label=release&style=flat&maxAge=2592000)](https://github.com/ppouliot/puppet-ipam/tags)
 [![GitHub issues](https://img.shields.io/github/issues/ppouliot/puppet-ipam.svg)](https://github.com/ppouliot/puppet-ipam/issues)
